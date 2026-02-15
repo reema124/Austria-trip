@@ -1002,10 +1002,19 @@ async function initCloud() {
         if (resp.ok) {
             // Extract blob ID from response headers
             blobId = resp.headers.get('X-jsonblob-id')
-                || (resp.headers.get('Location') || '').split('/').pop();
-            localStorage.setItem(BLOB_ID_KEY, blobId);
-            window.location.hash = blobId;
-            updateSyncUI('synced');
+                || resp.headers.get('x-jsonblob-id');
+            if (!blobId) {
+                const loc = resp.headers.get('Location') || resp.headers.get('location') || '';
+                if (loc) blobId = loc.split('/').pop();
+            }
+            if (blobId) {
+                localStorage.setItem(BLOB_ID_KEY, blobId);
+                window.location.hash = blobId;
+                updateSyncUI('synced');
+            } else {
+                console.warn('Could not extract blob ID from headers');
+                updateSyncUI('offline');
+            }
         } else {
             updateSyncUI('offline');
         }
@@ -1079,7 +1088,7 @@ function updateSyncUI(status) {
             break;
         case 'offline':
             dot.classList.add('offline');
-            text.textContent = 'Offline mode — votes saved locally';
+            text.textContent = 'Offline mode — votes saved locally. If using an ad blocker, try disabling it for sync.';
             break;
         case 'error':
             dot.classList.add('error');
