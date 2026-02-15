@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slovakia + Austria Round Trip | April 1-10, 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --bg-primary: #0f0f0f;
+            --bg-card: #1a1a2e;
+            --bg-card-hover: #16213e;
+            --accent-blue: #4fc3f7;
+            --accent-orange: #ffab40;
+            --accent-green: #69f0ae;
+            --accent-pink: #f48fb1;
+            --accent-purple: #ce93d8;
+            --text-primary: #e8e8e8;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666;
+            --border-color: #2a2a3e;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; position: relative;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 30%, #0d2137 60%, #0a0a1a 100%);
+            overflow: hidden; padding: 2rem;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(79,195,247,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,171,64,0.06) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(105,240,174,0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .hero-flag { font-size: 3rem; margin-bottom: 1rem; animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 900;
+            background: linear-gradient(135deg, #fff 0%, var(--accent-blue) 50%, var(--accent-green) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 1rem; position: relative; z-index: 1;
+        }
+        .hero-subtitle { font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 300; letter-spacing: 0.1em; text-transform: uppercase; }
+        .hero-dates { font-size: 1.2rem; color: var(--accent-orange); font-weight: 600; margin-bottom: 2rem; }
+        .hero-route {
+            display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.5rem;
+            margin: 2rem 0; padding: 1.5rem;
+            background: rgba(255,255,255,0.03); border-radius: 16px; border: 1px solid var(--border-color);
+            max-width: 900px;
+        }
+        .hero-route .stop { padding: 0.4rem 1rem; background: rgba(79,195,247,0.1); border: 1px solid rgba(79,195,247,0.2); border-radius: 20px; font-size: 0.9rem; font-weight: 500; white-space: nowrap; }
+        .hero-route .arrow { color: var(--accent-orange); font-size: 1.2rem; }
+        .scroll-indicator { position: absolute; bottom: 2rem; animation: bounce 2s ease-in-out infinite; cursor: pointer; }
+        .scroll-indicator svg { width: 30px; height: 30px; stroke: var(--text-muted); }
+        @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+
+        /* ===== NAV ===== */
+        .nav { position: sticky; top: 0; z-index: 100; background: rgba(15,15,15,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-color); }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; padding: 0 1rem; }
+        .nav-inner::-webkit-scrollbar { display: none; }
+        .nav-link { padding: 1rem 1.2rem; color: var(--text-muted); text-decoration: none; font-size: 0.8rem; font-weight: 600; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid transparent; transition: all 0.3s; }
+        .nav-link:hover, .nav-link.active { color: var(--accent-blue); border-bottom-color: var(--accent-blue); }
+
+        /* ===== OVERVIEW ===== */
+        .overview { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+        .overview h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 2rem; text-align: center; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .stat-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 1.5rem; text-align: center; transition: transform 0.3s, border-color 0.3s; }
+        .stat-card:hover { transform: translateY(-4px); border-color: var(--accent-blue); }
+        .stat-number { font-size: 2rem; font-weight: 700; color: var(--accent-blue); display: block; }
+        .stat-label { color: var(--text-secondary); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.3rem; }
+
+        /* Sleeping bases */
+        .sleeping-bases { margin-top: 3rem; }
+        .sleeping-bases h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 1.5rem; text-align: center; color: var(--accent-purple); }
+        .bases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+        .base-card { background: linear-gradient(135deg, rgba(206,147,216,0.08), rgba(206,147,216,0.02)); border: 1px solid rgba(206,147,216,0.2); border-radius: 12px; padding: 1.2rem; text-align: center; }
+        .base-card .base-num { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-purple); margin-bottom: 0.3rem; }
+        .base-card .base-name { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.3rem; }
+        .base-card .base-nights { font-size: 0.85rem; color: var(--text-secondary); }
+
+        /* Map */
+        .map-container { max-width: 900px; margin: 2rem auto; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 2rem; text-align: center; }
+        .route-visual { display: flex; flex-direction: column; gap: 0; align-items: center; padding: 1rem 0; }
+        .route-stop { display: flex; align-items: center; gap: 1rem; width: 100%; max-width: 500px; }
+        .route-dot { width: 16px; height: 16px; border-radius: 50%; background: var(--accent-blue); flex-shrink: 0; position: relative; z-index: 2; }
+        .route-stop:nth-child(odd) .route-dot { background: var(--accent-orange); }
+        .route-info { flex: 1; text-align: left; padding: 0.8rem 0; }
+        .route-info .city { font-weight: 700; font-size: 1.05rem; }
+        .route-info .nights { font-size: 0.8rem; color: var(--text-muted); }
+        .route-connector { width: 2px; height: 30px; background: var(--border-color); margin-left: 7px; }
+        .route-drive { font-size: 0.75rem; color: var(--accent-green); margin-left: 2rem; padding: 0.2rem 0; }
+
+        /* ===== DAY SECTIONS ===== */
+        .day-section { max-width: 1000px; margin: 0 auto; padding: 4rem 2rem; border-top: 1px solid var(--border-color); }
+        .day-header { text-align: center; margin-bottom: 3rem; }
+        .day-badge { display: inline-block; padding: 0.4rem 1.2rem; border-radius: 20px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
+        .badge-slovakia { background: rgba(79,195,247,0.15); color: var(--accent-blue); border: 1px solid rgba(79,195,247,0.3); }
+        .badge-austria { background: rgba(255,171,64,0.15); color: var(--accent-orange); border: 1px solid rgba(255,171,64,0.3); }
+        .day-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; margin-bottom: 0.5rem; }
+        .day-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; color: var(--text-secondary); font-size: 0.9rem; }
+        .day-meta span { display: flex; align-items: center; gap: 0.4rem; }
+        .day-meta .icon { font-size: 1.1rem; }
+
+        /* Timeline */
+        .timeline { position: relative; padding-left: 2rem; }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--accent-blue), var(--accent-green), var(--accent-orange)); border-radius: 2px; }
+        .timeline-block { position: relative; margin-bottom: 2.5rem; padding-left: 1.5rem; }
+        .timeline-block::before { content: ''; position: absolute; left: -2rem; top: 0.5rem; width: 10px; height: 10px; border-radius: 50%; background: var(--accent-blue); border: 2px solid var(--bg-primary); transform: translateX(-4px); }
+        .timeline-block.food::before { background: var(--accent-orange); }
+        .timeline-block.sleep::before { background: var(--accent-purple); }
+        .timeline-block.drive::before { background: var(--accent-green); }
+        .time-label { font-size: 0.8rem; font-weight: 600; color: var(--accent-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+        .timeline-block.food .time-label { color: var(--accent-orange); }
+        .timeline-block.sleep .time-label { color: var(--accent-purple); }
+        .timeline-block.drive .time-label { color: var(--accent-green); }
+        .timeline-block h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .timeline-block p, .timeline-block ul { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
+        .timeline-block ul { list-style: none; padding: 0; }
+        .timeline-block ul li { padding: 0.3rem 0; padding-left: 1.2rem; position: relative; }
+        .timeline-block ul li::before { content: '\2022'; position: absolute; left: 0; color: var(--text-muted); }
+
+        .highlight-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.2rem; margin: 0.8rem 0; }
+        .highlight-card .hl-title { font-weight: 700; color: var(--accent-blue); margin-bottom: 0.3rem; }
+        .highlight-card .hl-detail { font-size: 0.85rem; color: var(--text-secondary); }
+        .highlight-card .hl-meta { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.5rem; font-size: 0.8rem; }
+        .highlight-card .hl-meta span { background: rgba(255,255,255,0.05); padding: 0.2rem 0.6rem; border-radius: 8px; color: var(--text-muted); }
+
+        .tip-box { background: rgba(105,240,174,0.06); border-left: 3px solid var(--accent-green); padding: 1rem 1.2rem; border-radius: 0 8px 8px 0; margin: 0.8rem 0; font-size: 0.9rem; color: var(--text-secondary); }
+        .tip-box strong { color: var(--accent-green); }
+        .warning-box { background: rgba(255,171,64,0.06); border-left: 3px solid var(--accent-orange); padding: 1rem 1.2rem; border-radius: 0 8px 8px 0; margin: 0.8rem 0; font-size: 0.9rem; color: var(--text-secondary); }
+        .warning-box strong { color: var(--accent-orange); }
+
+        /* Sleep section */
+        .sleep-section { background: linear-gradient(135deg, rgba(206,147,216,0.06), rgba(206,147,216,0.02)); border: 1px solid rgba(206,147,216,0.15); border-radius: 16px; padding: 1.5rem; margin-top: 1rem; }
+        .sleep-section h4 { color: var(--accent-purple); font-size: 1rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
+        .sleep-section ul { list-style: none; padding: 0; }
+        .sleep-section ul li { padding: 0.3rem 0; font-size: 0.9rem; color: var(--text-secondary); padding-left: 1.2rem; position: relative; }
+        .sleep-section ul li::before { content: '\2022'; position: absolute; left: 0; color: var(--accent-purple); }
+        .sleep-section .price-range { display: inline-block; margin-top: 0.5rem; padding: 0.3rem 0.8rem; background: rgba(206,147,216,0.1); border-radius: 8px; font-size: 0.85rem; color: var(--accent-purple); font-weight: 600; }
+
+        /* Essentials */
+        .essentials { max-width: 1000px; margin: 0 auto; padding: 4rem 2rem; border-top: 1px solid var(--border-color); }
+        .essentials h2 { font-family: 'Playfair Display', serif; font-size: 2rem; text-align: center; margin-bottom: 2rem; }
+        .essentials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .essential-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 1.5rem; }
+        .essential-card h4 { color: var(--accent-blue); margin-bottom: 0.5rem; font-size: 1rem; }
+        .essential-card p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; }
+
+        /* Budget */
+        .budget-section { max-width: 800px; margin: 0 auto; padding: 4rem 2rem; border-top: 1px solid var(--border-color); }
+        .budget-section h2 { font-family: 'Playfair Display', serif; font-size: 2rem; text-align: center; margin-bottom: 2rem; }
+        .budget-table { width: 100%; border-collapse: separate; border-spacing: 0 0.5rem; }
+        .budget-table tr { background: var(--bg-card); }
+        .budget-table td { padding: 1rem 1.5rem; font-size: 0.95rem; }
+        .budget-table tr td:first-child { border-radius: 12px 0 0 12px; font-weight: 600; }
+        .budget-table tr td:last-child { border-radius: 0 12px 12px 0; text-align: right; color: var(--accent-green); font-weight: 600; }
+        .budget-table tr.total { background: linear-gradient(135deg, rgba(105,240,174,0.1), rgba(79,195,247,0.1)); }
+        .budget-table tr.total td { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); }
+        .budget-table tr.total td:last-child { color: var(--accent-green); }
+
+        /* Packing & Verify */
+        .packing-section { max-width: 800px; margin: 0 auto; padding: 4rem 2rem; border-top: 1px solid var(--border-color); }
+        .packing-section h2 { font-family: 'Playfair Display', serif; font-size: 2rem; text-align: center; margin-bottom: 2rem; }
+        .packing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+        .pack-item { display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem 1rem; background: var(--bg-card); border-radius: 10px; cursor: pointer; transition: all 0.2s; user-select: none; }
+        .pack-item:hover { background: var(--bg-card-hover); }
+        .pack-item.checked { opacity: 0.5; }
+        .pack-item .checkbox { width: 22px; height: 22px; border: 2px solid var(--text-muted); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
+        .pack-item.checked .checkbox { background: var(--accent-green); border-color: var(--accent-green); }
+        .pack-item.checked .checkbox::after { content: '\2713'; color: var(--bg-primary); font-weight: 700; font-size: 0.8rem; }
+        .pack-item.checked .pack-label { text-decoration: line-through; }
+        .pack-label { font-size: 0.9rem; }
+
+        /* Driving table */
+        .drive-table-section { max-width: 900px; margin: 2rem auto; }
+        .drive-table { width: 100%; border-collapse: separate; border-spacing: 0 0.4rem; font-size: 0.85rem; }
+        .drive-table th { padding: 0.8rem 1rem; text-align: left; color: var(--accent-green); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .drive-table tr { background: var(--bg-card); }
+        .drive-table thead tr { background: none; }
+        .drive-table td { padding: 0.7rem 1rem; color: var(--text-secondary); }
+        .drive-table td:first-child { border-radius: 8px 0 0 8px; font-weight: 600; color: var(--accent-blue); }
+        .drive-table td:last-child { border-radius: 0 8px 8px 0; }
+        .drive-table td:nth-child(3) { color: var(--accent-green); font-weight: 600; }
+
+        /* Footer */
+        .footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 0.85rem; }
+        .footer .heart { color: var(--accent-pink); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-route { flex-direction: column; gap: 0.3rem; }
+            .hero-route .arrow { transform: rotate(90deg); }
+            .timeline { padding-left: 1.5rem; }
+            .day-section { padding: 3rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero" id="top">
+    <div class="hero-flag">&#x1F1F8;&#x1F1F0; &#x1F1E6;&#x1F1F9;</div>
+    <p class="hero-subtitle">Round Trip Planner</p>
+    <h1>Slovakia & Austria</h1>
+    <p class="hero-dates">April 1 - 10, 2026 &middot; 10 Days &middot; Clockwise Loop</p>
+    <div class="hero-route">
+        <span class="stop">Bratislava</span>
+        <span class="arrow">&rarr;</span>
+        <span class="stop">Hallstatt</span>
+        <span class="arrow">&rarr;</span>
+        <span class="stop">Zell am See</span>
+        <span class="arrow">&rarr;</span>
+        <span class="stop">Werfen</span>
+        <span class="arrow">&rarr;</span>
+        <span class="stop">Salzburg</span>
+        <span class="arrow">&rarr;</span>
+        <span class="stop">Wachau</span>
+        <span class="arrow">&rarr;</span>
+        <span class="stop">Vienna</span>
+    </div>
+    <div style="margin-top:1.5rem; padding:0.8rem 1.5rem; background:rgba(255,171,64,0.12); border:1px solid rgba(255,171,64,0.3); border-radius:12px; max-width:500px;">
+        <span style="color:var(--accent-orange); font-weight:700;">Easter 2026 = April 5 (Day 4!)</span>
+        <span style="color:var(--text-secondary); font-size:0.9rem; display:block; margin-top:0.3rem;">Good Friday to Easter Monday falls mid-trip. Some shops/restaurants may have limited hours.</span>
+    </div>
+    <div style="margin-top:1rem; padding:0.6rem 1.2rem; background:rgba(105,240,174,0.08); border:1px solid rgba(105,240,174,0.2); border-radius:12px; max-width:500px;">
+        <span style="color:var(--accent-green); font-weight:600; font-size:0.9rem;">All driving segments &le; 2 hours &middot; 904 km total</span>
+    </div>
+    <a href="#overview" class="scroll-indicator">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
+    </a>
+</section>
+
+<!-- ==================== NAV ==================== -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="#overview" class="nav-link">Overview</a>
+        <a href="#essentials" class="nav-link">Essentials</a>
+        <a href="#day1" class="nav-link">Day 1</a>
+        <a href="#day2" class="nav-link">Day 2</a>
+        <a href="#day3" class="nav-link">Day 3</a>
+        <a href="#day4" class="nav-link">Day 4</a>
+        <a href="#day5" class="nav-link">Day 5</a>
+        <a href="#day6" class="nav-link">Day 6</a>
+        <a href="#day7" class="nav-link">Day 7</a>
+        <a href="#day8" class="nav-link">Day 8</a>
+        <a href="#day9" class="nav-link">Day 9</a>
+        <a href="#verify" class="nav-link">Checklist</a>
+        <a href="#budget" class="nav-link">Budget</a>
+        <a href="#packing" class="nav-link">Packing</a>
+    </div>
+</nav>
+
+<!-- ==================== OVERVIEW ==================== -->
+<section class="overview" id="overview">
+    <h2>Trip at a Glance</h2>
+    <div class="stats-grid">
+        <div class="stat-card"><span class="stat-number">10</span><span class="stat-label">Days</span></div>
+        <div class="stat-card"><span class="stat-number">9</span><span class="stat-label">Nights</span></div>
+        <div class="stat-card"><span class="stat-number">7</span><span class="stat-label">Destinations</span></div>
+        <div class="stat-card"><span class="stat-number">~904</span><span class="stat-label">km Total</span></div>
+        <div class="stat-card"><span class="stat-number">2</span><span class="stat-label">Countries</span></div>
+        <div class="stat-card"><span class="stat-number">5</span><span class="stat-label">Sleeping Bases</span></div>
+    </div>
+
+    <div class="map-container">
+        <h3 style="margin-bottom: 1.5rem; font-size: 1.4rem;">Route Map (Clockwise Loop)</h3>
+        <div class="route-visual">
+            <div class="route-stop"><div class="route-dot"></div><div class="route-info"><span class="city">Bratislava</span> <span class="nights">&middot; 2 nights</span></div></div>
+            <div class="route-drive">&#x1F697; 1h 30min (stop: Semmering)</div><div class="route-connector"></div>
+            <div class="route-drive">&#x1F697; 2h (stop: Bad Aussee)</div><div class="route-connector"></div>
+            <div class="route-drive">&#x1F697; 20min</div><div class="route-connector"></div>
+            <div class="route-stop"><div class="route-dot"></div><div class="route-info"><span class="city">Hallstatt</span> <span class="nights">&middot; 2 nights</span></div></div>
+            <div class="route-drive">&#x1F697; 1h 45min</div><div class="route-connector"></div>
+            <div class="route-stop"><div class="route-dot"></div><div class="route-info"><span class="city">Zell am See</span> <span class="nights">&middot; 2 nights</span></div></div>
+            <div class="route-drive">&#x1F697; 50min</div><div class="route-connector"></div>
+            <div class="route-stop"><div class="route-dot"></div><div class="route-info"><span class="city">Werfen</span> <span class="nights">&middot; 2 nights (day trip to Salzburg)</span></div></div>
+            <div class="route-drive">&#x1F697; 1h 45min (stop: Gmunden)</div><div class="route-connector"></div>
+            <div class="route-drive">&#x1F697; 1h 15min (stop: Melk Abbey)</div><div class="route-connector"></div>
+            <div class="route-drive">&#x1F697; 30min (stop: Durnstein)</div><div class="route-connector"></div>
+            <div class="route-drive">&#x1F697; 1h 20min</div><div class="route-connector"></div>
+            <div class="route-stop"><div class="route-dot"></div><div class="route-info"><span class="city">Vienna</span> <span class="nights">&middot; 1 night</span></div></div>
+        </div>
+    </div>
+
+    <!-- Sleeping Bases -->
+    <div class="sleeping-bases">
+        <h3>Sleeping Bases</h3>
+        <div class="bases-grid">
+            <div class="base-card">
+                <div class="base-num">Base 1</div>
+                <div class="base-name">Bratislava</div>
+                <div class="base-nights">2 nights</div>
+                <div style="font-size:0.72rem;color:var(--text-secondary);margin-top:0.2rem;">Park Inn by Radisson Danube</div>
+                <div style="display:flex;justify-content:center;gap:0.8rem;margin-top:0.4rem;font-size:0.78rem;">
+                    <span style="color:var(--accent-green);">In: Apr 1</span>
+                    <span style="color:var(--accent-orange);">Out: Apr 3</span>
+                </div>
+            </div>
+            <div class="base-card">
+                <div class="base-num">Base 2</div>
+                <div class="base-name">Hallstatt</div>
+                <div class="base-nights">2 nights</div>
+                <div style="display:flex;justify-content:center;gap:0.8rem;margin-top:0.4rem;font-size:0.78rem;">
+                    <span style="color:var(--accent-green);">In: Apr 3</span>
+                    <span style="color:var(--accent-orange);">Out: Apr 5</span>
+                </div>
+            </div>
+            <div class="base-card">
+                <div class="base-num">Base 3</div>
+                <div class="base-name">Zell am See</div>
+                <div class="base-nights">2 nights</div>
+                <div style="display:flex;justify-content:center;gap:0.8rem;margin-top:0.4rem;font-size:0.78rem;">
+                    <span style="color:var(--accent-green);">In: Apr 5</span>
+                    <span style="color:var(--accent-orange);">Out: Apr 7</span>
+                </div>
+            </div>
+            <div class="base-card">
+                <div class="base-num">Base 4</div>
+                <div class="base-name">Werfen</div>
+                <div class="base-nights">2 nights</div>
+                <div style="font-size:0.72rem;color:var(--text-secondary);margin-top:0.2rem;">Der Burgblick</div>
+                <div style="display:flex;justify-content:center;gap:0.8rem;margin-top:0.4rem;font-size:0.78rem;">
+                    <span style="color:var(--accent-green);">In: Apr 7</span>
+                    <span style="color:var(--accent-orange);">Out: Apr 9</span>
+                </div>
+            </div>
+            <div class="base-card">
+                <div class="base-num">Base 5</div>
+                <div class="base-name">Vienna</div>
+                <div class="base-nights">1 night</div>
+                <div style="display:flex;justify-content:center;gap:0.8rem;margin-top:0.4rem;font-size:0.78rem;">
+                    <span style="color:var(--accent-green);">In: Apr 9</span>
+                    <span style="color:var(--accent-orange);">Out: Apr 10</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Driving Segments Table -->
+    <div class="drive-table-section" style="margin-top:3rem;">
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.4rem; text-align:center; margin-bottom:1.5rem; color:var(--accent-green);">All Driving Segments &le; 2h</h3>
+        <table class="drive-table">
+            <thead><tr><th>Day</th><th>From &rarr; To</th><th>Duration</th><th>Stop</th></tr></thead>
+            <tbody>
+                <tr><td>2</td><td>Bratislava &rarr; Semmering</td><td>1h 30min</td><td>UNESCO railway, coffee</td></tr>
+                <tr><td>2</td><td>Semmering &rarr; Bad Aussee</td><td>2h 00min</td><td>Lunch in Ausseerland</td></tr>
+                <tr><td>2</td><td>Bad Aussee &rarr; Hallstatt</td><td>20min</td><td>&mdash;</td></tr>
+                <tr><td>4</td><td>Hallstatt &rarr; Zell am See</td><td>1h 45min</td><td>Scenic Salzkammergut</td></tr>
+                <tr><td>6</td><td>Zell am See &rarr; Werfen</td><td>50min</td><td>&mdash;</td></tr>
+                <tr><td>6</td><td>Werfen &rarr; Salzburg</td><td>40min</td><td>Evening walk</td></tr>
+                <tr><td>7</td><td>Werfen &harr; Salzburg</td><td>40min each</td><td>Full day trip</td></tr>
+                <tr><td>8</td><td>Werfen &rarr; Gmunden</td><td>1h 45min</td><td>Schloss Ort, lake</td></tr>
+                <tr><td>8</td><td>Gmunden &rarr; Melk</td><td>1h 15min</td><td>Melk Abbey</td></tr>
+                <tr><td>8</td><td>Melk &rarr; Durnstein</td><td>30min</td><td>Wine, church, ruins</td></tr>
+                <tr><td>8</td><td>Durnstein &rarr; Vienna</td><td>1h 20min</td><td>&mdash;</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- ==================== ESSENTIALS ==================== -->
+<section class="essentials" id="essentials">
+    <h2>Before You Go</h2>
+    <div class="essentials-grid">
+        <div class="essential-card" style="border-color: rgba(255,171,64,0.4);">
+            <h4 style="color: var(--accent-orange);">Austria Vignette</h4>
+            <p>Required for all motorways. 10-day digital vignette ~EUR 9.90 at asfinag.at. <strong style="color:var(--accent-orange);">CRITICAL: Digital vignette activates 18 days after purchase &mdash; buy by March 14!</strong> Or buy a physical sticker at a gas station on arrival.</p>
+        </div>
+        <div class="essential-card">
+            <h4>Slovakia Vignette</h4>
+            <p>Also required for Slovak motorways! Buy the e-vignette at eznamka.sk before entering (~EUR 12 for 10 days).</p>
+        </div>
+        <div class="essential-card">
+            <h4>Weather (Early April)</h4>
+            <p>Valleys 5-15&#176;C, mountains 0-8&#176;C. Pack layers, rain jacket, warm fleece for cable cars. Snow possible at altitude.</p>
+        </div>
+        <div class="essential-card">
+            <h4>Currency &amp; Fuel</h4>
+            <p>Euro in both countries. Fill up in Slovakia where fuel is cheaper. Austria ~EUR 1.40-1.60/liter.</p>
+        </div>
+        <div class="essential-card">
+            <h4>Winter Tires</h4>
+            <p>Legally required in Austria through April 15. Rental cars should have them &mdash; confirm with agency. Snow chains recommended for mountain areas.</p>
+        </div>
+        <div class="essential-card">
+            <h4>Parking</h4>
+            <p>Most Austrian cities have paid zones (Kurzparkzonen). Keep coins ready or use EasyPark / ParkNow app. Hallstatt: use P1 garage only!</p>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== DAY 1 ==================== -->
+<section class="day-section" id="day1">
+    <div class="day-header">
+        <span class="day-badge badge-slovakia">Slovakia</span>
+        <h2>Day 1 &mdash; Bratislava</h2>
+        <div class="day-meta">
+            <span><span class="icon">&#x1F4C5;</span> Tue night Apr 1 + Wed Apr 2</span>
+            <span><span class="icon">&#x2708;</span> Arrive 1:30 AM</span>
+            <span><span class="icon">&#x1F319;</span> Sleep: Park Inn by Radisson Danube (2 nights)</span>
+        </div>
+    </div>
+    <div class="timeline">
+        <div class="timeline-block">
+            <div class="time-label">1:30 AM</div>
+            <h3>Arrival</h3>
+            <p>Flight lands 1:30 AM. Taxi/transfer to Park Inn by Radisson Danube (~20 min from BTS airport). Sleep!</p>
+        </div>
+        <div class="timeline-block">
+            <div class="time-label">Morning</div>
+            <h3>Old Town Walk</h3>
+            <ul>
+                <li><strong>Hlavne namestie (Main Square)</strong> &mdash; Pastel-colored buildings, start here</li>
+                <li><strong>Michael's Gate</strong> &mdash; Only preserved medieval gate, tower views (~EUR 5)</li>
+                <li><strong>Cumil (Man at Work)</strong> &mdash; Famous bronze statue, great photo spot</li>
+                <li><strong>St. Martin's Cathedral</strong> &mdash; Gothic cathedral, free entry</li>
+                <li><strong>UFO Bridge deck</strong> &mdash; Panoramic Danube views (~EUR 8), great at sunset</li>
+            </ul>
+        </div>
+        <div class="timeline-block">
+            <div class="time-label">Late Afternoon</div>
+            <h3>Bratislava Castle</h3>
+            <p>Walk up from Old Town (~15 min). Stunning views over the Danube and into Austria. Free grounds, museum ~EUR 10. Sunset from the castle gardens is magical.</p>
+        </div>
+        <div class="timeline-block food">
+            <div class="time-label">Evening</div>
+            <h3>Little Carpathians Wine + Dinner</h3>
+            <div class="highlight-card">
+                <div class="hl-title">Slovak Pub</div>
+                <div class="hl-detail">Huge traditional restaurant in themed rooms. Try bryndzove halusky (potato dumplings with sheep cheese). Affordable!</div>
+            </div>
+            <ul>
+                <li><strong>Vinoteka sv. Urbana</strong> &mdash; Slovak wines, cozy cellar</li>
+                <li><strong>Zylinder Cafe</strong> &mdash; Stylish Slovak cuisine on Hviezdoslavovo namestie</li>
+            </ul>
+            <div class="tip-box"><strong>Budget tip:</strong> Bratislava is significantly cheaper than Austria. Enjoy bigger meals here!</div>
+        </div>
+        <div class="timeline-block sleep">
+            <div class="time-label">Sleep</div>
+            <h3>Accommodation &mdash; Bratislava (2 nights)</h3>
+            <div class="sleep-section">
+                <h4>&#x1F6CF; Where to Stay</h4>
+                <ul>
+                    <li><strong>Park Inn by Radisson Danube</strong> &mdash; Booked! Right on the Danube waterfront</li>
+                </ul>
+                <span class="price-range">EUR 50-90 / night</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== DAY 2 ==================== -->
+<section class="day-section" id="day2">
+    <div class="day-header">
+        <span class="day-badge badge-austria">Drive Day</span>
+        <h2>Day 2 &mdash; Bratislava &rarr; Hallstatt</h2>
+        <div class="day-meta">
+            <span><span class="icon">&#x1F4C5;</span> Thursday, April 3</span>
+            <span><span class="icon">&#x1F697;</span> ~4h total (3 segments, 2 stops)</span>
+            <span><span class="icon">&#x1F319;</span> Sleep: Hallstatt / Obertraun</span>
+        </div>
+    </div>
+    <div class="timeline">
+        <div class="timeline-block drive">
+            <div class="time-label">8:00 - 9:30</div>
+            <h3>Drive: Bratislava &rarr; Semmering Pass</h3>
+            <p>~1h 30min south on A2 motorway. Buy your Austria vignette at a gas station right after crossing the border!</p>
+        </div>
+        <div class="timeline-block">
+            <div class="time-label">9:30 - 10:00</div>
+            <h3>Stop 1: Semmering Pass</h3>
+            <div class="highlight-card">
+                <div class="hl-title">Semmering Railway (UNESCO)</div>
+                <div class="hl-detail">World's first mountain railway (1848-1854). Stunning viaducts and tunnels visible from the village. Quick coffee and photo stop.</div>
+                <div class="hl-meta"><span>UNESCO Site</span><span>20 min stop</span></div>
+            </div>
+        </div>
+        <div class="timeline-block drive">
+            <div class="time-label">10:00 - 12:00</div>
+            <h3>Drive: Semmering &rarr; Bad Aussee</h3>
+            <p>~2h through the Mur Valley. Landscape becomes progressively more Alpine as you enter the Salzkammergut.</p>
+        </div>
+        <div class="timeline-block food">
+            <div class="time-label">12:00 - 13:00</div>
+            <h3>Stop 2: Bad Aussee (Lunch)</h3>
+            <p>Charming Ausseerland spa town at the confluence of two rivers, surrounded by mountains.</p>
+            <div class="highlight-card">
+                <div class="hl-title">Gasthof Blaue Traube</div>
+                <div class="hl-detail">Traditional Austrian food on the main square. Or Lebzelterhaus for cakes and coffee.</div>
+            </div>
+            <div class="tip-box"><strong>Detour option:</strong> Altaussee (10 min further) has a stunning mountain lake + historic salt mine.</div>
+        </div>
+        <div class="timeline-block drive">
+            <div class="time-label">13:00 - 13:20</div>
+            <h3>Drive: Bad Aussee &rarr; Hallstatt</h3>
+            <p>Just 20 min! Short scenic drive.</p>
+        </div>
+        <div class="timeline-block">
+            <div class="time-label">14:00 - 18:00</div>
+            <h3>Hallstatt Village</h3>
+            <p>Austria's most photographed village. Tiny, lakeside, mountains rising on all sides.</p>
+            <div class="warning-box"><strong>Parking:</strong> Use <strong>P1 parking garage</strong> at the tunnel entrance. ~EUR 10/day. Do NOT try to drive into the village!</div>
+            <ul>
+                <li><strong>The Classic Viewpoint</strong> &mdash; THE iconic photo between parking and village</li>
+                <li><strong>Marktplatz</strong> &mdash; Tiny market square, flower-covered houses</li>
+                <li><strong>Beinhaus (Bone House)</strong> &mdash; 600+ painted skulls, 12th century tradition (~EUR 2)</li>
+                <li><strong>Lake Walk</strong> &mdash; Walk south for peaceful views, fewer crowds</li>
+            </ul>
+        </div>
+        <div class="timeline-block food">
+            <div class="time-label">Evening</div>
+            <h3>Dinner in Hallstatt</h3>
+            <div class="highlight-card">
+                <div class="hl-title">Gasthof Zauner</div>
+                <div class="hl-detail">Traditional lakeside restaurant. Excellent fresh trout from the lake!</div>
+            </div>
+            <p>Hallstatt empties after ~17:00 when day-trippers leave. The magic hour &mdash; village practically to yourself.</p>
+        </div>
+        <div class="timeline-block sleep">
+            <div class="time-label">Sleep</div>
+            <h3>Accommodation &mdash; Hallstatt area (2 nights)</h3>
+            <div class="sleep-section">
+                <h4>&#x1F6CF; Where to Stay</h4>
+                <ul>
+                    <li><strong>In Hallstatt:</strong> Heritage Hotel (lake views), Gasthof Zauner (central), Braugasthof (budget, parking)</li>
+                    <li><strong>In Obertraun (5 min):</strong> Much cheaper, closer to Dachstein &mdash; Haus Loidl, B&amp;B Hallstatt</li>
+                </ul>
+                <span class="price-range">EUR 60-180 / night (varies by location)</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== DAY 3 ==================== -->
+<section class="day-section" id="day3">
+    <div class="day-header">
+        <span class="day-badge badge-austria">Austria</span>
+        <h2>Day 3 &mdash; Hallstatt + Dachstein</h2>
+        <div class="day-meta">
+            <span><span class="icon">&#x1F4C5;</span> Friday, April 4</span>
+            <span><span class="icon">&#x1F697;</span> Short local drives</span>
+            <span><span class="icon">&#x1F319;</span> Sleep: Hallstatt area</span>
+        </div>
+    </div>
+    <div class="timeline">
+        <div class="timeline-block">
+            <div class="time-label">9:00 - 12:00</div>
+            <h3>Hallstatt Salt Mine + Skywalk</h3>
+            <div class="highlight-card">
+                <div class="hl-title">Salzwelten Hallstatt</div>
+                <div class="hl-detail">World's oldest salt mine. Funicular up, mining railway inside, underground salt lake, oldest wooden staircase in Europe. Skywalk (350m above lake) included!</div>
+                <div class="hl-meta"><span>~EUR 40</span><span>2.5 hours</span><span>Check April opening!</span></div>
+            </div>
+        </div>
+        <div class="timeline-block">
+            <div class="time-label">12:30 - 17:00</div>
+            <h3>Dachstein Krippenstein</h3>
+            <p>Cable car from Obertraun into the mountains. Check dachstein-salzkammergut.com for April status.</p>
+            <div class="highlight-card">
+                <div class="hl-title">Five Fingers Viewpoint</div>
+                <div class="hl-detail">Five metal platforms jutting over a 400m cliff. Glass floor, picture frame, telescope. One of Austria's most spectacular viewpoints!</div>
+                <div class="hl-meta"><span>~EUR 40 cable car</span><span>2-3 hours</span><span>Free with cable car ticket</span></div>
+            </div>
+            <ul>
+                <li><strong>Dachstein Ice Cave</strong> &mdash; Ice formations inside the mountain (~EUR 30)</li>
+                <li><strong>Mammoth Cave</strong> &mdash; Enormous cave system</li>
+            </ul>
+            <div class="tip-box"><strong>Alternative:</strong> If Dachstein is closed, drive to <strong>Gosausee</strong> (~30 min) &mdash; stunning alpine lake with Dachstein glacier reflections. Easy 1.5h flat loop walk. Parking ~EUR 5.</div>
+        </div>
+        <div class="timeline-block food">
+            <div class="time-label">Evening</div>
+            <h3>Farewell Dinner</h3>
+            <div class="highlight-card">
+                <div class="hl-title">Gasthof Koppen (Obertraun)</div>
+                <div class="hl-detail">Hearty, no-frills Austrian mountain food. Great value.</div>
+            </div>
+            <p>Pack and prepare for Zell am See tomorrow.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== DAY 4 ==================== -->
+<section class="day-section" id="day4">
+    <div class="day-header">
+        <span class="day-badge badge-austria">Austria</span>
+        <h2>Day 4 &mdash; Hallstatt &rarr; Zell am See</h2>
+        <div class="day-meta">
+            <span><span class="icon">&#x1F4C5;</span> Saturday, April 5 &mdash; Easter Saturday!</span>
+            <span><span class="icon">&#x1F697;</span> ~1h 45min drive</span>
+            <span><span class="icon">&#x1F319;</span> Sleep: Zell am See</span>
+        </div>
+    </div>
+    <div class="timeline">
+        <div class="timeline-block">
+            <div class="time-label">9:00 - 10:00</div>
+            <h3>Last Hallstatt Moments</h3>
+            <p>Pack up, grab breakfast. If you haven't done Gosausee, consider a quick morning detour (adds ~1h).</p>
+        </div>
+        <div class="timeline-block drive">
+            <div class="time-label">10:00 - 11:45</div>
+            <h3>Drive: Hallstatt &rarr; Zell am See</h3>
+            <p>~1h 45min through gorgeous Alpine passes and the Salzburg lake district. Under 2 hours!</p>
+        </div>
+        <div class="timeline-block">
+            <div class="time-label">12:00 - 18:00</div>
+            <h3>Zell am See</h3>
+            <ul>
+                <li><strong>Lake Zell</strong> &mdash; Crystal-clear Alpine lake with Kitzsteinhorn glacier backdrop</li>
+                <li><strong>Lake Promenade</strong> &mdash; Full lakefront walk (~45 min loop)</li>
+                <li><strong>Old Town</strong> &mdash; St. Hippolyte's Church, Vogtturm tower</li>
+                <li><strong>Elisabeth Promenade</strong> &mdash; Peaceful lakeside walk, beautiful afternoon light</li>
+            </ul>
+            <div class="highlight-card">
+                <div class="hl-title">Schmittenhohe Cable Car</div>
+                <div class="hl-detail">1,965m summit. 360-degree panorama of 30+ peaks including Grossglockner. Check April operating status.</div>
+                <div class="hl-meta"><span>~EUR 35 round trip</span><span>Check if open</span></div>
+            </div>
+            <div class="warning-box"><strong>Easter Saturday:</strong> Some shops may close early. Restaurants usually open but busier than normal.</div>
+        </div>
+        <div class="timeline-block food">
+            <div class="time-label">Evening</div>
+            <h3>Dinner in Zell am See</h3>
+            <div class="highlight-card">
+                <div class="hl-title">Steinerwirt 1493</div>
+                <div class="hl-detail">One of the oldest inns in the region. Great Austrian food.</div>
+            </div>
+            <p>Walk the promenade at sunset. Chill mountain-town vibe.</p>
+        </div>
+        <div class="timeline-block sleep">
+            <div class="time-label">Sleep</div>
+            <h3>Accommodation &mdash; Zell am See (2 nights)</h3>
+            <div class="sleep-section">
+                <h4>&#x1F6CF; Where to Stay</h4>
+                <ul>
+                    <li><strong>Budget:</strong> Jugendherberge Zell am See, Pension Hubertus</li>
+                    <li><strong>Mid-range:</strong> Hotel Neue Post (center), Alpin Life Hotel Gebhard</li>
+                </ul>
+                <span class="price-range">EUR 80-130 / night</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== DAY 5 ==================== -->
+<section class="day-section" id="day5">
+    <div class="day-header">
+        <span class="day-badge badge-austria">Austria</span>
+        <h2>Day 5 &mdash; Zell am See / Kaprun</h2>
+        <div class="day-meta">
+            <span><span class="icon">&#x1F4C5;</span> Sunday, April 6 &mdash; Easter Sunday!</span>
+            <span><span class="icon">&#x1F697;</span> Short local drives</span>
+            <span><span class="icon">&#x1F319;</span> Sleep: Zell am See</span>
+        </div>
+    </div>
+    <div class="timeline">
+        <div class="timeline-block">
+            <div class="time-label">9:00 - 13:00</div>
+            <h3>Kitzsteinhorn Glacier (3,029m)</h3>
+            <p>Drive to Kaprun (~10 min).</p>
+            <div class="highlight-card">
+                <div class="hl-title">Top of Salzburg Platform (3,029m)</div>
+                <div class="hl-detail">Jaw-dropping 360-degree panorama. National Park Gallery tunnel at 2,450m. ICE ARENA &mdash; gallery carved into glacial ice.</div>
+                <div class="hl-meta"><span>~EUR 45 cable car</span><span>2-3 hours</span><span>Dress warmly! Sub-zero!</span></div>
+            </div>
+            <div class="warning-box"><strong>Easter Sunday:</strong> Many shops and some restaurants WILL be closed. Have snacks ready. Hotel breakfast is your best friend today.</div>
+        </div>
+        <div class="timeline-block">
+            <div class="time-label">13:00 - 18:00</div>
+            <h3>Kaprun Valley</h3>
+            <div class="highlight-card">
+                <div class="hl-title">Dorfstadl Kaprun</div>
+                <div class="hl-detail">Cozy mountain restaurant. Try the Kaiserschmarrn &mdash; shredded pancake, must-try Austrian dish!</div>
+            </div>
+            <ul>
+                <li><strong>Burg Kaprun</strong> &mdash; Medieval castle ruin, free, nice valley views</li>
+                <li><strong>Sigmund-Thun Gorge</strong> &mdash; Turquoise water walkways (~EUR 6). Likely closed in April &mdash; verify!</li>
+                <li><strong>Maiskogel</strong> &mdash; Gondola, easy walks, views to Zell am See (if gorge closed)</li>
+            </ul>
+        </div>
+        <div class="timeline-block food">
+            <div class="time-label">Evening</div>
+            <h3>Dinner</h3>
+            <ul>
+                <li><strong>Seewirt</strong> &mdash; Lake-view dining</li>
+                <li><strong>Deins &amp; Meins</strong> &mdash; Modern bistro feel</li>
+            </ul>
+            <p>Take an evening stroll along the lake. April sunsets over the mountains are incredible.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== DAY 6 ==================== -->
+<section class="day-section" id="day6">
+    <div class="day-header">
+        <span class="day-badge badge-austria">Austria</span>
+        <h2>Day 6 &mdash; Zell am See &rarr; Werfen + Salzburg</h2>
+        <div class="day-meta">
+            <span><span class="icon">&#x1F4C5;</span> Monday, April 7</span>
+            <span><span class="icon">&#x1F697;</span> 50min + 40min evening</span>
+            <span><span class="icon">&#x1F319;</span> Sleep: Werfen (Der Burgblick)</span>
+        </div>
+    </div>
+    <div class="timeline">
+        <div class="timeline-block drive">
+            <div class="time-label">10:00 - 10:50</div>
+            <h3>Drive: Zell am See &rarr; Werfen</h3>
+            <p>~50 min north on B311. Scenic Salzach Valley. Check in at <strong>Der Burgblick - Adults Only</strong>.</p>
+        </div>
+        <div class="timeline-block">
+            <div class="time-label">11:00 - 13:30</div>
+            <h3>Hohenwerfen Castle</h3>
+            <div class="highlight-card">
+                <div class="hl-title">Burg Hohenwerfen</div>
+                <div class="hl-detail">Dramatic 900-year-old fortress on a cliff 155m above the Salzach Valley. Daily falconry shows with eagles, falcons &amp; vultures. Filming location for "Where Eagles Dare" (1968).</div>
+                <div class="hl-meta"><span>~EUR 16</span><span>1.5-2 hours</span><span>Incl. falconry show</span></div>
+            </div>
+        </div>
+        <div class="timeline-block food">
+            <div class="time-label">Lunch</div>
+            <h3>Eat in Werfen</h3>
+            <ul>
+                <li><strong>Obauer</strong> &mdash; 2-Michelin-star splurge option (one of Austria's best!)</li>
+                <li><strong>Gasthof Lebzelter</strong> &mdash; Traditional Austrian, good value</li>
+            </ul>
+        </div>
+        <div class="timeline-block drive">
+            <div class="time-label">16:30 - 17:10</div>
+            <h3>Drive to Salzburg</h3>
+            <p>~40 min north on A10.</p>
+        </div>
+        <div class="timeline-block">
+            <div class="time-label">17:00 - 21:00</div>
+            <h3>Salzburg Evening Walk</h3>
+            <ul>
+                <li><strong>Getreidegasse</strong> &mdash; Famous shopping street with ornate wrought-iron guild signs</li>
+                <li><strong>Residenzplatz</strong> &mdash; Grand square, atmospheric at night</li>
+                <li><strong>Salzach River</strong> &mdash; Walk the embankment as the fortress lights up above</li>
+            </ul>
+        </div>
+        <div class="timeline-block food">
+            <div class="time-label">Dinner</div>
+            <h3>Salzburg Dining</h3>
+            <div class="highlight-card">
+                <div class="hl-title">Stiftskeller St. Peter</div>
+                <div class="hl-detail">One of Europe's oldest restaurants (803 AD!). Traditional Austrian food, stunning setting. Book ahead.</div>
+            </div>
+            <div class="highlight-card">
+                <div class="hl-title">Zwettler's</div>
+                <div class="hl-detail">Hearty Austrian classics &mdash; Schnitzel, Tafelspitz &mdash; right on Kaigasse</div>
+            </div>
+            <div class="tip-box"><strong>Street food:</strong> Grab a Bosna (spicy sausage in a bun) from a stand on Getreidegasse &mdash; Salzburg's famous street food!</div>
+        </div>
+        <div class="timeline-block drive">
+            <div class="time-label">~21:00</div>
+            <h3>Drive back to Werfen</h3>
+            <p>~40 min on A10 back to Der Burgblick.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== DAY 7 ==================== -->
+<section class="day-section" id="day7">
+    <div class="day-header">
+        <span class="day-badge badge-austria">Austria</span>
+        <h2>Day 7 &mdash; Salzburg Full Day (from Werfen)</h2>
+        <div class="day-meta">
+            <span><span class="icon">&#x1F4C5;</span> Tuesday, April 8</span>
+            <span><span class="icon">&#x1F697;</span> ~40 min each way</span>
+            <span><span class="icon">&#x1F319;</span> Sleep: Werfen</span>
+        </div>
+    </div>
+    <div class="timeline">
+        <div class="timeline-block drive">
+            <div class="time-label">8:30</div>
+            <h3>Drive to Salzburg</h3>
+            <p>~40 min on A10.</p>
+        </div>
+        <div class="timeline-block">
+            <div class="time-label">9:00 - 12:00</div>
+            <h3>Hohensalzburg Fortress</h3>
+            <div class="highlight-card">
+                <div class="hl-title">Hohensalzburg Fortress</div>
+                <div class="hl-detail">One of Europe's largest medieval castles. Funicular up, state rooms, torture chamber, panoramic terrace.</div>
+                <div class="hl-meta"><span>~EUR 16.30</span><span>2-3 hours</span><span>Go early!</span></div>
+            </div>
+            <div class="highlight-card">
+                <div class="hl-title">Salzburg Cathedral (Dom)</div>
+                <div class="hl-detail">Magnificent Baroque cathedral. Mozart's baptismal font inside. Free entry.</div>
+                <div class="hl-meta"><span>Free</span><span>30 min</span></div>
+            </div>
+        </div>
+        <div class="timeline-block food">
+            <div class="time-label">12:00 - 13:00</div>
+            <h3>Lunch</h3>
+            <div class="highlight-card">
+                <div class="hl-title">Cafe Tomaselli</div>
+                <div class="hl-detail">Salzburg's oldest coffeehouse (since 1705). Try the Salzburger Nockerl &mdash; sweet souffle, city's signature dessert</div>
+            </div>
+        </div>
+        <div class="timeline-block">
+            <div class="time-label">13:00 - 14:00</div>
+            <h3>Mirabell Palace &amp; Gardens</h3>
+            <p>Beautiful Baroque gardens from "The Sound of Music" (Do-Re-Mi scene). Free entry. Pegasus fountain, rose garden, Marble Hall.</p>
+        </div>
+        <div class="timeline-block">
+            <div class="time-label">14:00 - 17:00</div>
+            <h3>Afternoon Exploration</h3>
+            <ul>
+                <li><strong>Mozart's Birthplace</strong> (Getreidegasse 9) &mdash; His childhood violin, manuscripts (~EUR 14)</li>
+                <li><strong>Kapuzinerberg Hill</strong> &mdash; Quiet viewpoint, ~15 min hike</li>
+                <li><strong>Linzergasse</strong> &mdash; Charming shopping street, less crowded</li>
+            </ul>
+        </div>
+        <div class="timeline-block">
+            <div class="time-label">17:00 - 20:30</div>
+            <h3>Evening: Cafe + Beer Hall</h3>
+            <ul>
+                <li><strong>Cafe Sacher</strong> &mdash; Original Sacher Torte on the river terrace</li>
+                <li><strong>Makartsteg bridge</strong> &mdash; Love-lock bridge, golden hour photos</li>
+            </ul>
+            <div class="highlight-card">
+                <div class="hl-title">Augustiner Brau</div>
+                <div class="hl-detail">Massive beer hall run by monks. Beer from wooden barrels. Self-service, local favorite. Amazing atmosphere!</div>
+            </div>
+        </div>
+        <div class="timeline-block drive">
+            <div class="time-label">~20:30</div>
+            <h3>Drive back to Werfen</h3>
+            <p>~40 min on A10. Last night at Der Burgblick.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== DAY 8 ==================== -->
+<section class="day-section" id="day8">
+    <div class="day-header">
+        <span class="day-badge badge-austria">Drive Day</span>
+        <h2>Day 8 &mdash; Werfen &rarr; Wachau &rarr; Vienna</h2>
+        <div class="day-meta">
+            <span><span class="icon">&#x1F4C5;</span> Wednesday, April 9</span>
+            <span><span class="icon">&#x1F697;</span> ~4.5h total (4 segments, 3 stops)</span>
+            <span><span class="icon">&#x1F319;</span> Sleep: Vienna</span>
+        </div>
+    </div>
+    <div class="timeline">
+        <div class="timeline-block drive">
+            <div class="time-label">8:00 - 9:45</div>
+            <h3>Drive: Werfen &rarr; Gmunden / Traunsee</h3>
+            <p>~1h 45min north on A10/A1. Through the scenic Salzburg lake district.</p>
+        </div>
+        <div class="timeline-block">
+            <div class="time-label">9:45 - 10:30</div>
+            <h3>Stop 1: Gmunden / Traunsee</h3>
+            <div class="highlight-card">
+                <div class="hl-title">Schloss Ort (Seeschloss Ort)</div>
+                <div class="hl-detail">Fairy-tale castle on a small island in Traunsee, connected by a wooden bridge. Iconic Austrian postcard motif!</div>
+                <div class="hl-meta"><span>Free to walk/photograph</span><span>30-45 min</span></div>
+            </div>
+            <p>Quick esplanade walk along the lake with mountain backdrop.</p>
+        </div>
+        <div class="timeline-block drive">
+            <div class="time-label">10:30 - 11:45</div>
+            <h3>Drive: Gmunden &rarr; Melk</h3>
+            <p>~1h 15min east toward the Danube.</p>
+        </div>
+        <div class="timeline-block">
+            <div class="time-label">11:45 - 13:30</div>
+            <h3>Stop 2: Melk Abbey</h3>
+            <div class="highlight-card">
+                <div class="hl-title">Stift Melk</div>
+                <div class="hl-detail">One of Europe's most magnificent Baroque monasteries, perched on a cliff above the Danube. Imperial corridor, marble hall, incredible library (250,000+ volumes).</div>
+                <div class="hl-meta"><span>~EUR 14.50</span><span>1.5-2 hours</span><span>Parking ~EUR 4</span></div>
+            </div>
+        </div>
+        <div class="timeline-block drive">
+            <div class="time-label">13:30 - 14:00</div>
+            <h3>Drive: Melk &rarr; Durnstein</h3>
+            <p>~30 min east along the Danube through the Wachau Valley. Vineyards, apricot orchards, the blue Danube below.</p>
+            <div class="tip-box"><strong>Apricot blossom season!</strong> Early April is peak bloom for Wachau's famous Marillen orchards. White/pink blossoms everywhere!</div>
+        </div>
+        <div class="timeline-block">
+            <div class="time-label">14:00 - 15:30</div>
+            <h3>Stop 3: Durnstein</h3>
+            <p>Tiny, picture-perfect Wachau village.</p>
+            <ul>
+                <li><strong>Blue church tower</strong> &mdash; Iconic Baroque Stiftskirche</li>
+                <li><strong>Ruine Durnstein</strong> &mdash; Castle where Richard the Lionheart was imprisoned (1192). ~20 min hike</li>
+                <li><strong>Wine tasting</strong> &mdash; Gruner Veltliner at a local Heuriger</li>
+            </ul>
+            <div class="highlight-card">
+                <div class="hl-title">Loibnerhof (Lunch)</div>
+                <div class="hl-detail">Danube fish and local Wachau wines</div>
+            </div>
+        </div>
+        <div class="timeline-block drive">
+            <div class="time-label">15:30 - 16:50</div>
+            <h3>Drive: Durnstein &rarr; Vienna</h3>
+            <p>~1h 20min on A1/S33 to Vienna.</p>
+        </div>
+        <div class="timeline-block">
+            <div class="time-label">17:00 - 22:00</div>
+            <h3>Vienna Evening</h3>
+            <ul>
+                <li><strong>Stephansdom</strong> &mdash; Gothic masterpiece, South Tower climb (~EUR 6, 343 steps)</li>
+                <li><strong>Graben &amp; Kohlmarkt</strong> &mdash; Elegant shopping streets</li>
+                <li><strong>Naschmarkt</strong> &mdash; 120+ food stalls (closes ~18:00)</li>
+            </ul>
+            <div class="highlight-card">
+                <div class="hl-title">Figlmuller</div>
+                <div class="hl-detail">Vienna's most famous Schnitzel (since 1905). Hangs over the plate! Book ahead or queue.</div>
+            </div>
+            <ul>
+                <li><strong>Ringstrasse night walk</strong> &mdash; Illuminated Opera House, Parliament, Rathaus</li>
+                <li><strong>Loos American Bar</strong> &mdash; Legendary tiny cocktail bar (1908)</li>
+            </ul>
+            <div class="warning-box"><strong>Parking in Vienna:</strong> Expensive. Use a Park &amp; Ride (e.g., Erdberg P+R) and get a 24h Wiener Linien ticket (~EUR 8).</div>
+        </div>
+        <div class="timeline-block sleep">
+            <div class="time-label">Sleep</div>
+            <h3>Accommodation &mdash; Vienna (1 night)</h3>
+            <div class="sleep-section">
+                <h4>&#x1F6CF; Where to Stay</h4>
+                <ul>
+                    <li><strong>Budget:</strong> Wombat's City Hostel, SafeStay Vienna</li>
+                    <li><strong>Mid-range:</strong> Motel One Wien-Staatsoper, Ruby Marie Hotel</li>
+                    <li><strong>Area:</strong> 1st district or along the Ring (4th, 6th, 7th)</li>
+                </ul>
+                <span class="price-range">EUR 90-160 / night</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== DAY 9 ==================== -->
+<section class="day-section" id="day9">
+    <div class="day-header">
+        <span class="day-badge badge-austria">Austria</span>
+        <h2>Day 9 &mdash; Vienna (Departure)</h2>
+        <div class="day-meta">
+            <span><span class="icon">&#x1F4C5;</span> Thursday, April 10</span>
+            <span><span class="icon">&#x2708;</span> Friends depart</span>
+        </div>
+    </div>
+    <div class="timeline">
+        <div class="timeline-block">
+            <div class="time-label">9:00 - 13:00</div>
+            <h3>Last Vienna Highlights</h3>
+            <div class="highlight-card">
+                <div class="hl-title">Schonbrunn Palace</div>
+                <div class="hl-detail">Habsburgs' summer residence. Gardens are free and spectacular. The Gloriette viewpoint is a must!</div>
+                <div class="hl-meta"><span>Interior ~EUR 22</span><span>Gardens free</span><span>U4 to Schonbrunn</span></div>
+            </div>
+            <div class="highlight-card">
+                <div class="hl-title">Cafe Central</div>
+                <div class="hl-detail">Vienna's most famous coffeehouse. Stunning neo-Gothic interior. Where Trotsky and Freud gathered. Try a Melange + Apfelstrudel.</div>
+            </div>
+            <p><strong>Alternative:</strong> Belvedere Palace &mdash; Klimt's "The Kiss" (~EUR 16).</p>
+        </div>
+        <div class="timeline-block">
+            <div class="time-label">Midday</div>
+            <h3>Departure</h3>
+            <p>Vienna Airport (VIE): ~20 min drive or CAT train from Wien Mitte.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== VERIFY ==================== -->
+<section class="packing-section" id="verify">
+    <h2>Verify Before Travel (2-4 Weeks Out)</h2>
+    <div class="packing-grid" id="verifyGrid">
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Austria digital vignette (buy by Mar 14!)</span></div>
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Slovakia e-vignette (eznamka.sk)</span></div>
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Dachstein/Five Fingers cable car status</span></div>
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Hallstatt Salt Mine opening date</span></div>
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Kitzsteinhorn cable car April hours</span></div>
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Schmittenhohe cable car April status</span></div>
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Hohenwerfen Castle April hours</span></div>
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Melk Abbey hours (stiftmelk.at)</span></div>
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Easter closures: restaurants Apr 3-6</span></div>
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">All accommodation booked</span></div>
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Rental car winter tires confirmed</span></div>
+    </div>
+</section>
+
+<!-- ==================== BUDGET ==================== -->
+<section class="budget-section" id="budget">
+    <h2>Budget Estimate (per person)</h2>
+    <table class="budget-table">
+        <tr><td>Accommodation (9 nights)</td><td>EUR 450 - 780</td></tr>
+        <tr><td>Fuel (~900 km)</td><td>EUR 80 - 110</td></tr>
+        <tr><td>Food &amp; Drinks (9 days)</td><td>EUR 250 - 400</td></tr>
+        <tr><td>Activities &amp; Entries</td><td>EUR 150 - 250</td></tr>
+        <tr><td>Vignette Austria (10-day)</td><td>EUR ~10</td></tr>
+        <tr><td>Vignette Slovakia (10-day)</td><td>EUR ~12</td></tr>
+        <tr><td>Parking (total)</td><td>EUR 40 - 60</td></tr>
+        <tr class="total"><td>TOTAL ESTIMATE</td><td>EUR 950 - 1,550</td></tr>
+    </table>
+</section>
+
+<!-- ==================== PACKING ==================== -->
+<section class="packing-section" id="packing">
+    <h2>Packing Checklist</h2>
+    <div class="packing-grid" id="packingGrid">
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Layers (temps vary wildly)</span></div>
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Rain jacket / waterproof layer</span></div>
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Comfortable walking shoes</span></div>
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Hiking shoes</span></div>
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Warm fleece for cable cars</span></div>
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Sunglasses + sunscreen</span></div>
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Car phone charger + mount</span></div>
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Reusable water bottle</span></div>
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Camera / extra battery</span></div>
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Passport / ID card</span></div>
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Travel insurance docs</span></div>
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Snow chains (for car)</span></div>
+    </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<div class="footer">
+    <p>Slovakia + Austria Round Trip &middot; April 1-10, 2026</p>
+    <p style="margin-top: 0.5rem;">Planned with <span class="heart">&hearts;</span></p>
+</div>
+
+<!-- ==================== JAVASCRIPT ==================== -->
+<script>
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + id) {
+                        link.classList.add('active');
+                        link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    }
+                });
+            }
+        });
+    }, { root: null, rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+    sections.forEach(section => observer.observe(section));
+
+    // Fade-in animation
+    const fadeElements = document.querySelectorAll('.timeline-block, .stat-card, .base-card, .essential-card');
+    const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    fadeElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        fadeObserver.observe(el);
+    });
+
+    // Checklist localStorage
+    function initChecklist(containerId, storageKey) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        const packItems = container.querySelectorAll('.pack-item');
+        const savedState = JSON.parse(localStorage.getItem(storageKey) || '{}');
+
+        packItems.forEach((item, index) => {
+            if (savedState[index]) item.classList.add('checked');
+            item.addEventListener('click', () => {
+                const state = {};
+                packItems.forEach((it, i) => { state[i] = it.classList.contains('checked'); });
+                localStorage.setItem(storageKey, JSON.stringify(state));
+            });
+        });
+    }
+
+    initChecklist('packingGrid', 'rtPackingState');
+    initChecklist('verifyGrid', 'rtVerifyState');
+</script>
+
+</body>
+</html>
