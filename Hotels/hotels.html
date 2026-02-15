@@ -214,11 +214,79 @@ body {
     letter-spacing: 0.05em;
 }
 
-.card-image {
+/* Card image carousel */
+.card-gallery {
+    position: relative;
     width: 100%;
-    height: 180px;
-    object-fit: cover;
+    height: 200px;
+    overflow: hidden;
     background: var(--bg-card-hover);
+}
+.card-gallery img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+.card-gallery .gallery-track {
+    display: flex;
+    transition: transform 0.35s ease;
+    height: 100%;
+}
+.card-gallery .gallery-slide {
+    min-width: 100%;
+    height: 100%;
+}
+.card-gallery .gallery-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    font-size: 0.8rem;
+    cursor: pointer;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card-gallery .gallery-btn.prev { left: 6px; }
+.card-gallery .gallery-btn.next { right: 6px; }
+.card-gallery .gallery-dots {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 4px;
+    z-index: 3;
+}
+.card-gallery .gallery-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+.card-gallery .gallery-dot.active {
+    background: #fff;
+}
+.card-gallery .img-counter {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 99px;
+    z-index: 3;
 }
 
 .card-body { padding: 1.2rem; }
@@ -545,8 +613,8 @@ body {
 // ========== CONFIG ==========
 const VOTERS = [
     { name: 'Najeeb', color: '#4a9eff', initial: 'N' },
-    { name: 'Reema', color: '#f472b6', initial: 'R' },
-    { name: 'Evon', color: '#a78bfa', initial: 'E' },
+    { name: 'Reema', color: '#a78bfa', initial: 'R' },
+    { name: 'Evon', color: '#f472b6', initial: 'E' },
     { name: 'Eran', color: '#fb923c', initial: 'Er' },
 ];
 
@@ -555,8 +623,8 @@ const LOCATIONS = [
     {
         id: 'bratislava',
         name: 'Bratislava',
-        nights: 1,
-        dates: 'Apr 1 (1 night)',
+        nights: 2,
+        dates: 'Apr 1–3 (2 nights)',
         image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=200&q=80',
         hotels: [
             {
@@ -564,7 +632,7 @@ const LOCATIONS = [
                 name: 'Park Inn by Radisson Danube',
                 location: 'Bratislava Old Town',
                 locType: 'in-village',
-                image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80',
+                images: [],
                 pricePerCouple: 610,
                 priceRefund: 'refundable',
                 priceAlt: 'Non-refundable: ILS 550/couple',
@@ -576,7 +644,7 @@ const LOCATIONS = [
                 name: 'Palace Apartments',
                 location: 'Bratislava Center',
                 locType: 'in-village',
-                image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80',
+                images: [],
                 pricePerCouple: 500,
                 priceRefund: 'refundable',
                 priceAlt: 'Full apartment: ILS 1,000',
@@ -588,7 +656,7 @@ const LOCATIONS = [
                 name: 'Old Town Luxury Apartment',
                 location: 'Heart of Bratislava',
                 locType: 'in-village',
-                image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80',
+                images: [],
                 pricePerCouple: 492,
                 priceRefund: 'refundable',
                 priceAlt: 'Full apartment: ILS 985',
@@ -600,7 +668,7 @@ const LOCATIONS = [
                 name: 'Elisabeth Old Town',
                 location: 'Bratislava Old Town',
                 locType: 'in-village',
-                image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&q=80',
+                images: [],
                 pricePerCouple: 725,
                 priceRefund: 'refundable',
                 priceAlt: 'Non-refundable: ILS 656/couple',
@@ -612,7 +680,7 @@ const LOCATIONS = [
                 name: 'Radisson Blu Carlton Hotel',
                 location: 'Bratislava Center',
                 locType: 'in-village',
-                image: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&q=80',
+                images: [],
                 pricePerCouple: 513,
                 priceRefund: 'refundable',
                 priceAlt: 'Non-refundable: ILS 486/couple',
@@ -625,7 +693,7 @@ const LOCATIONS = [
         id: 'hallstatt',
         name: 'Hallstatt Area',
         nights: 2,
-        dates: 'Apr 2–3 (2 nights)',
+        dates: 'Apr 3–5 (2 nights)',
         image: 'https://images.unsplash.com/photo-1609942167021-f59442d56d8f?w=200&q=80',
         hotels: [
             {
@@ -633,7 +701,12 @@ const LOCATIONS = [
                 name: 'Seewirt Zauner',
                 location: 'Hallstatt village',
                 locType: 'in-village',
-                image: 'https://images.unsplash.com/photo-1609942167021-f59442d56d8f?w=600&q=80',
+                images: [
+                    'https://www.hallstatt.net/assets/Hallstatt/Unterkunft/unterkunftsverzeichnis/gasthoefe-und-hotels/gasthof-zauner/gasthof-zauner-hallstatt/_resampled/WebsitePictureW10/hallstatt-hotels-gasthof-zauner-025.jpg',
+                    'https://www.seewirt-zauner.at/assets/images/3/hallstatt-see-aussicht-69c3232e-d3a0334c.jpg',
+                    'https://www.seewirt-zauner.at/assets/images/0/restaurant-balkon-seewirt-bbc897d9-d4bafbcd.jpg',
+                    'https://www.seewirt-zauner.at/assets/images/7/stuhl-restaurant-zauner-64a527e2-0bbd84b6.jpg',
+                ],
                 pricePerCouple: 1815,
                 priceRefund: 'refundable',
                 priceAlt: null,
@@ -645,7 +718,7 @@ const LOCATIONS = [
                 name: 'Pension Leopoldine',
                 location: 'Hallstatt village',
                 locType: 'in-village',
-                image: 'https://images.unsplash.com/photo-1609942167021-f59442d56d8f?w=600&q=80',
+                images: [],
                 pricePerCouple: 1939,
                 priceRefund: 'refundable',
                 priceAlt: null,
@@ -657,7 +730,7 @@ const LOCATIONS = [
                 name: 'Fenix Hall Boutique Hotel',
                 location: 'Hallstatt village',
                 locType: 'in-village',
-                image: 'https://images.unsplash.com/photo-1609942167021-f59442d56d8f?w=600&q=80',
+                images: [],
                 pricePerCouple: 1820,
                 priceRefund: 'refundable',
                 priceAlt: null,
@@ -669,7 +742,7 @@ const LOCATIONS = [
                 name: 'Dormio Hotel Obertraun',
                 location: 'Obertraun (near Hallstatt)',
                 locType: 'nearby',
-                image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&q=80',
+                images: [],
                 pricePerCouple: 1627,
                 priceRefund: 'refundable',
                 priceAlt: 'Non-refundable: ILS 1,363/couple',
@@ -681,7 +754,7 @@ const LOCATIONS = [
                 name: 'Seehotel am Hallstattersee',
                 location: 'Obertraun (lakeside)',
                 locType: 'nearby',
-                image: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=600&q=80',
+                images: [],
                 pricePerCouple: 1016,
                 priceRefund: 'refundable',
                 priceAlt: null,
@@ -693,7 +766,12 @@ const LOCATIONS = [
                 name: 'COOEE alpin Hotel Dachstein',
                 location: 'Hallstatt area',
                 locType: 'nearby',
-                image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80',
+                images: [
+                    'https://cooee-alpin.com/wp-content/uploads/Aussenaufnahme_DAC_Sommer-2024-3-e1770817620243.webp',
+                    'https://cooee-alpin.com/wp-content/uploads/401_Apartment_COOEE_alpin_Dachstein-9.webp',
+                    'https://cooee-alpin.com/wp-content/uploads/402_Apartment_COOEE_alpin_Dachstein-5.webp',
+                    'https://cooee-alpin.com/wp-content/uploads/404_Apartment_COOEE_alpin_Dachstein-_1.webp',
+                ],
                 pricePerCouple: 1494,
                 priceRefund: 'refundable',
                 priceAlt: 'Full apartment: ILS 2,989',
@@ -705,7 +783,7 @@ const LOCATIONS = [
                 name: 'Villa Salzweg',
                 location: 'Hallstatt area',
                 locType: 'nearby',
-                image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80',
+                images: [],
                 pricePerCouple: 950,
                 priceRefund: 'refundable',
                 priceAlt: 'Full apartment: ILS 1,900',
@@ -717,7 +795,7 @@ const LOCATIONS = [
                 name: 'Obertrauner Hof',
                 location: 'Obertraun',
                 locType: 'nearby',
-                image: 'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=600&q=80',
+                images: [],
                 pricePerCouple: 1300,
                 priceRefund: 'refundable',
                 priceAlt: null,
@@ -730,7 +808,7 @@ const LOCATIONS = [
         id: 'zellamsee',
         name: 'Zell am See',
         nights: 2,
-        dates: 'Apr 4–5 (2 nights)',
+        dates: 'Apr 5–7 (2 nights)',
         image: 'https://images.unsplash.com/photo-1589308078059-be1415eab4c3?w=200&q=80',
         hotels: [
             {
@@ -738,7 +816,7 @@ const LOCATIONS = [
                 name: 'The House Zell am See',
                 location: 'Zell am See',
                 locType: 'in-village',
-                image: 'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=600&q=80',
+                images: [],
                 pricePerCouple: null,
                 priceRefund: null,
                 priceAlt: 'Price not listed — check Booking.com',
@@ -750,7 +828,7 @@ const LOCATIONS = [
                 name: 'Residence Bellevue',
                 location: 'Zell am See',
                 locType: 'in-village',
-                image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80',
+                images: [],
                 pricePerCouple: 1316,
                 priceRefund: 'refundable',
                 priceAlt: 'Full apartment: ILS 2,633',
@@ -762,7 +840,12 @@ const LOCATIONS = [
                 name: 'Der Erlhof Restaurant & Landhotel',
                 location: 'Zell am See area',
                 locType: 'nearby',
-                image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80',
+                images: [
+                    'https://erlhof-at.b-cdn.net/wp-content/uploads/2019/07/slide-erlhof-9-1.jpg',
+                    'https://erlhof-at.b-cdn.net/wp-content/uploads/2019/07/der-erlhof-hotel-zell-am-see-14.jpg',
+                    'https://erlhof-at.b-cdn.net/wp-content/uploads/2019/06/hotel-direkt-am-see-zell-am-see.jpg',
+                    'https://erlhof-at.b-cdn.net/wp-content/uploads/2019/07/der-erlhof-hotel-restaurant-zell-am-see-1.jpg',
+                ],
                 pricePerCouple: 1282,
                 priceRefund: 'refundable',
                 priceAlt: null,
@@ -774,7 +857,12 @@ const LOCATIONS = [
                 name: 'Hotel Steinerwirt1493',
                 location: 'Zell am See',
                 locType: 'in-village',
-                image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&q=80',
+                images: [
+                    'https://cdn-steinerwirt.b-cdn.net/wp-content/uploads/2022/12/028_5892-2-scaled.jpg',
+                    'https://cdn-steinerwirt.b-cdn.net/wp-content/uploads/2022/12/Zimmer03-scaled.jpg',
+                    'https://cdn-steinerwirt.b-cdn.net/wp-content/uploads/2022/12/Stueberl03-scaled.jpg',
+                    'https://cdn-steinerwirt.b-cdn.net/wp-content/uploads/2022/12/Essen07-1-scaled.jpg',
+                ],
                 pricePerCouple: 1436,
                 priceRefund: 'refundable',
                 priceAlt: 'Non-refundable: ILS 1,364/couple',
@@ -787,7 +875,7 @@ const LOCATIONS = [
         id: 'werfen',
         name: 'Salzburg / Werfen',
         nights: 2,
-        dates: 'Apr 6–7 (2 nights)',
+        dates: 'Apr 7–9 (2 nights)',
         image: 'https://images.unsplash.com/photo-1632892271596-9afebd2de0c1?w=200&q=80',
         hotels: [
             {
@@ -795,7 +883,11 @@ const LOCATIONS = [
                 name: 'Der Burgblick — Adults Only',
                 location: 'Werfen (near Salzburg)',
                 locType: 'nearby',
-                image: 'https://images.unsplash.com/photo-1632892271596-9afebd2de0c1?w=600&q=80',
+                images: [
+                    'https://www.der-burgblick.at/wp-content/uploads/hotel-zimmer-werfen-salzburg-4-990x582.jpg',
+                    'https://www.der-burgblick.at/wp-content/uploads/hotel-zimmer-werfen-salzburg-1-990x660.jpg',
+                    'https://www.der-burgblick.at/wp-content/uploads/hotel-zimmer-werfen-salzburg-2-990x660.jpg',
+                ],
                 pricePerCouple: 742,
                 priceRefund: 'refundable',
                 priceAlt: null,
@@ -807,7 +899,7 @@ const LOCATIONS = [
                 name: 'Numa Salzburg Vogelweider',
                 location: 'Salzburg city',
                 locType: 'in-village',
-                image: 'https://images.unsplash.com/photo-1660046911251-e29fa793f429?w=600&q=80',
+                images: [],
                 pricePerCouple: null,
                 priceRefund: null,
                 priceAlt: 'Price not listed — check Booking.com',
@@ -819,8 +911,8 @@ const LOCATIONS = [
     {
         id: 'vienna',
         name: 'Vienna',
-        nights: 2,
-        dates: 'Apr 8–9 (2 nights)',
+        nights: 1,
+        dates: 'Apr 9–10 (1 night)',
         image: 'https://images.unsplash.com/photo-1516550893923-42d28e5677af?w=200&q=80',
         hotels: [
             {
@@ -828,7 +920,7 @@ const LOCATIONS = [
                 name: 'Add Vienna hotels',
                 location: 'Vienna — no hotels added yet',
                 locType: 'in-village',
-                image: 'https://images.unsplash.com/photo-1516550893923-42d28e5677af?w=600&q=80',
+                images: [],
                 pricePerCouple: null,
                 priceRefund: null,
                 priceAlt: 'Add your Vienna hotel options to compare',
@@ -1057,9 +1149,32 @@ function renderHotelCard(hotel, locationId) {
         ? `<span class="price-refund non-refundable">Non-refundable</span>`
         : '';
 
+    const imgs = hotel.images || [];
+    const hasMultiple = imgs.length > 1;
+    const galleryId = `gallery-${hotel.id}`;
+
+    const galleryHTML = imgs.length === 0
+        ? `<div class="card-gallery" id="${galleryId}" style="display:flex;align-items:center;justify-content:center;background:var(--bg-card-hover);">
+            <div style="text-align:center;color:var(--text-muted);font-size:0.85rem;">
+                <div style="font-size:1.5rem;margin-bottom:0.3rem;opacity:0.4;">&#128247;</div>
+                No photo available
+            </div>
+        </div>`
+        : `<div class="card-gallery" id="${galleryId}">
+            <div class="gallery-track">
+                ${imgs.map((src, i) => `<div class="gallery-slide"><img loading="lazy" src="${src}" alt="${hotel.name} photo ${i+1}"></div>`).join('')}
+            </div>
+            ${hasMultiple ? `
+                <button class="gallery-btn prev" data-gallery="${galleryId}">&#10094;</button>
+                <button class="gallery-btn next" data-gallery="${galleryId}">&#10095;</button>
+                <span class="img-counter">1/${imgs.length}</span>
+                <div class="gallery-dots">${imgs.map((_, i) => `<button class="gallery-dot ${i===0?'active':''}" data-gallery="${galleryId}" data-idx="${i}"></button>`).join('')}</div>
+            ` : ''}
+        </div>`;
+
     return `<div class="hotel-card ${isSelected ? 'selected' : ''}" data-hotel="${hotel.id}" data-location="${locationId}">
         ${voteCount > 0 ? `<div class="vote-count ${isPopular ? 'popular' : ''}">${isPopular ? '&#9733; ' : ''}${voteCount} vote${voteCount>1?'s':''}</div>` : ''}
-        <img class="card-image" loading="lazy" src="${hotel.image}" alt="${hotel.name}">
+        ${galleryHTML}
         <div class="card-body">
             <div class="card-name">${hotel.name}</div>
             <div class="card-location">
@@ -1164,6 +1279,34 @@ function bindEvents() {
             state.votes[hotelId][voter] = !state.votes[hotelId][voter];
             saveState(state);
             render();
+        });
+    });
+
+    // Gallery navigation
+    document.querySelectorAll('.card-gallery').forEach(gal => {
+        const track = gal.querySelector('.gallery-track');
+        const slides = gal.querySelectorAll('.gallery-slide');
+        const dots = gal.querySelectorAll('.gallery-dot');
+        const counter = gal.querySelector('.img-counter');
+        if (slides.length <= 1) return;
+        let idx = 0;
+        const go = (i) => {
+            idx = (i + slides.length) % slides.length;
+            track.style.transform = `translateX(-${idx * 100}%)`;
+            dots.forEach((d, j) => d.classList.toggle('active', j === idx));
+            if (counter) counter.textContent = `${idx+1}/${slides.length}`;
+        };
+        const prev = gal.querySelector('.gallery-btn.prev');
+        const next = gal.querySelector('.gallery-btn.next');
+        if (prev) prev.addEventListener('click', (e) => { e.stopPropagation(); go(idx - 1); });
+        if (next) next.addEventListener('click', (e) => { e.stopPropagation(); go(idx + 1); });
+        dots.forEach(d => d.addEventListener('click', (e) => { e.stopPropagation(); go(+d.dataset.idx); }));
+        // Touch/swipe
+        let tx = 0;
+        gal.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+        gal.addEventListener('touchend', e => {
+            const dx = e.changedTouches[0].clientX - tx;
+            if (Math.abs(dx) > 40) go(dx < 0 ? idx + 1 : idx - 1);
         });
     });
 
