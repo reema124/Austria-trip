@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slovakia + Austria Trip — Hotel Picker</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg-main: #0a0a0f;
+    --bg-card: #13131a;
+    --bg-card-hover: #1a1a24;
+    --border-color: rgba(255,255,255,0.08);
+    --text-primary: #e8e6e3;
+    --text-secondary: #a8a5a0;
+    --text-muted: #6b6966;
+    --accent-blue: #4a9eff;
+    --accent-green: #4ade80;
+    --accent-orange: #fb923c;
+    --accent-red: #f87171;
+    --accent-purple: #a78bfa;
+    --accent-pink: #f472b6;
+    --gold: #fbbf24;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-main);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding-bottom: 100px;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    padding: 2.5rem 1rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    background: linear-gradient(180deg, rgba(74,158,255,0.06) 0%, transparent 100%);
+}
+.header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 0.3rem;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.header p { color: var(--text-secondary); font-size: 0.9rem; }
+
+/* Sticky total bar */
+.total-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(13,13,20,0.95);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid var(--border-color);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+    gap: 1rem;
+}
+.total-bar .total-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+.total-bar .total-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--accent-green);
+}
+.total-bar .total-detail {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+.total-left { flex: 1; }
+.total-right { text-align: right; }
+.total-locations {
+    display: flex;
+    gap: 0.4rem;
+    margin-top: 0.3rem;
+    flex-wrap: wrap;
+}
+.total-loc-chip {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 99px;
+    background: rgba(74,158,255,0.15);
+    color: var(--accent-blue);
+    white-space: nowrap;
+}
+.total-loc-chip.empty {
+    background: rgba(255,255,255,0.05);
+    color: var(--text-muted);
+}
+
+/* Navigation */
+.nav {
+    display: flex;
+    overflow-x: auto;
+    gap: 0;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--bg-card);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    -webkit-overflow-scrolling: touch;
+}
+.nav-btn {
+    flex: 1;
+    min-width: max-content;
+    padding: 0.85rem 1.2rem;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    white-space: nowrap;
+}
+.nav-btn:hover { color: var(--text-secondary); background: rgba(255,255,255,0.03); }
+.nav-btn.active {
+    color: var(--accent-blue);
+    border-bottom-color: var(--accent-blue);
+    background: rgba(74,158,255,0.05);
+}
+.nav-btn .nav-check { display: none; margin-left: 0.3rem; color: var(--accent-green); }
+.nav-btn.has-selection .nav-check { display: inline; }
+
+/* Sections */
+.location-section {
+    display: none;
+    padding: 1.5rem 1rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    animation: fadeIn 0.3s ease;
+}
+.location-section.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.section-header img {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+.section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+}
+.section-meta {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 0.25rem;
+    flex-wrap: wrap;
+}
+.meta-chip {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 99px;
+    background: rgba(255,255,255,0.06);
+    color: var(--text-secondary);
+}
+
+/* Hotel cards */
+.hotel-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+.hotel-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s;
+    position: relative;
+}
+.hotel-card:hover { border-color: rgba(255,255,255,0.15); }
+.hotel-card.selected {
+    border-color: var(--accent-green);
+    box-shadow: 0 0 20px rgba(74,222,128,0.1);
+}
+.hotel-card.selected::before {
+    content: 'CHOSEN';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--accent-green);
+    color: #000;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 99px;
+    z-index: 5;
+    letter-spacing: 0.05em;
+}
+
+.card-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    background: var(--bg-card-hover);
+}
+
+.card-body { padding: 1.2rem; }
+.card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    margin-bottom: 0.15rem;
+}
+.card-location {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.8rem;
+}
+.card-location .loc-badge {
+    display: inline-block;
+    padding: 0.1rem 0.5rem;
+    border-radius: 99px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-right: 0.3rem;
+}
+.loc-badge.in-village {
+    background: rgba(74,222,128,0.15);
+    color: var(--accent-green);
+}
+.loc-badge.nearby {
+    background: rgba(251,191,36,0.15);
+    color: var(--gold);
+}
+
+/* Price */
+.price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    margin-bottom: 0.6rem;
+    flex-wrap: wrap;
+}
+.price-main {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+}
+.price-sub {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+.price-refund {
+    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 99px;
+}
+.price-refund.refundable {
+    background: rgba(74,222,128,0.12);
+    color: var(--accent-green);
+}
+.price-refund.non-refundable {
+    background: rgba(248,113,113,0.12);
+    color: var(--accent-red);
+}
+.price-alt {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+}
+
+/* Features */
+.features {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+.feature-tag {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.06);
+    color: var(--text-secondary);
+}
+.feature-tag.highlight {
+    background: rgba(74,158,255,0.12);
+    color: var(--accent-blue);
+}
+
+/* Votes */
+.votes-section {
+    border-top: 1px solid var(--border-color);
+    padding-top: 0.8rem;
+    margin-top: 0.8rem;
+}
+.votes-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+.vote-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+.vote-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.7rem;
+    border-radius: 99px;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--text-muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.vote-btn:hover { border-color: rgba(255,255,255,0.2); color: var(--text-secondary); }
+.vote-btn.voted {
+    border-color: var(--accent-blue);
+    background: rgba(74,158,255,0.12);
+    color: var(--accent-blue);
+}
+.vote-btn .vote-avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+/* Actions */
+.card-actions {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 1rem;
+    align-items: center;
+}
+.btn-choose {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background: rgba(255,255,255,0.04);
+    color: var(--text-secondary);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.btn-choose:hover { background: rgba(74,222,128,0.1); border-color: var(--accent-green); color: var(--accent-green); }
+.hotel-card.selected .btn-choose {
+    background: var(--accent-green);
+    color: #000;
+    border-color: var(--accent-green);
+}
+.btn-booking {
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(74,158,255,0.3);
+    background: rgba(74,158,255,0.08);
+    color: var(--accent-blue);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+.btn-booking:hover { background: rgba(74,158,255,0.15); }
+
+/* Vote count badge */
+.vote-count {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(15,15,20,0.8);
+    backdrop-filter: blur(8px);
+    padding: 0.25rem 0.6rem;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    z-index: 5;
+    border: 1px solid var(--border-color);
+}
+.vote-count.popular {
+    background: rgba(251,191,36,0.2);
+    border-color: rgba(251,191,36,0.3);
+    color: var(--gold);
+}
+
+/* Summary section */
+.summary-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+.summary-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+}
+.summary-card .loc-name {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.3rem;
+}
+.summary-card .hotel-chosen {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+}
+.summary-card .price-chosen {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-green);
+}
+.summary-card.empty .hotel-chosen {
+    color: var(--text-muted);
+    font-family: 'Inter', sans-serif;
+    font-style: italic;
+}
+
+/* Responsive */
+@media (min-width: 700px) {
+    .hotel-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .header h1 { font-size: 2.5rem; }
+}
+@media (min-width: 1000px) {
+    .hotel-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width: 500px) {
+    .total-bar { padding: 0.6rem 1rem; }
+    .total-bar .total-amount { font-size: 1.3rem; }
+    .card-image { height: 150px; }
+    .nav-btn { padding: 0.7rem 0.8rem; font-size: 0.72rem; }
+}
+
+/* Sync indicator */
+.sync-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+}
+.sync-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-green);
+    animation: pulse 2s infinite;
+}
+.sync-dot.offline { background: var(--accent-orange); animation: none; }
+.sync-dot.error { background: var(--accent-red); animation: none; }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+.sync-bar button {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+}
+.sync-bar button:hover { color: var(--text-secondary); border-color: rgba(255,255,255,0.2); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Hotel Picker</h1>
+    <p>Slovakia + Austria Road Trip &mdash; Apr 1&ndash;10, 2026 &mdash; Vote &amp; Choose!</p>
+</div>
+
+<div class="sync-bar" id="syncBar">
+    <span class="sync-dot" id="syncDot"></span>
+    <span id="syncText">Connecting...</span>
+    <button onclick="syncNow()">Refresh</button>
+</div>
+<nav class="nav" id="nav"></nav>
+
+<main id="main"></main>
+
+<div class="total-bar" id="totalBar">
+    <div class="total-left">
+        <div class="total-label">Total per couple</div>
+        <div class="total-locations" id="totalLocations"></div>
+    </div>
+    <div class="total-right">
+        <div class="total-amount" id="totalAmount">ILS 0</div>
+        <div class="total-detail" id="totalDetail">0 of 5 locations chosen</div>
+    </div>
+</div>
+
+<script>
+// ========== CONFIG ==========
+const VOTERS = [
+    { name: 'Najeeb', color: '#4a9eff', initial: 'N' },
+    { name: 'Reema', color: '#f472b6', initial: 'R' },
+    { name: 'Evon', color: '#a78bfa', initial: 'E' },
+    { name: 'Eran', color: '#fb923c', initial: 'Er' },
+];
+
+// ========== HOTEL DATA ==========
+const LOCATIONS = [
+    {
+        id: 'bratislava',
+        name: 'Bratislava',
+        nights: 1,
+        dates: 'Apr 1 (1 night)',
+        image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=200&q=80',
+        hotels: [
+            {
+                id: 'brat-1',
+                name: 'Park Inn by Radisson Danube',
+                location: 'Bratislava Old Town',
+                locType: 'in-village',
+                image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80',
+                pricePerCouple: 610,
+                priceRefund: 'refundable',
+                priceAlt: 'Non-refundable: ILS 550/couple',
+                features: ['Breakfast included', 'Hotel', '2 rooms available'],
+                url: 'https://www.booking.com/Share-PpVc1nt',
+            },
+            {
+                id: 'brat-2',
+                name: 'Palace Apartments',
+                location: 'Bratislava Center',
+                locType: 'in-village',
+                image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80',
+                pricePerCouple: 500,
+                priceRefund: 'refundable',
+                priceAlt: 'Full apartment: ILS 1,000',
+                features: ['Apartment', 'Self-catering', 'More space'],
+                url: 'https://www.booking.com/Share-JsVtOcw',
+            },
+            {
+                id: 'brat-3',
+                name: 'Old Town Luxury Apartment',
+                location: 'Heart of Bratislava',
+                locType: 'in-village',
+                image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80',
+                pricePerCouple: 492,
+                priceRefund: 'refundable',
+                priceAlt: 'Full apartment: ILS 985',
+                features: ['Apartment', 'Old Town location', 'Self-catering'],
+                url: 'https://www.booking.com/Share-J830x1',
+            },
+            {
+                id: 'brat-4',
+                name: 'Elisabeth Old Town',
+                location: 'Bratislava Old Town',
+                locType: 'in-village',
+                image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&q=80',
+                pricePerCouple: 725,
+                priceRefund: 'refundable',
+                priceAlt: 'Non-refundable: ILS 656/couple',
+                features: ['Hotel', 'Old Town', 'Premium'],
+                url: 'https://www.booking.com/Share-6ki0ekz',
+            },
+            {
+                id: 'brat-5',
+                name: 'Radisson Blu Carlton Hotel',
+                location: 'Bratislava Center',
+                locType: 'in-village',
+                image: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&q=80',
+                pricePerCouple: 513,
+                priceRefund: 'refundable',
+                priceAlt: 'Non-refundable: ILS 486/couple',
+                features: ['Hotel', '5-star', 'Historic building'],
+                url: 'https://www.booking.com/Share-gaUIg9v',
+            },
+        ]
+    },
+    {
+        id: 'hallstatt',
+        name: 'Hallstatt Area',
+        nights: 2,
+        dates: 'Apr 2–3 (2 nights)',
+        image: 'https://images.unsplash.com/photo-1609942167021-f59442d56d8f?w=200&q=80',
+        hotels: [
+            {
+                id: 'hall-1',
+                name: 'Seewirt Zauner',
+                location: 'Hallstatt village',
+                locType: 'in-village',
+                image: 'https://images.unsplash.com/photo-1609942167021-f59442d56d8f?w=600&q=80',
+                pricePerCouple: 1815,
+                priceRefund: 'refundable',
+                priceAlt: null,
+                features: ['Hotel', 'In Hallstatt', 'Contactless check-in', 'Lakeside'],
+                url: 'https://www.booking.com/Share-NCaqc3t',
+            },
+            {
+                id: 'hall-2',
+                name: 'Pension Leopoldine',
+                location: 'Hallstatt village',
+                locType: 'in-village',
+                image: 'https://images.unsplash.com/photo-1609942167021-f59442d56d8f?w=600&q=80',
+                pricePerCouple: 1939,
+                priceRefund: 'refundable',
+                priceAlt: null,
+                features: ['Pension', 'In Hallstatt', 'Charming'],
+                url: 'https://www.booking.com/Share-rI2tTCf',
+            },
+            {
+                id: 'hall-3',
+                name: 'Fenix Hall Boutique Hotel',
+                location: 'Hallstatt village',
+                locType: 'in-village',
+                image: 'https://images.unsplash.com/photo-1609942167021-f59442d56d8f?w=600&q=80',
+                pricePerCouple: 1820,
+                priceRefund: 'refundable',
+                priceAlt: null,
+                features: ['Boutique Hotel', 'In Hallstatt', 'Modern'],
+                url: 'https://www.booking.com/Share-2lMuA6',
+            },
+            {
+                id: 'hall-4',
+                name: 'Dormio Hotel Obertraun',
+                location: 'Obertraun (near Hallstatt)',
+                locType: 'nearby',
+                image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&q=80',
+                pricePerCouple: 1627,
+                priceRefund: 'refundable',
+                priceAlt: 'Non-refundable: ILS 1,363/couple',
+                features: ['Hotel', 'Near Hallstatt', 'Obertraun'],
+                url: 'https://www.booking.com/Share-sGsET7',
+            },
+            {
+                id: 'hall-5',
+                name: 'Seehotel am Hallstattersee',
+                location: 'Obertraun (lakeside)',
+                locType: 'nearby',
+                image: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=600&q=80',
+                pricePerCouple: 1016,
+                priceRefund: 'refundable',
+                priceAlt: null,
+                features: ['Hotel', 'Lakeside', 'Obertraun', 'Budget-friendly'],
+                url: 'https://www.booking.com/Share-3vaBpc',
+            },
+            {
+                id: 'hall-6',
+                name: 'COOEE alpin Hotel Dachstein',
+                location: 'Hallstatt area',
+                locType: 'nearby',
+                image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80',
+                pricePerCouple: 1494,
+                priceRefund: 'refundable',
+                priceAlt: 'Full apartment: ILS 2,989',
+                features: ['Apartment', 'Alpine style', 'More space'],
+                url: 'https://www.booking.com/Share-kKfqboV',
+            },
+            {
+                id: 'hall-7',
+                name: 'Villa Salzweg',
+                location: 'Hallstatt area',
+                locType: 'nearby',
+                image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80',
+                pricePerCouple: 950,
+                priceRefund: 'refundable',
+                priceAlt: 'Full apartment: ILS 1,900',
+                features: ['Apartment', 'Villa', 'Self-catering'],
+                url: 'https://www.booking.com/Share-Iqyofa',
+            },
+            {
+                id: 'hall-8',
+                name: 'Obertrauner Hof',
+                location: 'Obertraun',
+                locType: 'nearby',
+                image: 'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=600&q=80',
+                pricePerCouple: 1300,
+                priceRefund: 'refundable',
+                priceAlt: null,
+                features: ['Hotel', 'Obertraun', 'Traditional'],
+                url: 'https://www.booking.com/Share-SH14Nj',
+            },
+        ]
+    },
+    {
+        id: 'zellamsee',
+        name: 'Zell am See',
+        nights: 2,
+        dates: 'Apr 4–5 (2 nights)',
+        image: 'https://images.unsplash.com/photo-1589308078059-be1415eab4c3?w=200&q=80',
+        hotels: [
+            {
+                id: 'zell-1',
+                name: 'The House Zell am See',
+                location: 'Zell am See',
+                locType: 'in-village',
+                image: 'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=600&q=80',
+                pricePerCouple: null,
+                priceRefund: null,
+                priceAlt: 'Price not listed — check Booking.com',
+                features: ['Check price on Booking'],
+                url: 'https://www.booking.com/Share-koo4IQ',
+            },
+            {
+                id: 'zell-2',
+                name: 'Residence Bellevue',
+                location: 'Zell am See',
+                locType: 'in-village',
+                image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80',
+                pricePerCouple: 1316,
+                priceRefund: 'refundable',
+                priceAlt: 'Full apartment: ILS 2,633',
+                features: ['Apartment', '2 rooms', 'Parking included'],
+                url: 'https://www.booking.com/Share-ejOSnF',
+            },
+            {
+                id: 'zell-3',
+                name: 'Der Erlhof Restaurant & Landhotel',
+                location: 'Zell am See area',
+                locType: 'nearby',
+                image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80',
+                pricePerCouple: 1282,
+                priceRefund: 'refundable',
+                priceAlt: null,
+                features: ['Hotel', 'Restaurant', 'Breakfast included', 'Traditional'],
+                url: 'https://www.booking.com/Share-CYaNFBZ',
+            },
+            {
+                id: 'zell-4',
+                name: 'Hotel Steinerwirt1493',
+                location: 'Zell am See',
+                locType: 'in-village',
+                image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&q=80',
+                pricePerCouple: 1436,
+                priceRefund: 'refundable',
+                priceAlt: 'Non-refundable: ILS 1,364/couple',
+                features: ['Hotel', 'Historic (since 1493!)', 'Central'],
+                url: 'https://www.booking.com/Share-d1aWQ5',
+            },
+        ]
+    },
+    {
+        id: 'werfen',
+        name: 'Salzburg / Werfen',
+        nights: 2,
+        dates: 'Apr 6–7 (2 nights)',
+        image: 'https://images.unsplash.com/photo-1632892271596-9afebd2de0c1?w=200&q=80',
+        hotels: [
+            {
+                id: 'werf-1',
+                name: 'Der Burgblick — Adults Only',
+                location: 'Werfen (near Salzburg)',
+                locType: 'nearby',
+                image: 'https://images.unsplash.com/photo-1632892271596-9afebd2de0c1?w=600&q=80',
+                pricePerCouple: 742,
+                priceRefund: 'refundable',
+                priceAlt: null,
+                features: ['Hotel', 'Adults Only', 'Castle views', 'Near Hohenwerfen'],
+                url: 'https://www.booking.com/Share-y0qO2iA',
+            },
+            {
+                id: 'werf-2',
+                name: 'Numa Salzburg Vogelweider',
+                location: 'Salzburg city',
+                locType: 'in-village',
+                image: 'https://images.unsplash.com/photo-1660046911251-e29fa793f429?w=600&q=80',
+                pricePerCouple: null,
+                priceRefund: null,
+                priceAlt: 'Price not listed — check Booking.com',
+                features: ['Apartment', 'In Salzburg', 'Modern'],
+                url: 'https://www.booking.com/Share-RH86Gg',
+            },
+        ]
+    },
+    {
+        id: 'vienna',
+        name: 'Vienna',
+        nights: 2,
+        dates: 'Apr 8–9 (2 nights)',
+        image: 'https://images.unsplash.com/photo-1516550893923-42d28e5677af?w=200&q=80',
+        hotels: [
+            {
+                id: 'wien-placeholder',
+                name: 'Add Vienna hotels',
+                location: 'Vienna — no hotels added yet',
+                locType: 'in-village',
+                image: 'https://images.unsplash.com/photo-1516550893923-42d28e5677af?w=600&q=80',
+                pricePerCouple: null,
+                priceRefund: null,
+                priceAlt: 'Add your Vienna hotel options to compare',
+                features: ['Coming soon'],
+                url: null,
+                placeholder: true,
+            },
+        ]
+    },
+];
+
+// ========== STATE (Cloud + localStorage) ==========
+const STORAGE_KEY = 'hotelPickerState';
+const BLOB_ID_KEY = 'hotelPickerBlobId';
+const JSONBLOB_API = 'https://jsonblob.com/api/jsonBlob';
+
+// Cloud sync state
+let blobId = null;
+let syncing = false;
+let lastSync = 0;
+
+function loadLocal() {
+    try {
+        const s = localStorage.getItem(STORAGE_KEY);
+        return s ? JSON.parse(s) : { votes: {}, selections: {} };
+    } catch { return { votes: {}, selections: {} }; }
+}
+function saveLocal(s) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+}
+
+// Merge remote state with local state (union of votes, keep latest selections)
+function mergeStates(local, remote) {
+    const merged = { votes: {}, selections: {} };
+    // Merge votes: union of all votes from both
+    const allHotelIds = new Set([...Object.keys(local.votes || {}), ...Object.keys(remote.votes || {})]);
+    for (const hid of allHotelIds) {
+        merged.votes[hid] = { ...(local.votes[hid] || {}), ...(remote.votes[hid] || {}) };
+    }
+    // Merge selections: remote wins (since it has everyone's choices)
+    merged.selections = { ...(local.selections || {}), ...(remote.selections || {}) };
+    return merged;
+}
+
+// Create or load cloud blob
+async function initCloud() {
+    updateSyncUI('connecting');
+    // Check URL hash for shared blob ID
+    const hashId = window.location.hash.replace('#', '');
+    const savedId = localStorage.getItem(BLOB_ID_KEY);
+    blobId = hashId || savedId;
+
+    if (blobId) {
+        // Try to load existing blob
+        try {
+            const resp = await fetch(`${JSONBLOB_API}/${blobId}`, {
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
+            });
+            if (resp.ok) {
+                const remote = await resp.json();
+                state = mergeStates(state, remote);
+                saveLocal(state);
+                localStorage.setItem(BLOB_ID_KEY, blobId);
+                window.location.hash = blobId;
+                updateSyncUI('synced');
+                render();
+                return;
+            }
+        } catch (e) { console.warn('Cloud load failed:', e); }
+    }
+
+    // Create new blob
+    try {
+        const resp = await fetch(JSONBLOB_API, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(state)
+        });
+        if (resp.ok) {
+            // Extract blob ID from response headers
+            blobId = resp.headers.get('X-jsonblob-id')
+                || (resp.headers.get('Location') || '').split('/').pop();
+            localStorage.setItem(BLOB_ID_KEY, blobId);
+            window.location.hash = blobId;
+            updateSyncUI('synced');
+        } else {
+            updateSyncUI('offline');
+        }
+    } catch (e) {
+        console.warn('Cloud create failed:', e);
+        updateSyncUI('offline');
+    }
+}
+
+async function saveState(s) {
+    saveLocal(s);
+    if (!blobId) return;
+    syncing = true;
+    updateSyncUI('syncing');
+    try {
+        await fetch(`${JSONBLOB_API}/${blobId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(s)
+        });
+        lastSync = Date.now();
+        updateSyncUI('synced');
+    } catch (e) {
+        console.warn('Cloud save failed:', e);
+        updateSyncUI('offline');
+    }
+    syncing = false;
+}
+
+async function syncNow() {
+    if (!blobId) { await initCloud(); return; }
+    updateSyncUI('syncing');
+    try {
+        const resp = await fetch(`${JSONBLOB_API}/${blobId}`, {
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
+        });
+        if (resp.ok) {
+            const remote = await resp.json();
+            state = mergeStates(state, remote);
+            saveLocal(state);
+            // Push merged state back
+            await fetch(`${JSONBLOB_API}/${blobId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify(state)
+            });
+            lastSync = Date.now();
+            updateSyncUI('synced');
+            render();
+        }
+    } catch (e) {
+        console.warn('Sync failed:', e);
+        updateSyncUI('offline');
+    }
+}
+
+function updateSyncUI(status) {
+    const dot = document.getElementById('syncDot');
+    const text = document.getElementById('syncText');
+    dot.className = 'sync-dot';
+    switch(status) {
+        case 'connecting':
+            dot.classList.add('offline');
+            text.textContent = 'Connecting...';
+            break;
+        case 'synced':
+            text.textContent = `Synced — share this page URL so everyone sees the same votes`;
+            break;
+        case 'syncing':
+            text.textContent = 'Saving...';
+            break;
+        case 'offline':
+            dot.classList.add('offline');
+            text.textContent = 'Offline mode — votes saved locally';
+            break;
+        case 'error':
+            dot.classList.add('error');
+            text.textContent = 'Sync error — votes saved locally';
+            break;
+    }
+}
+
+// Auto-refresh from cloud every 15 seconds
+setInterval(() => {
+    if (blobId && !syncing && document.visibilityState === 'visible') {
+        syncNow();
+    }
+}, 15000);
+
+let state = loadLocal();
+
+// ========== RENDER ==========
+function renderNav() {
+    const nav = document.getElementById('nav');
+    nav.innerHTML = LOCATIONS.map(loc => {
+        const hasSelection = state.selections[loc.id];
+        return `<button class="nav-btn ${loc.id === activeTab ? 'active' : ''} ${hasSelection ? 'has-selection' : ''}" data-tab="${loc.id}">
+            ${loc.name}<span class="nav-check">&#10003;</span>
+        </button>`;
+    }).join('');
+    nav.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            activeTab = btn.dataset.tab;
+            render();
+        });
+    });
+}
+
+function getVoteCount(hotelId) {
+    if (!state.votes[hotelId]) return 0;
+    return Object.values(state.votes[hotelId]).filter(Boolean).length;
+}
+
+function renderHotelCard(hotel, locationId) {
+    if (hotel.placeholder) {
+        return `<div class="hotel-card" style="display:flex;align-items:center;justify-content:center;min-height:200px;opacity:0.5;">
+            <div style="text-align:center;padding:2rem;">
+                <div style="font-size:2rem;margin-bottom:0.5rem;">+</div>
+                <div class="card-name">${hotel.name}</div>
+                <div class="card-location">${hotel.location}</div>
+            </div>
+        </div>`;
+    }
+
+    const isSelected = state.selections[locationId] === hotel.id;
+    const votes = state.votes[hotel.id] || {};
+    const voteCount = getVoteCount(hotel.id);
+
+    // Find max votes in this location to mark popular
+    const loc = LOCATIONS.find(l => l.id === locationId);
+    const maxVotes = Math.max(...loc.hotels.filter(h => !h.placeholder).map(h => getVoteCount(h.id)), 0);
+    const isPopular = voteCount > 0 && voteCount === maxVotes && maxVotes > 1;
+
+    const priceDisplay = hotel.pricePerCouple
+        ? `<span class="price-main">ILS ${hotel.pricePerCouple.toLocaleString()}</span><span class="price-sub">/ couple</span>`
+        : `<span class="price-main" style="color:var(--text-muted);font-size:1rem;">Price TBD</span>`;
+
+    const refundBadge = hotel.priceRefund === 'refundable'
+        ? `<span class="price-refund refundable">Free cancellation</span>`
+        : hotel.priceRefund === 'non-refundable'
+        ? `<span class="price-refund non-refundable">Non-refundable</span>`
+        : '';
+
+    return `<div class="hotel-card ${isSelected ? 'selected' : ''}" data-hotel="${hotel.id}" data-location="${locationId}">
+        ${voteCount > 0 ? `<div class="vote-count ${isPopular ? 'popular' : ''}">${isPopular ? '&#9733; ' : ''}${voteCount} vote${voteCount>1?'s':''}</div>` : ''}
+        <img class="card-image" loading="lazy" src="${hotel.image}" alt="${hotel.name}">
+        <div class="card-body">
+            <div class="card-name">${hotel.name}</div>
+            <div class="card-location">
+                <span class="loc-badge ${hotel.locType}">${hotel.locType === 'in-village' ? 'In town' : 'Nearby'}</span>
+                ${hotel.location}
+            </div>
+            <div class="price-row">
+                ${priceDisplay}
+                ${refundBadge}
+            </div>
+            ${hotel.priceAlt ? `<div class="price-alt">${hotel.priceAlt}</div>` : ''}
+            <div class="features">
+                ${hotel.features.map(f => `<span class="feature-tag ${f.includes('Breakfast') || f.includes('Parking') ? 'highlight' : ''}">${f}</span>`).join('')}
+            </div>
+            <div class="votes-section">
+                <div class="votes-label">Who likes this?</div>
+                <div class="vote-buttons">
+                    ${VOTERS.map((v, i) => `<button class="vote-btn ${votes[v.name] ? 'voted' : ''}" data-hotel="${hotel.id}" data-voter="${v.name}">
+                        <span class="vote-avatar" style="background:${v.color}">${v.initial}</span>
+                        ${v.name}
+                    </button>`).join('')}
+                </div>
+            </div>
+            <div class="card-actions">
+                <button class="btn-choose" data-hotel="${hotel.id}" data-location="${locationId}">
+                    ${isSelected ? '&#10003; Chosen' : 'Choose this hotel'}
+                </button>
+                ${hotel.url ? `<a class="btn-booking" href="${hotel.url}" target="_blank" rel="noopener">Booking.com</a>` : ''}
+            </div>
+        </div>
+    </div>`;
+}
+
+function renderSection(loc) {
+    return `<section class="location-section ${loc.id === activeTab ? 'active' : ''}" data-section="${loc.id}">
+        <div class="section-header">
+            <img src="${loc.image}" alt="${loc.name}">
+            <div>
+                <h2>${loc.name}</h2>
+                <div class="section-meta">
+                    <span class="meta-chip">${loc.dates}</span>
+                    <span class="meta-chip">${loc.hotels.filter(h=>!h.placeholder).length} options</span>
+                    <span class="meta-chip">${loc.nights} night${loc.nights>1?'s':''}</span>
+                </div>
+            </div>
+        </div>
+        <div class="hotel-grid">
+            ${loc.hotels.map(h => renderHotelCard(h, loc.id)).join('')}
+        </div>
+    </section>`;
+}
+
+function renderTotal() {
+    let total = 0;
+    let chosen = 0;
+    const locsEl = document.getElementById('totalLocations');
+    locsEl.innerHTML = '';
+
+    LOCATIONS.forEach(loc => {
+        const selId = state.selections[loc.id];
+        const chip = document.createElement('span');
+        if (selId) {
+            const hotel = loc.hotels.find(h => h.id === selId);
+            if (hotel && hotel.pricePerCouple) {
+                total += hotel.pricePerCouple;
+                chosen++;
+                chip.className = 'total-loc-chip';
+                chip.textContent = `${loc.name}: ILS ${hotel.pricePerCouple.toLocaleString()}`;
+            } else {
+                chosen++;
+                chip.className = 'total-loc-chip';
+                chip.textContent = `${loc.name}: TBD`;
+            }
+        } else {
+            chip.className = 'total-loc-chip empty';
+            chip.textContent = loc.name;
+        }
+        locsEl.appendChild(chip);
+    });
+
+    document.getElementById('totalAmount').textContent = `ILS ${total.toLocaleString()}`;
+    document.getElementById('totalDetail').textContent = `${chosen} of ${LOCATIONS.length} locations chosen`;
+}
+
+let activeTab = 'bratislava';
+
+function render() {
+    renderNav();
+    const main = document.getElementById('main');
+    main.innerHTML = LOCATIONS.map(loc => renderSection(loc)).join('');
+    renderTotal();
+    bindEvents();
+}
+
+function bindEvents() {
+    // Vote buttons
+    document.querySelectorAll('.vote-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const hotelId = btn.dataset.hotel;
+            const voter = btn.dataset.voter;
+            if (!state.votes[hotelId]) state.votes[hotelId] = {};
+            state.votes[hotelId][voter] = !state.votes[hotelId][voter];
+            saveState(state);
+            render();
+        });
+    });
+
+    // Choose buttons
+    document.querySelectorAll('.btn-choose').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const hotelId = btn.dataset.hotel;
+            const locationId = btn.dataset.location;
+            if (state.selections[locationId] === hotelId) {
+                delete state.selections[locationId];
+            } else {
+                state.selections[locationId] = hotelId;
+            }
+            saveState(state);
+            render();
+        });
+    });
+}
+
+// Init
+render();
+initCloud();
+</script>
+</body>
+</html>
