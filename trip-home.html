@@ -128,6 +128,13 @@
         .timeline-block.food::before { background: var(--accent-orange); }
         .timeline-block.sleep::before { background: var(--accent-purple); }
         .timeline-block.drive::before { background: var(--accent-green); }
+        .timeline-block.optional::before { background: var(--accent-pink); }
+        .timeline-block.optional .time-label { color: var(--accent-pink); }
+        .optional-box { background: rgba(244,143,177,0.06); border: 1px dashed rgba(244,143,177,0.3); border-radius: 12px; padding: 1.2rem; margin: 0.5rem 0; }
+        .optional-box h4 { color: var(--accent-pink); font-size: 0.95rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
+        .optional-box ul { list-style: none; padding: 0; }
+        .optional-box ul li { padding: 0.3rem 0; font-size: 0.9rem; color: var(--text-secondary); padding-left: 1.2rem; position: relative; }
+        .optional-box ul li::before { content: '\2022'; position: absolute; left: 0; color: var(--accent-pink); }
         .time-label { font-size: 0.8rem; font-weight: 600; color: var(--accent-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
         .timeline-block.food .time-label { color: var(--accent-orange); }
         .timeline-block.sleep .time-label { color: var(--accent-purple); }
@@ -316,6 +323,8 @@
         <span class="arrow">&rarr;</span>
         <span class="stop">Hallstatt</span>
         <span class="arrow">&rarr;</span>
+        <span class="stop">Schladming</span>
+        <span class="arrow">&rarr;</span>
         <span class="stop">Zell am See</span>
         <span class="arrow">&rarr;</span>
         <span class="stop">Werfen</span>
@@ -327,11 +336,11 @@
         <span class="stop">Vienna</span>
     </div>
     <div style="margin-top:1.5rem; padding:0.8rem 1.5rem; background:rgba(255,171,64,0.12); border:1px solid rgba(255,171,64,0.3); border-radius:12px; max-width:500px;">
-        <span style="color:var(--accent-orange); font-weight:700;">Easter 2026 = April 5 (Day 4!)</span>
+        <span style="color:var(--accent-orange); font-weight:700;">Easter 2026 = April 5 (Day 5!)</span>
         <span style="color:var(--text-secondary); font-size:0.9rem; display:block; margin-top:0.3rem;">Good Friday to Easter Monday falls mid-trip. Some shops/restaurants may have limited hours.</span>
     </div>
     <div style="margin-top:1rem; padding:0.6rem 1.2rem; background:rgba(105,240,174,0.08); border:1px solid rgba(105,240,174,0.2); border-radius:12px; max-width:500px;">
-        <span style="color:var(--accent-green); font-weight:600; font-size:0.9rem;">All driving segments &le; 2 hours &middot; 904 km total</span>
+        <span style="color:var(--accent-green); font-weight:600; font-size:0.9rem;">All driving segments &le; 2 hours &middot; ~950 km total</span>
     </div>
     <a href="#overview" class="scroll-indicator">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
@@ -364,8 +373,8 @@
     <div class="stats-grid">
         <div class="stat-card"><span class="stat-number">10</span><span class="stat-label">Days</span></div>
         <div class="stat-card"><span class="stat-number">9</span><span class="stat-label">Nights</span></div>
-        <div class="stat-card"><span class="stat-number">7</span><span class="stat-label">Destinations</span></div>
-        <div class="stat-card"><span class="stat-number">~904</span><span class="stat-label">km Total</span></div>
+        <div class="stat-card"><span class="stat-number">8+</span><span class="stat-label">Destinations</span></div>
+        <div class="stat-card"><span class="stat-number">~950</span><span class="stat-label">km Total</span></div>
         <div class="stat-card"><span class="stat-number">2</span><span class="stat-label">Countries</span></div>
         <div class="stat-card"><span class="stat-number">5</span><span class="stat-label">Sleeping Bases</span></div>
     </div>
@@ -375,19 +384,17 @@
         <div class="route-visual">
             <div class="route-stop"><div class="route-dot"></div><div class="route-info"><span class="city">Bratislava</span> <span class="nights">&middot; 2 nights</span></div></div>
             <div class="route-drive">&#x1F697; 1h 30min (stop: Semmering)</div><div class="route-connector"></div>
-            <div class="route-drive">&#x1F697; 2h (stop: Bad Aussee)</div><div class="route-connector"></div>
-            <div class="route-drive">&#x1F697; 20min</div><div class="route-connector"></div>
-            <div class="route-stop"><div class="route-dot"></div><div class="route-info"><span class="city">Hallstatt</span> <span class="nights">&middot; 2 nights</span></div></div>
-            <div class="route-drive">&#x1F697; 35min (stop: St. Wolfgang)</div><div class="route-connector"></div>
-            <div class="route-drive">&#x1F697; 1h 20min</div><div class="route-connector"></div>
-            <div class="route-stop"><div class="route-dot"></div><div class="route-info"><span class="city">Zell am See</span> <span class="nights">&middot; 2 nights</span></div></div>
-            <div class="route-drive">&#x1F697; 50min</div><div class="route-connector"></div>
-            <div class="route-stop"><div class="route-dot"></div><div class="route-info"><span class="city">Werfen</span> <span class="nights">&middot; 2 nights (day trip to Salzburg)</span></div></div>
+            <div class="route-drive">&#x1F697; 2h (stop: Bad Aussee + Altausseer See)</div><div class="route-connector"></div>
+            <div class="route-stop"><div class="route-dot"></div><div class="route-info"><span class="city">Hallstatt Area</span> <span class="nights">&middot; 2 nights</span></div></div>
+            <div class="route-drive">&#x1F697; 45min (Schladming/Ramsau)</div><div class="route-connector"></div>
+            <div class="route-drive">&#x1F697; 20min (Filzmoos) + 45min</div><div class="route-connector"></div>
+            <div class="route-stop"><div class="route-dot"></div><div class="route-info"><span class="city">Zell am See / Kaprun</span> <span class="nights">&middot; 2 nights</span></div></div>
+            <div class="route-drive">&#x1F697; 50min (stop: Werfen/Hohenwerfen)</div><div class="route-connector"></div>
+            <div class="route-drive">&#x1F697; 40min</div><div class="route-connector"></div>
+            <div class="route-stop"><div class="route-dot"></div><div class="route-info"><span class="city">Salzburg</span> <span class="nights">&middot; 2 nights</span></div></div>
             <div class="route-drive">&#x1F697; 1h 30min (stop: Traunfall)</div><div class="route-connector"></div>
-            <div class="route-drive">&#x1F697; 15min (stop: Gmunden)</div><div class="route-connector"></div>
-            <div class="route-drive">&#x1F697; 1h 15min (stop: Melk Abbey)</div><div class="route-connector"></div>
-            <div class="route-drive">&#x1F697; 30min (stop: Durnstein)</div><div class="route-connector"></div>
-            <div class="route-drive">&#x1F697; 1h 20min</div><div class="route-connector"></div>
+            <div class="route-drive">&#x1F697; 15min (Gmunden) + 1h 15min (Melk)</div><div class="route-connector"></div>
+            <div class="route-drive">&#x1F697; 30min (D&uuml;rnstein) + 1h 20min</div><div class="route-connector"></div>
             <div class="route-stop"><div class="route-dot"></div><div class="route-info"><span class="city">Vienna</span> <span class="nights">&middot; 1 night</span></div></div>
         </div>
     </div>
@@ -400,7 +407,6 @@
                 <div class="base-num">Base 1</div>
                 <div class="base-name">Bratislava</div>
                 <div class="base-nights">2 nights</div>
-                <div style="font-size:0.72rem;color:var(--text-secondary);margin-top:0.2rem;">Park Inn by Radisson Danube</div>
                 <div style="display:flex;justify-content:center;gap:0.8rem;margin-top:0.4rem;font-size:0.78rem;">
                     <span style="color:var(--accent-green);">In: Apr 1</span>
                     <span style="color:var(--accent-orange);">Out: Apr 3</span>
@@ -408,8 +414,9 @@
             </div>
             <div class="base-card">
                 <div class="base-num">Base 2</div>
-                <div class="base-name">Hallstatt</div>
+                <div class="base-name">Hallstatt Area</div>
                 <div class="base-nights">2 nights</div>
+                <div style="font-size:0.72rem;color:var(--text-secondary);margin-top:0.2rem;">Obertraun / Bad Aussee / Altaussee</div>
                 <div style="display:flex;justify-content:center;gap:0.8rem;margin-top:0.4rem;font-size:0.78rem;">
                     <span style="color:var(--accent-green);">In: Apr 3</span>
                     <span style="color:var(--accent-orange);">Out: Apr 5</span>
@@ -417,7 +424,7 @@
             </div>
             <div class="base-card">
                 <div class="base-num">Base 3</div>
-                <div class="base-name">Zell am See</div>
+                <div class="base-name">Zell am See / Kaprun</div>
                 <div class="base-nights">2 nights</div>
                 <div style="display:flex;justify-content:center;gap:0.8rem;margin-top:0.4rem;font-size:0.78rem;">
                     <span style="color:var(--accent-green);">In: Apr 5</span>
@@ -426,9 +433,9 @@
             </div>
             <div class="base-card">
                 <div class="base-num">Base 4</div>
-                <div class="base-name">Werfen</div>
+                <div class="base-name">Salzburg</div>
                 <div class="base-nights">2 nights</div>
-                <div style="font-size:0.72rem;color:var(--text-secondary);margin-top:0.2rem;">Der Burgblick</div>
+                <div style="font-size:0.72rem;color:var(--text-secondary);margin-top:0.2rem;">or Wolfgangsee &mdash; TBD</div>
                 <div style="display:flex;justify-content:center;gap:0.8rem;margin-top:0.4rem;font-size:0.78rem;">
                     <span style="color:var(--accent-green);">In: Apr 7</span>
                     <span style="color:var(--accent-orange);">Out: Apr 9</span>
@@ -452,19 +459,20 @@
         <table class="drive-table">
             <thead><tr><th>Day</th><th>From &rarr; To</th><th>Duration</th><th>Stop</th></tr></thead>
             <tbody>
-                <tr><td>2</td><td>Bratislava &rarr; Semmering</td><td>1h 30min</td><td>UNESCO railway, coffee</td></tr>
-                <tr><td>2</td><td>Semmering &rarr; Bad Aussee</td><td>2h 00min</td><td>Lunch in Ausseerland</td></tr>
-                <tr><td>2</td><td>Bad Aussee &rarr; Hallstatt</td><td>20min</td><td>&mdash;</td></tr>
-                <tr><td>4</td><td>Hallstatt &rarr; St. Wolfgang</td><td>35min</td><td>Wolfgangsee, Pilgrimage Church</td></tr>
-                <tr><td>4</td><td>St. Wolfgang &rarr; Zell am See</td><td>1h 20min</td><td>&mdash;</td></tr>
-                <tr><td>6</td><td>Zell am See &rarr; Werfen</td><td>50min</td><td>&mdash;</td></tr>
-                <tr><td>6</td><td>Werfen &rarr; Salzburg</td><td>40min</td><td>Evening walk</td></tr>
-                <tr><td>7</td><td>Werfen &harr; Salzburg</td><td>40min each</td><td>Full day trip</td></tr>
-                <tr><td>8</td><td>Werfen &rarr; Traunfall</td><td>1h 30min</td><td>Traunfall waterfall</td></tr>
-                <tr><td>8</td><td>Traunfall &rarr; Gmunden</td><td>15min</td><td>Schloss Ort, lake</td></tr>
-                <tr><td>8</td><td>Gmunden &rarr; Melk</td><td>1h 15min</td><td>Melk Abbey</td></tr>
-                <tr><td>8</td><td>Melk &rarr; Durnstein</td><td>30min</td><td>Wine, church, ruins</td></tr>
-                <tr><td>8</td><td>Durnstein &rarr; Vienna</td><td>1h 20min</td><td>&mdash;</td></tr>
+                <tr><td>3</td><td>Bratislava &rarr; Semmering</td><td>1h 30min</td><td>UNESCO railway, coffee</td></tr>
+                <tr><td>3</td><td>Semmering &rarr; Bad Aussee</td><td>2h 00min</td><td>Lunch in Ausseerland</td></tr>
+                <tr><td>3</td><td>Bad Aussee &rarr; Altausseer See</td><td>10min</td><td>Mountain lake walk</td></tr>
+                <tr><td>3</td><td>Altausseer See &rarr; Hallstatt area</td><td>30min</td><td>&mdash;</td></tr>
+                <tr><td>5</td><td>Hallstatt area &rarr; Schladming</td><td>45min</td><td>Ramsau am Dachstein</td></tr>
+                <tr><td>5</td><td>Schladming &rarr; Filzmoos</td><td>20min</td><td>Alpine village</td></tr>
+                <tr><td>5</td><td>Filzmoos &rarr; Zell am See</td><td>45min</td><td>&mdash;</td></tr>
+                <tr><td>7</td><td>Zell am See &rarr; Werfen</td><td>50min</td><td>Hohenwerfen Castle</td></tr>
+                <tr><td>7</td><td>Werfen &rarr; Salzburg</td><td>40min</td><td>&mdash;</td></tr>
+                <tr><td>9</td><td>Salzburg &rarr; Traunfall</td><td>1h 30min</td><td>Traunfall waterfall</td></tr>
+                <tr><td>9</td><td>Traunfall &rarr; Gmunden</td><td>15min</td><td>Schloss Ort, lake</td></tr>
+                <tr><td>9</td><td>Gmunden &rarr; Melk</td><td>1h 15min</td><td>Melk Abbey</td></tr>
+                <tr><td>9</td><td>Melk &rarr; D&uuml;rnstein</td><td>30min</td><td>Wine, church, ruins</td></tr>
+                <tr><td>9</td><td>D&uuml;rnstein &rarr; Vienna</td><td>1h 20min</td><td>&mdash;</td></tr>
             </tbody>
         </table>
     </div>
@@ -558,6 +566,19 @@
             </ul>
             <div class="tip-box"><strong>Budget tip:</strong> Bratislava is significantly cheaper than Austria. Enjoy bigger meals here!</div>
         </div>
+        <div class="timeline-block optional">
+            <div class="time-label">If You Have Time</div>
+            <h3>Optional Activities</h3>
+            <div class="optional-box">
+                <h4>&#x1F570; Extra Ideas for Bratislava</h4>
+                <ul>
+                    <li><strong>Dev&iacute;n Castle</strong> &mdash; Dramatic ruins at the confluence of the Danube and Morava rivers (~20 min drive). Stunning views into Austria. ~EUR 8, 2 hours.</li>
+                    <li><strong>Danube bike path</strong> &mdash; Rent bikes and ride along the Danube. Beautiful, flat, easy ride.</li>
+                    <li><strong>Slav&iacute;n War Memorial</strong> &mdash; Soviet WWII memorial on a hilltop with panoramic city views. Free. ~30 min walk from center.</li>
+                    <li><strong>Blue Church (St. Elizabeth)</strong> &mdash; Art Nouveau church with striking blue exterior. Unique photo op. 10 min from Old Town.</li>
+                </ul>
+            </div>
+        </div>
         <div class="timeline-block sleep">
             <div class="time-label">Sleep</div>
             <h3>Accommodation &mdash; Bratislava (2 nights)</h3>
@@ -576,17 +597,17 @@
 <section class="day-section" id="day2">
     <div class="day-header">
         <span class="day-badge badge-austria">Drive Day</span>
-        <h2>Day 2 &mdash; Bratislava &rarr; Hallstatt</h2>
+        <h2>Day 2 &mdash; Bratislava &rarr; Hallstatt Area</h2>
         <div class="day-meta">
             <span><span class="icon">&#x1F4C5;</span> Thursday, April 3</span>
-            <span><span class="icon">&#x1F697;</span> ~4h total (3 segments, 2 stops)</span>
-            <span><span class="icon">&#x1F319;</span> Sleep: Hallstatt / Obertraun</span>
+            <span><span class="icon">&#x1F697;</span> ~4h 10min total (4 segments, 3 stops)</span>
+            <span><span class="icon">&#x1F319;</span> Sleep: Hallstatt area (Obertraun / Bad Aussee)</span>
         </div>
     </div>
     <div class="carousel" data-carousel>
         <div class="carousel-track">
             <div class="carousel-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1662141973411-755c43966c72?w=800&q=80" alt="Semmering Viaduct"><div class="carousel-caption">Semmering Railway</div></div>
-            <div class="carousel-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1587897720493-7e2bff05f431?w=800&q=80" alt="Altaussee Lake"><div class="carousel-caption">Ausseerland</div></div>
+            <div class="carousel-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1587897720493-7e2bff05f431?w=800&q=80" alt="Altaussee Lake"><div class="carousel-caption">Altausseer See</div></div>
             <div class="carousel-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1609942167021-f59442d56d8f?w=800&q=80" alt="Hallstatt Village"><div class="carousel-caption">Hallstatt Village</div></div>
         </div>
         <button class="carousel-btn prev" aria-label="Previous">&#10094;</button>
@@ -621,33 +642,53 @@
                 <div class="hl-title">Gasthof Blaue Traube</div>
                 <div class="hl-detail">Traditional Austrian food on the main square. Or Lebzelterhaus for cakes and coffee.</div>
             </div>
-            <div class="tip-box"><strong>Detour option:</strong> Altaussee (10 min further) has a stunning mountain lake + historic salt mine.</div>
         </div>
         <div class="timeline-block drive">
-            <div class="time-label">13:35 - 13:55</div>
-            <h3>Drive: Bad Aussee &rarr; Hallstatt</h3>
-            <p>Just 20 min! Short scenic drive.</p>
+            <div class="time-label">13:35 - 13:45</div>
+            <h3>Drive: Bad Aussee &rarr; Altausseer See</h3>
+            <p>Just 10 min! Short scenic drive to the lake.</p>
         </div>
         <div class="timeline-block">
-            <div class="time-label">14:10 - 18:00</div>
-            <h3>Hallstatt Village</h3>
-            <p>Austria's most photographed village. Tiny, lakeside, mountains rising on all sides.</p>
-            <div class="warning-box"><strong>Parking:</strong> Use <strong>P1 parking garage</strong> at the tunnel entrance. ~EUR 10/day. Do NOT try to drive into the village!</div>
-            <ul>
-                <li><strong>The Classic Viewpoint</strong> &mdash; THE iconic photo between parking and village</li>
-                <li><strong>Marktplatz</strong> &mdash; Tiny market square, flower-covered houses</li>
-                <li><strong>Beinhaus (Bone House)</strong> &mdash; 600+ painted skulls, 12th century tradition (~EUR 2)</li>
-                <li><strong>Lake Walk</strong> &mdash; Walk south for peaceful views, fewer crowds</li>
-            </ul>
+            <div class="time-label">13:45 - 14:45</div>
+            <h3>Stop 3: Altausseer See</h3>
+            <div class="highlight-card">
+                <div class="hl-title">Altausseer See</div>
+                <div class="hl-detail">One of the most beautiful mountain lakes in the Salzkammergut. Crystal-clear water surrounded by the dramatic Loser and Trisselwand mountains. The Dachstein massif reflected in the lake is extraordinary.</div>
+                <div class="hl-meta"><span>Free</span><span>1h lake loop walk</span><span>Hidden gem!</span></div>
+            </div>
+            <p>Walk along the lakeshore path. Quiet, less touristy than Hallstatt &mdash; a true hidden gem.</p>
+        </div>
+        <div class="timeline-block drive">
+            <div class="time-label">14:45 - 15:15</div>
+            <h3>Drive: Altausseer See &rarr; Hallstatt area</h3>
+            <p>~30 min scenic drive to your accommodation.</p>
+        </div>
+        <div class="timeline-block">
+            <div class="time-label">15:15 onwards</div>
+            <h3>Arrive &amp; Settle In</h3>
+            <p>Check in at your accommodation. If staying in Obertraun, you&rsquo;re 5 min from Hallstatt and 5 min from the Dachstein cable car. Relax, or take a first walk into Hallstatt village if you have energy.</p>
         </div>
         <div class="timeline-block food">
             <div class="time-label">Evening</div>
-            <h3>Dinner in Hallstatt</h3>
+            <h3>Dinner</h3>
             <div class="highlight-card">
-                <div class="hl-title">Gasthof Zauner</div>
-                <div class="hl-detail">Traditional lakeside restaurant. Excellent fresh trout from the lake!</div>
+                <div class="hl-title">Gasthof Zauner (Hallstatt)</div>
+                <div class="hl-detail">Traditional lakeside restaurant. Excellent fresh trout from the lake! Or Gasthof Blaue Traube if staying in Bad Aussee area.</div>
             </div>
             <p>Hallstatt empties after ~17:00 when day-trippers leave. The magic hour &mdash; village practically to yourself.</p>
+        </div>
+        <div class="timeline-block optional">
+            <div class="time-label">If You Have Time</div>
+            <h3>Optional Activities</h3>
+            <div class="optional-box">
+                <h4>&#x1F570; Extra Ideas for the Drive Day</h4>
+                <ul>
+                    <li><strong>Altaussee Salt Mine</strong> &mdash; Historic salt mine where Nazis hid stolen masterpieces in WWII (Ghent Altarpiece, Vermeer, Michelangelo). Fascinating guided tours. ~EUR 22, 1.5 hours.</li>
+                    <li><strong>Toplitzsee</strong> &mdash; Mysterious mountain lake accessed via a short walk from G&ouml;ssl. Known for Nazi gold legend (counterfeit currency was recovered). Beautiful and eerie. ~30 min from Bad Aussee.</li>
+                    <li><strong>Longer Semmering walk</strong> &mdash; Walk the Bahnwanderweg (Railway Hiking Trail) along the UNESCO Semmering Railway. 2-3 hours for spectacular viaduct views.</li>
+                    <li><strong>Hallstatt evening walk</strong> &mdash; Walk into the village for sunset. The lake reflections are extraordinary in the evening light.</li>
+                </ul>
+            </div>
         </div>
         <div class="timeline-block sleep">
             <div class="time-label">Sleep</div>
@@ -657,6 +698,7 @@
                 <ul>
                     <li><strong>In Hallstatt:</strong> Heritage Hotel (lake views), Gasthof Zauner (central), Braugasthof (budget, parking)</li>
                     <li><strong>In Obertraun (5 min):</strong> Much cheaper, closer to Dachstein &mdash; Haus Loidl, B&amp;B Hallstatt</li>
+                    <li><strong>In Bad Aussee:</strong> More options, quieter, charming town center</li>
                 </ul>
                 <span class="price-range">EUR 60-180 / night (varies by location)</span>
             </div>
@@ -668,7 +710,7 @@
 <section class="day-section" id="day3">
     <div class="day-header">
         <span class="day-badge badge-austria">Austria</span>
-        <h2>Day 3 &mdash; Hallstatt + Dachstein</h2>
+        <h2>Day 3 &mdash; Five Fingers + Dachstein + Hallstatt</h2>
         <div class="day-meta">
             <span><span class="icon">&#x1F4C5;</span> Friday, April 4</span>
             <span><span class="icon">&#x1F697;</span> Short local drives</span>
@@ -679,7 +721,7 @@
         <div class="carousel-track">
             <div class="carousel-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1632893502156-9f696ab8454e?w=800&q=80" alt="Five Fingers Viewpoint"><div class="carousel-caption">Five Fingers Viewpoint</div></div>
             <div class="carousel-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1607040467769-73962ff3bc48?w=800&q=80" alt="Dachstein Ice Cave"><div class="carousel-caption">Dachstein Ice Cave</div></div>
-            <div class="carousel-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1567343628691-5f85c6ae2742?w=800&q=80" alt="Gosausee"><div class="carousel-caption">Gosausee</div></div>
+            <div class="carousel-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1609942167021-f59442d56d8f?w=800&q=80" alt="Hallstatt Village"><div class="carousel-caption">Hallstatt Village</div></div>
         </div>
         <button class="carousel-btn prev" aria-label="Previous">&#10094;</button>
         <button class="carousel-btn next" aria-label="Next">&#10095;</button>
@@ -687,37 +729,54 @@
     </div>
     <div class="timeline">
         <div class="timeline-block">
-            <div class="time-label">9:00 - 12:00</div>
-            <h3>Hallstatt Salt Mine + Skywalk</h3>
-            <div class="highlight-card">
-                <div class="hl-title">Salzwelten Hallstatt</div>
-                <div class="hl-detail">World's oldest salt mine. Funicular up, mining railway inside, underground salt lake, oldest wooden staircase in Europe. Skywalk (350m above lake) included!</div>
-                <div class="hl-meta"><span>~EUR 40</span><span>2.5 hours</span><span>Check April opening!</span></div>
-            </div>
-        </div>
-        <div class="timeline-block">
-            <div class="time-label">12:30 - 17:00</div>
+            <div class="time-label">9:00 - 13:00</div>
             <h3>Dachstein Krippenstein</h3>
-            <p>Cable car from Obertraun into the mountains. Check dachstein-salzkammergut.com for April status.</p>
+            <p>Drive to Obertraun cable car station (~5-15 min). Check dachstein-salzkammergut.com for April status.</p>
             <div class="highlight-card">
                 <div class="hl-title">Five Fingers Viewpoint</div>
-                <div class="hl-detail">Five metal platforms jutting over a 400m cliff. Glass floor, picture frame, telescope. One of Austria's most spectacular viewpoints!</div>
+                <div class="hl-detail">Five metal platforms jutting over a 400m cliff. Glass floor, picture frame, telescope. One of Austria&rsquo;s most spectacular viewpoints! ~15 min walk from the summit station.</div>
                 <div class="hl-meta"><span>~EUR 40 cable car</span><span>2-3 hours</span><span>Free with cable car ticket</span></div>
             </div>
             <ul>
-                <li><strong>Dachstein Ice Cave</strong> &mdash; Ice formations inside the mountain (~EUR 30)</li>
-                <li><strong>Mammoth Cave</strong> &mdash; Enormous cave system</li>
+                <li><strong>Dachstein Ice Cave</strong> &mdash; Ice formations inside the mountain (~EUR 30, can combine with cable car)</li>
+                <li><strong>Mammoth Cave</strong> &mdash; Enormous cave system, remarkable for its size</li>
             </ul>
             <div class="tip-box"><strong>Alternative:</strong> If Dachstein is closed, drive to <strong>Gosausee</strong> (~30 min) &mdash; stunning alpine lake with Dachstein glacier reflections. Easy 1.5h flat loop walk. Parking ~EUR 5.</div>
         </div>
+        <div class="timeline-block">
+            <div class="time-label">13:30 - 18:00</div>
+            <h3>Hallstatt Village</h3>
+            <p>Austria&rsquo;s most photographed village. Tiny, lakeside, with mountains rising dramatically on all sides.</p>
+            <div class="warning-box"><strong>Parking:</strong> Use <strong>P1 parking garage</strong> at the tunnel entrance. ~EUR 10/day. Do NOT try to drive into the village!</div>
+            <ul>
+                <li><strong>The Classic Viewpoint</strong> &mdash; THE iconic photo between parking and village</li>
+                <li><strong>Marktplatz (Market Square)</strong> &mdash; Heart of the village, flower-covered wooden houses</li>
+                <li><strong>Beinhaus (Bone House)</strong> &mdash; 600+ painted skulls, unique 12th century tradition (~EUR 2)</li>
+                <li><strong>Hallstatt Catholic Church</strong> &mdash; Pretty lakeside church</li>
+                <li><strong>Lake Walk</strong> &mdash; Walk south along the waterfront for peaceful views, fewer crowds</li>
+            </ul>
+        </div>
         <div class="timeline-block food">
             <div class="time-label">Evening</div>
-            <h3>Farewell Dinner</h3>
+            <h3>Dinner &amp; Sunset</h3>
             <div class="highlight-card">
-                <div class="hl-title">Gasthof Koppen (Obertraun)</div>
-                <div class="hl-detail">Hearty, no-frills Austrian mountain food. Great value.</div>
+                <div class="hl-title">Gasthof Zauner / Seehotel Gr&uuml;ner Baum</div>
+                <div class="hl-detail">Traditional lakeside restaurant with excellent fresh trout from the lake. Or Gasthof Koppen in Obertraun for hearty mountain food.</div>
             </div>
-            <p>Pack and prepare for Zell am See tomorrow.</p>
+            <p>Walk the waterfront at sunset. The reflections on the lake are extraordinary. Pack and prepare for Schladming/Zell am See tomorrow.</p>
+        </div>
+        <div class="timeline-block optional">
+            <div class="time-label">If You Have Time</div>
+            <h3>Optional Activities</h3>
+            <div class="optional-box">
+                <h4>&#x1F570; Extra Ideas for Hallstatt Day</h4>
+                <ul>
+                    <li><strong>Hallstatt Salt Mine (Salzwelten)</strong> &mdash; World&rsquo;s oldest salt mine. Funicular up, mining railway inside, underground salt lake, oldest wooden staircase in Europe. Skywalk (350m above lake) included! ~EUR 40, 2.5 hours. Check April opening at salzwelten.at.</li>
+                    <li><strong>Gosausee</strong> &mdash; If you didn&rsquo;t do it as a Dachstein alternative, this stunning alpine lake is worth the 30 min detour.</li>
+                    <li><strong>Hallstatt Museum</strong> &mdash; Covers 7,000 years of salt mining history. ~EUR 10. Good rainy-day option.</li>
+                    <li><strong>Boat ride on Hallst&auml;tter See</strong> &mdash; Electric boats for rent. Peaceful way to see the village from the water.</li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
@@ -725,19 +784,19 @@
 <!-- ==================== DAY 4 ==================== -->
 <section class="day-section" id="day4">
     <div class="day-header">
-        <span class="day-badge badge-austria">Austria</span>
-        <h2>Day 4 &mdash; Hallstatt &rarr; Wolfgangsee &rarr; Zell am See</h2>
+        <span class="day-badge badge-austria">Scenic Drive</span>
+        <h2>Day 4 &mdash; Schladming &rarr; Ramsau &rarr; Filzmoos &rarr; Zell am See</h2>
         <div class="day-meta">
             <span><span class="icon">&#x1F4C5;</span> Saturday, April 5 &mdash; Easter Saturday!</span>
-            <span><span class="icon">&#x1F697;</span> ~1h 55min drive (2 segments, 1 stop)</span>
-            <span><span class="icon">&#x1F319;</span> Sleep: Zell am See</span>
+            <span><span class="icon">&#x1F697;</span> ~2h total (scenic segments with stops)</span>
+            <span><span class="icon">&#x1F319;</span> Sleep: Zell am See / Kaprun</span>
         </div>
     </div>
     <div class="carousel" data-carousel>
         <div class="carousel-track">
-            <div class="carousel-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1605388218317-0469d5836d17?w=800&q=80" alt="Wolfgangsee"><div class="carousel-caption">Wolfgangsee</div></div>
             <div class="carousel-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1622118817955-e902d5f59061?w=800&q=80" alt="Zell am See"><div class="carousel-caption">Zell am See</div></div>
-            <div class="carousel-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1652796385949-58b40eafb93c?w=800&q=80" alt="Lake Hallstatt area"><div class="carousel-caption">Salzkammergut Lakes</div></div>
+            <div class="carousel-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1567343628691-5f85c6ae2742?w=800&q=80" alt="Dachstein South Face"><div class="carousel-caption">Dachstein Massif from Ramsau</div></div>
+            <div class="carousel-slide"><img loading="lazy" src="https://images.unsplash.com/photo-1652796385949-58b40eafb93c?w=800&q=80" alt="Alpine Village"><div class="carousel-caption">Alpine Villages</div></div>
         </div>
         <button class="carousel-btn prev" aria-label="Previous">&#10094;</button>
         <button class="carousel-btn next" aria-label="Next">&#10095;</button>
@@ -745,44 +804,60 @@
     </div>
     <div class="timeline">
         <div class="timeline-block">
-            <div class="time-label">9:00 - 9:30</div>
-            <h3>Last Hallstatt Moments</h3>
-            <p>Pack up, grab breakfast. If you haven't done Gosausee, consider a quick morning detour (adds ~1h).</p>
+            <div class="time-label">9:00</div>
+            <h3>Depart Hallstatt Area</h3>
+            <p>Pack up, grab breakfast, check out. Head south toward Schladming through the mountains.</p>
         </div>
         <div class="timeline-block drive">
-            <div class="time-label">9:30 - 10:05</div>
-            <h3>Drive: Hallstatt &rarr; St. Wolfgang</h3>
-            <p>~35min scenic drive through Salzkammergut to the shores of Wolfgangsee.</p>
+            <div class="time-label">9:00 - 9:45</div>
+            <h3>Drive: Hallstatt area &rarr; Schladming</h3>
+            <p>~45 min scenic drive past Bad Mitterndorf and into the Enns Valley.</p>
         </div>
         <div class="timeline-block">
-            <div class="time-label">10:15 - 11:15</div>
-            <h3>St. Wolfgang am Wolfgangsee</h3>
+            <div class="time-label">10:00 - 11:30</div>
+            <h3>Stop 1: Ramsau am Dachstein</h3>
+            <div class="highlight-card">
+                <div class="hl-title">Ramsau am Dachstein</div>
+                <div class="hl-detail">Stunning high plateau village at the foot of the Dachstein massif. Dramatic mountain scenery, alpine meadows, traditional wooden farmhouses. The south face of the Dachstein is absolutely massive from here.</div>
+                <div class="hl-meta"><span>~10 min from Schladming</span><span>1-1.5 hours</span></div>
+            </div>
             <ul>
-                <li><strong>Pilgrimage Church</strong> &mdash; Famous <strong>Michael Pacher altarpiece (1481)</strong>, one of the finest Gothic altarpieces in the world</li>
-                <li><strong>Lakeside promenade</strong> &mdash; Turquoise water, mountain backdrop, walk past the legendary Weisses R&ouml;ssl (White Horse Inn)</li>
-                <li><strong>Coffee/snack</strong> at a lakeside cafe</li>
+                <li><strong>Dachstein S&uuml;dwand cable car</strong> &mdash; If operating, take it up for spectacular south-face views. Check seasonal status.</li>
+                <li><strong>Sky Walk</strong> &mdash; Viewing platform at the cable car mountain station</li>
+                <li><strong>Village walk</strong> &mdash; Enjoy panoramic views, traditional farmhouses</li>
             </ul>
-            <div class="tip-box"><strong>Tip:</strong> The Schafbergbahn cog railway (1,783m summit, views over 7 lakes) likely won&rsquo;t be running in early April &mdash; usually opens late April/May.</div>
         </div>
         <div class="timeline-block drive">
-            <div class="time-label">11:15 - 12:35</div>
-            <h3>Drive: St. Wolfgang &rarr; Zell am See</h3>
-            <p>~1h 20min through Alpine passes and the Salzburg lake district.</p>
+            <div class="time-label">11:30 - 11:50</div>
+            <h3>Drive: Ramsau &rarr; Filzmoos</h3>
+            <p>~20 min through Alpine scenery.</p>
+        </div>
+        <div class="timeline-block food">
+            <div class="time-label">11:50 - 12:45</div>
+            <h3>Stop 2: Filzmoos (Lunch)</h3>
+            <div class="highlight-card">
+                <div class="hl-title">Filzmoos &mdash; &ldquo;Jewel of the Alps&rdquo;</div>
+                <div class="hl-detail">Charming, quiet alpine village surrounded by mountains. Known for great mountain food. Find a traditional Gasthaus in the village for lunch.</div>
+            </div>
+            <ul>
+                <li><strong>Filzmoos Church</strong> &mdash; Picturesque church with mountain backdrop &mdash; classic Austrian postcard scene</li>
+                <li><strong>Village walk</strong> &mdash; Enjoy the peace and mountain views</li>
+            </ul>
+        </div>
+        <div class="timeline-block drive">
+            <div class="time-label">12:45 - 13:30</div>
+            <h3>Drive: Filzmoos &rarr; Zell am See</h3>
+            <p>~45 min continuing west through the Alps.</p>
         </div>
         <div class="timeline-block">
-            <div class="time-label">12:45 - 18:00</div>
+            <div class="time-label">13:30 - 18:00</div>
             <h3>Zell am See</h3>
             <ul>
-                <li><strong>Lake Zell</strong> &mdash; Crystal-clear Alpine lake with Kitzsteinhorn glacier backdrop</li>
-                <li><strong>Lake Promenade</strong> &mdash; Full lakefront walk (~45 min loop)</li>
-                <li><strong>Old Town</strong> &mdash; St. Hippolyte's Church, Vogtturm tower</li>
+                <li><strong>Lake Zell (Zeller See)</strong> &mdash; Crystal-clear Alpine lake with Kitzsteinhorn glacier backdrop</li>
+                <li><strong>Esplanade / Lake Promenade</strong> &mdash; Full lakefront walk (~45 min loop). Benches, cafes, mountain views</li>
+                <li><strong>Old Town</strong> &mdash; St. Hippolyte's Church, Vogtturm tower/museum</li>
                 <li><strong>Elisabeth Promenade</strong> &mdash; Peaceful lakeside walk, beautiful afternoon light</li>
             </ul>
-            <div class="highlight-card">
-                <div class="hl-title">Schmittenhohe Cable Car</div>
-                <div class="hl-detail">1,965m summit. 360-degree panorama of 30+ peaks including Grossglockner. Check April operating status.</div>
-                <div class="hl-meta"><span>~EUR 35 round trip</span><span>Check if open</span></div>
-            </div>
             <div class="warning-box"><strong>Easter Saturday:</strong> Some shops may close early. Restaurants usually open but busier than normal.</div>
         </div>
         <div class="timeline-block food">
@@ -790,18 +865,31 @@
             <h3>Dinner in Zell am See</h3>
             <div class="highlight-card">
                 <div class="hl-title">Steinerwirt 1493</div>
-                <div class="hl-detail">One of the oldest inns in the region. Great Austrian food.</div>
+                <div class="hl-detail">One of the oldest inns in the region. Great Austrian food. Or Zum Hirschen for classic Pinzgauer cuisine.</div>
             </div>
             <p>Walk the promenade at sunset. Chill mountain-town vibe.</p>
         </div>
+        <div class="timeline-block optional">
+            <div class="time-label">If You Have Time</div>
+            <h3>Optional Activities</h3>
+            <div class="optional-box">
+                <h4>&#x1F570; Extra Ideas for the Scenic Drive Day</h4>
+                <ul>
+                    <li><strong>Stoderzinken viewpoint</strong> &mdash; Near Gr&ouml;bming, on the way from Hallstatt to Schladming. Panoramic mountain viewpoint at 2,048m accessible by toll road. 360&deg; views over the Enns Valley and Dachstein. ~EUR 12 toll. Adds ~1 hour.</li>
+                    <li><strong>Schladming town walk</strong> &mdash; Lively alpine town with a nice main square, good cafes, and mountain sports shops.</li>
+                    <li><strong>Schmittenh&ouml;he Cable Car</strong> &mdash; 1,965m summit with 360-degree panorama of 30+ peaks. ~EUR 35 round trip. Check April status.</li>
+                </ul>
+            </div>
+        </div>
         <div class="timeline-block sleep">
             <div class="time-label">Sleep</div>
-            <h3>Accommodation &mdash; Zell am See (2 nights)</h3>
+            <h3>Accommodation &mdash; Zell am See / Kaprun (2 nights)</h3>
             <div class="sleep-section">
                 <h4>&#x1F6CF; Where to Stay</h4>
                 <ul>
                     <li><strong>Budget:</strong> Jugendherberge Zell am See, Pension Hubertus</li>
                     <li><strong>Mid-range:</strong> Hotel Neue Post (center), Alpin Life Hotel Gebhard</li>
+                    <li><strong>In Kaprun:</strong> Closer to Kitzsteinhorn for tomorrow</li>
                 </ul>
                 <span class="price-range">EUR 80-130 / night</span>
             </div>
@@ -813,11 +901,11 @@
 <section class="day-section" id="day5">
     <div class="day-header">
         <span class="day-badge badge-austria">Austria</span>
-        <h2>Day 5 &mdash; Zell am See / Kaprun</h2>
+        <h2>Day 5 &mdash; Kitzsteinhorn Glacier + Kaprun</h2>
         <div class="day-meta">
             <span><span class="icon">&#x1F4C5;</span> Sunday, April 6 &mdash; Easter Sunday!</span>
-            <span><span class="icon">&#x1F697;</span> Short local drives</span>
-            <span><span class="icon">&#x1F319;</span> Sleep: Zell am See</span>
+            <span><span class="icon">&#x1F697;</span> Short local drives (~10 min)</span>
+            <span><span class="icon">&#x1F319;</span> Sleep: Zell am See / Kaprun</span>
         </div>
     </div>
     <div class="carousel" data-carousel>
@@ -833,7 +921,7 @@
         <div class="timeline-block">
             <div class="time-label">9:00 - 13:00</div>
             <h3>Kitzsteinhorn Glacier (3,029m)</h3>
-            <p>Drive to Kaprun (~10 min).</p>
+            <p>Drive to Kaprun (~10 min from Zell am See).</p>
             <div class="highlight-card">
                 <div class="hl-title">Top of Salzburg Platform (3,029m)</div>
                 <div class="hl-detail">Jaw-dropping 360-degree panorama. National Park Gallery tunnel at 2,450m. ICE ARENA &mdash; gallery carved into glacial ice.</div>
@@ -841,17 +929,21 @@
             </div>
             <div class="warning-box"><strong>Easter Sunday:</strong> Many shops and some restaurants WILL be closed. Have snacks ready. Hotel breakfast is your best friend today.</div>
         </div>
-        <div class="timeline-block">
-            <div class="time-label">13:00 - 18:00</div>
-            <h3>Kaprun Valley</h3>
+        <div class="timeline-block food">
+            <div class="time-label">13:00</div>
+            <h3>Lunch in Kaprun</h3>
             <div class="highlight-card">
                 <div class="hl-title">Dorfstadl Kaprun</div>
                 <div class="hl-detail">Cozy mountain restaurant. Try the Kaiserschmarrn &mdash; shredded pancake, must-try Austrian dish!</div>
             </div>
+        </div>
+        <div class="timeline-block">
+            <div class="time-label">14:00 - 18:00</div>
+            <h3>Kaprun Valley</h3>
             <ul>
-                <li><strong>Burg Kaprun</strong> &mdash; Medieval castle ruin, free, nice valley views</li>
-                <li><strong>Sigmund-Thun Gorge</strong> &mdash; Turquoise water walkways (~EUR 6). Likely closed in April &mdash; verify!</li>
-                <li><strong>Maiskogel</strong> &mdash; Gondola, easy walks, views to Zell am See (if gorge closed)</li>
+                <li><strong>Burg Kaprun</strong> &mdash; Medieval castle ruin, free to walk around. Nice views of the valley</li>
+                <li><strong>Sigmund-Thun Gorge</strong> &mdash; Turquoise water walkways (~EUR 6). Usually opens mid/late May &mdash; likely closed!</li>
+                <li><strong>Maiskogel</strong> &mdash; Gondola, easy walks, views to Zell am See (good if gorge is closed)</li>
             </ul>
         </div>
         <div class="timeline-block food">
@@ -863,6 +955,19 @@
             </ul>
             <p>Take an evening stroll along the lake. April sunsets over the mountains are incredible.</p>
         </div>
+        <div class="timeline-block optional">
+            <div class="time-label">If You Have Time</div>
+            <h3>Optional Activities</h3>
+            <div class="optional-box">
+                <h4>&#x1F570; Extra Ideas for Glacier Day</h4>
+                <ul>
+                    <li><strong>Sigmund-Thun Gorge</strong> &mdash; Spectacular narrow gorge near Kaprun with wooden walkways over turquoise water. ~EUR 6, 45 min. Usually opens mid/late May.</li>
+                    <li><strong>Stauseen Kaprun (Reservoir Dams)</strong> &mdash; Impressive high-alpine engineering. Road may be closed in early April due to snow &mdash; check conditions.</li>
+                    <li><strong>Lake Zell boat ride</strong> &mdash; Electric boat tours on the lake. Relaxing way to see the mountains from the water.</li>
+                    <li><strong>Maiskogel</strong> &mdash; Family-friendly mountain with a gondola. Easy walks at the top with views down to Zell am See.</li>
+                </ul>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -870,11 +975,11 @@
 <section class="day-section" id="day6">
     <div class="day-header">
         <span class="day-badge badge-austria">Austria</span>
-        <h2>Day 6 &mdash; Zell am See &rarr; Werfen + Salzburg</h2>
+        <h2>Day 6 &mdash; Zell am See &rarr; Werfen &rarr; Salzburg</h2>
         <div class="day-meta">
             <span><span class="icon">&#x1F4C5;</span> Monday, April 7</span>
-            <span><span class="icon">&#x1F697;</span> 50min + 40min evening</span>
-            <span><span class="icon">&#x1F319;</span> Sleep: Werfen (Der Burgblick)</span>
+            <span><span class="icon">&#x1F697;</span> ~1h 30min total (2 segments)</span>
+            <span><span class="icon">&#x1F319;</span> Sleep: Salzburg (or Wolfgangsee &mdash; TBD)</span>
         </div>
     </div>
     <div class="carousel" data-carousel>
@@ -888,59 +993,84 @@
         <div class="carousel-dots"></div>
     </div>
     <div class="timeline">
+        <div class="timeline-block">
+            <div class="time-label">9:00</div>
+            <h3>Check Out</h3>
+            <p>Leisurely breakfast, pack up, check out of Zell am See / Kaprun.</p>
+        </div>
         <div class="timeline-block drive">
-            <div class="time-label">10:00 - 10:50</div>
+            <div class="time-label">9:00 - 9:50</div>
             <h3>Drive: Zell am See &rarr; Werfen</h3>
-            <p>~50 min north on B311. Scenic Salzach Valley. Check in at <strong>Der Burgblick - Adults Only</strong>.</p>
+            <p>~50 min north on B311. Scenic Salzach Valley with mountains on both sides.</p>
         </div>
         <div class="timeline-block">
-            <div class="time-label">11:00 - 13:30</div>
+            <div class="time-label">10:00 - 12:00</div>
             <h3>Hohenwerfen Castle</h3>
             <div class="highlight-card">
                 <div class="hl-title">Burg Hohenwerfen</div>
-                <div class="hl-detail">Dramatic 900-year-old fortress on a cliff 155m above the Salzach Valley. Daily falconry shows with eagles, falcons &amp; vultures. Filming location for "Where Eagles Dare" (1968).</div>
+                <div class="hl-detail">Dramatic 900-year-old fortress perched on a cliff 155m above the Salzach Valley. Daily falconry shows with eagles, falcons &amp; vultures. One of Austria&rsquo;s best-kept secrets! Filming location for &ldquo;Where Eagles Dare&rdquo; (1968).</div>
                 <div class="hl-meta"><span>~EUR 16</span><span>1.5-2 hours</span><span>Incl. falconry show</span></div>
             </div>
         </div>
         <div class="timeline-block food">
-            <div class="time-label">Lunch</div>
-            <h3>Eat in Werfen</h3>
+            <div class="time-label">12:00 - 13:00</div>
+            <h3>Lunch in Werfen</h3>
             <ul>
-                <li><strong>Obauer</strong> &mdash; 2-Michelin-star splurge option (one of Austria's best!)</li>
-                <li><strong>Gasthof Lebzelter</strong> &mdash; Traditional Austrian, good value</li>
+                <li><strong>Obauer</strong> &mdash; 2-Michelin-star splurge option (one of Austria&rsquo;s best!)</li>
+                <li><strong>Gasthof Lebzelter</strong> &mdash; More casual, traditional Austrian fare. Good value.</li>
             </ul>
         </div>
         <div class="timeline-block drive">
-            <div class="time-label">16:30 - 17:10</div>
-            <h3>Drive to Salzburg</h3>
-            <p>~40 min north on A10.</p>
+            <div class="time-label">13:00 - 13:40</div>
+            <h3>Drive: Werfen &rarr; Salzburg</h3>
+            <p>~40 min north on A10. Check in at your Salzburg accommodation.</p>
         </div>
         <div class="timeline-block">
-            <div class="time-label">17:15 - 21:00</div>
-            <h3>Salzburg Evening Walk</h3>
+            <div class="time-label">14:00 - 18:00</div>
+            <h3>Salzburg Old Town Walk</h3>
             <ul>
-                <li><strong>Getreidegasse</strong> &mdash; Famous shopping street with ornate wrought-iron guild signs</li>
-                <li><strong>Residenzplatz</strong> &mdash; Grand square, atmospheric at night</li>
-                <li><strong>Salzach River</strong> &mdash; Walk the embankment as the fortress lights up above</li>
+                <li><strong>Getreidegasse</strong> &mdash; Salzburg&rsquo;s most famous shopping street with ornate wrought-iron guild signs. Mozart&rsquo;s birthplace is here.</li>
+                <li><strong>Residenzplatz</strong> &mdash; Grand square with a large fountain. Beautiful in the afternoon.</li>
+                <li><strong>Salzach River</strong> &mdash; Walk along the river embankment, enjoy views of the fortress above.</li>
+                <li><strong>Kapuzinerberg Hill</strong> &mdash; Cross the river and hike up for a quieter viewpoint over Salzburg. ~15 min hike.</li>
             </ul>
         </div>
         <div class="timeline-block food">
-            <div class="time-label">Dinner</div>
+            <div class="time-label">Evening</div>
             <h3>Salzburg Dining</h3>
             <div class="highlight-card">
                 <div class="hl-title">Stiftskeller St. Peter</div>
-                <div class="hl-detail">One of Europe's oldest restaurants (803 AD!). Traditional Austrian food, stunning setting. Book ahead.</div>
+                <div class="hl-detail">One of Europe&rsquo;s oldest restaurants (803 AD!). Traditional Austrian food in a stunning setting. Book ahead.</div>
             </div>
             <div class="highlight-card">
-                <div class="hl-title">Zwettler's</div>
-                <div class="hl-detail">Hearty Austrian classics &mdash; Schnitzel, Tafelspitz &mdash; right on Kaigasse</div>
+                <div class="hl-title">Zwettler&rsquo;s</div>
+                <div class="hl-detail">Hearty Austrian classics &mdash; Schnitzel, Tafelspitz &mdash; right on Kaigasse.</div>
             </div>
-            <div class="tip-box"><strong>Street food:</strong> Grab a Bosna (spicy sausage in a bun) from a stand on Getreidegasse &mdash; Salzburg's famous street food!</div>
+            <div class="tip-box"><strong>Street food:</strong> Grab a Bosna (spicy sausage in a bun) from a stand on Getreidegasse &mdash; Salzburg&rsquo;s famous street food!</div>
         </div>
-        <div class="timeline-block drive">
-            <div class="time-label">~21:00</div>
-            <h3>Drive back to Werfen</h3>
-            <p>~40 min on A10 back to Der Burgblick.</p>
+        <div class="timeline-block optional">
+            <div class="time-label">If You Have Time</div>
+            <h3>Optional Activities</h3>
+            <div class="optional-box">
+                <h4>&#x1F570; Extra Ideas for Werfen + Salzburg Day</h4>
+                <ul>
+                    <li><strong>Eisriesenwelt Ice Cave</strong> &mdash; World&rsquo;s largest ice cave, inside the mountain above Werfen. Guided tours through frozen waterfalls and ice formations. ~EUR 14, 1.5 hours. <strong>Check if open in April &mdash; usually opens May 1.</strong> If open, do it before the castle in the morning (adds 2h).</li>
+                    <li><strong>Wolfgangsee detour</strong> &mdash; Detour to St. Wolfgang am Wolfgangsee (~45 min from Werfen). Beautiful lake, Pilgrimage Church with Michael Pacher altarpiece (1481), Weisses R&ouml;ssl (White Horse Inn). Adds 2-3 hours.</li>
+                    <li><strong>Hellbrunn Palace</strong> &mdash; Famous for trick fountains that spray visitors! Fun experience. On the southern edge of Salzburg. ~EUR 14, 1.5 hours.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="timeline-block sleep">
+            <div class="time-label">Sleep</div>
+            <h3>Accommodation &mdash; Salzburg (2 nights)</h3>
+            <div class="sleep-section">
+                <h4>&#x1F6CF; Where to Stay</h4>
+                <ul>
+                    <li><strong>Salzburg city:</strong> Walking distance to Old Town ideal</li>
+                    <li><strong>Alternative:</strong> Wolfgangsee area (St. Wolfgang / St. Gilgen) &mdash; lakeside, quieter, ~30 min from Salzburg</li>
+                </ul>
+                <span class="price-range">EUR 80-150 / night</span>
+            </div>
         </div>
     </div>
 </section>
@@ -949,11 +1079,11 @@
 <section class="day-section" id="day7">
     <div class="day-header">
         <span class="day-badge badge-austria">Austria</span>
-        <h2>Day 7 &mdash; Salzburg Full Day (from Werfen)</h2>
+        <h2>Day 7 &mdash; Salzburg Full Day</h2>
         <div class="day-meta">
             <span><span class="icon">&#x1F4C5;</span> Tuesday, April 8</span>
-            <span><span class="icon">&#x1F697;</span> ~40 min each way</span>
-            <span><span class="icon">&#x1F319;</span> Sleep: Werfen</span>
+            <span><span class="icon">&#x1F6B6;</span> No driving &mdash; everything walkable or by bus</span>
+            <span><span class="icon">&#x1F319;</span> Sleep: Salzburg</span>
         </div>
     </div>
     <div class="carousel" data-carousel>
@@ -967,22 +1097,17 @@
         <div class="carousel-dots"></div>
     </div>
     <div class="timeline">
-        <div class="timeline-block drive">
-            <div class="time-label">8:15 - 8:55</div>
-            <h3>Drive to Salzburg</h3>
-            <p>~40 min on A10.</p>
-        </div>
         <div class="timeline-block">
             <div class="time-label">9:00 - 12:00</div>
             <h3>Hohensalzburg Fortress</h3>
             <div class="highlight-card">
                 <div class="hl-title">Hohensalzburg Fortress</div>
-                <div class="hl-detail">One of Europe's largest medieval castles. Funicular up, state rooms, torture chamber, panoramic terrace.</div>
+                <div class="hl-detail">Salzburg&rsquo;s crown jewel. One of the largest and best-preserved medieval castles in Europe. Take the funicular up from Festungsgasse (included in ticket) or walk up (~20 min).</div>
                 <div class="hl-meta"><span>~EUR 16.30</span><span>2-3 hours</span><span>Go early!</span></div>
             </div>
             <div class="highlight-card">
                 <div class="hl-title">Salzburg Cathedral (Dom)</div>
-                <div class="hl-detail">Magnificent Baroque cathedral. Mozart's baptismal font inside. Free entry.</div>
+                <div class="hl-detail">Magnificent Baroque cathedral at the foot of the fortress hill. Mozart&rsquo;s baptismal font is inside. Free entry.</div>
                 <div class="hl-meta"><span>Free</span><span>30 min</span></div>
             </div>
         </div>
@@ -990,40 +1115,56 @@
             <div class="time-label">12:00 - 13:00</div>
             <h3>Lunch</h3>
             <div class="highlight-card">
-                <div class="hl-title">Cafe Tomaselli</div>
-                <div class="hl-detail">Salzburg's oldest coffeehouse (since 1705). Try the Salzburger Nockerl &mdash; sweet souffle, city's signature dessert</div>
+                <div class="hl-title">Caf&eacute; Tomaselli</div>
+                <div class="hl-detail">Salzburg&rsquo;s oldest coffeehouse (since 1705) on Alter Markt. Try the Salzburger Nockerl &mdash; sweet souffl&eacute;, city&rsquo;s signature dessert. Or Triangel for locals&rsquo; favorite Schnitzel.</div>
             </div>
         </div>
         <div class="timeline-block">
             <div class="time-label">13:00 - 14:00</div>
             <h3>Mirabell Palace &amp; Gardens</h3>
-            <p>Beautiful Baroque gardens from "The Sound of Music" (Do-Re-Mi scene). Free entry. Pegasus fountain, rose garden, Marble Hall.</p>
+            <p>Beautiful Baroque gardens from &ldquo;The Sound of Music&rdquo; (Do-Re-Mi scene). Free entry. Pegasus fountain, rose garden, dwarf garden. The Marble Hall inside is one of the most beautiful wedding halls in the world (free to peek in).</p>
         </div>
         <div class="timeline-block">
             <div class="time-label">14:00 - 17:00</div>
             <h3>Afternoon Exploration</h3>
             <ul>
-                <li><strong>Mozart's Birthplace</strong> (Getreidegasse 9) &mdash; His childhood violin, manuscripts (~EUR 14)</li>
-                <li><strong>Kapuzinerberg Hill</strong> &mdash; Quiet viewpoint, ~15 min hike</li>
-                <li><strong>Linzergasse</strong> &mdash; Charming shopping street, less crowded</li>
+                <li><strong>Mozart&rsquo;s Birthplace</strong> (Getreidegasse 9) &mdash; His childhood violin, family portraits, manuscripts (~EUR 14)</li>
+                <li><strong>Linzergasse</strong> &mdash; Charming Neustadt shopping street, less crowded than Getreidegasse</li>
+                <li><strong>Kapuzinerberg Hill</strong> &mdash; Quiet viewpoint over Salzburg, ~15 min hike</li>
             </ul>
         </div>
         <div class="timeline-block">
             <div class="time-label">17:00 - 20:30</div>
-            <h3>Evening: Cafe + Beer Hall</h3>
+            <h3>Evening: Caf&eacute; + Beer Hall</h3>
             <ul>
-                <li><strong>Cafe Sacher</strong> &mdash; Original Sacher Torte on the river terrace</li>
+                <li><strong>Caf&eacute; Sacher Salzburg</strong> &mdash; Original Sacher Torte on the river terrace</li>
                 <li><strong>Makartsteg bridge</strong> &mdash; Love-lock bridge, golden hour photos</li>
             </ul>
             <div class="highlight-card">
-                <div class="hl-title">Augustiner Brau</div>
-                <div class="hl-detail">Massive beer hall run by monks. Beer from wooden barrels. Self-service, local favorite. Amazing atmosphere!</div>
+                <div class="hl-title">Augustiner Br&auml;u</div>
+                <div class="hl-detail">Massive beer hall/garden run by monks. Beer tapped from wooden barrels. Self-service, local favorite. Amazing atmosphere!</div>
             </div>
         </div>
-        <div class="timeline-block drive">
-            <div class="time-label">~20:30</div>
-            <h3>Drive back to Werfen</h3>
-            <p>~40 min on A10. Last night at Der Burgblick.</p>
+        <div class="timeline-block food">
+            <div class="time-label">Dinner</div>
+            <h3>Dinner</h3>
+            <ul>
+                <li><strong>Gasthof Goldgasse</strong> &mdash; Refined Austrian cuisine in a medieval building</li>
+                <li><strong>Blaue Gans</strong> &mdash; More modern take on Austrian classics</li>
+            </ul>
+        </div>
+        <div class="timeline-block optional">
+            <div class="time-label">If You Have Time</div>
+            <h3>Optional Activities</h3>
+            <div class="optional-box">
+                <h4>&#x1F570; Extra Ideas for Salzburg Full Day</h4>
+                <ul>
+                    <li><strong>Untersberg Cable Car</strong> &mdash; ~20 min south of Salzburg. Cable car to 1,853m summit with panoramic views over Salzburg, the Alps, and into Germany. ~EUR 30 round trip, 2 hours.</li>
+                    <li><strong>Hellbrunn Palace</strong> &mdash; Trick fountains and water gardens. Fun and surprising. ~EUR 14, 1.5 hours.</li>
+                    <li><strong>Leopoldskron Palace</strong> &mdash; Lakeside palace from The Sound of Music. Walk around the lake, photos from outside.</li>
+                    <li><strong>Hangar-7</strong> &mdash; Red Bull&rsquo;s collection of historic aircraft, Formula 1 cars, and contemporary art at Salzburg Airport. Free entry! Striking modern architecture.</li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
@@ -1032,7 +1173,7 @@
 <section class="day-section" id="day8">
     <div class="day-header">
         <span class="day-badge badge-austria">Drive Day</span>
-        <h2>Day 8 &mdash; Werfen &rarr; Wachau &rarr; Vienna</h2>
+        <h2>Day 8 &mdash; Salzburg &rarr; Wachau &rarr; Vienna</h2>
         <div class="day-meta">
             <span><span class="icon">&#x1F4C5;</span> Wednesday, April 9</span>
             <span><span class="icon">&#x1F697;</span> ~4h 50min total (5 segments, 4 stops)</span>
@@ -1054,15 +1195,15 @@
     <div class="timeline">
         <div class="timeline-block drive">
             <div class="time-label">8:00 - 9:30</div>
-            <h3>Drive: Werfen &rarr; Traunfall / Roitham</h3>
-            <p>~1h 30min north on A10/A1. Exit at Laakirchen West, follow B144 toward Roitham.</p>
+            <h3>Drive: Salzburg &rarr; Traunfall / Roitham</h3>
+            <p>~1h 30min east on A1 through the Salzburg lake district (past Mondsee and Attersee). Exit at Laakirchen West, follow B144 toward Roitham.</p>
         </div>
         <div class="timeline-block">
             <div class="time-label">9:35 - 9:55</div>
             <h3>Stop 1: Traunfall</h3>
             <div class="highlight-card">
                 <div class="hl-title">Traunfall Waterfall</div>
-                <div class="hl-detail">One of Austria's most beautiful waterfalls &mdash; 12m high and ~200m long, stretching diagonally across the Traun river. Walk the footbridge directly over the falls for stunning views.</div>
+                <div class="hl-detail">One of Austria&rsquo;s most beautiful waterfalls &mdash; 12m high and ~200m long, stretching diagonally across the Traun river. Walk the footbridge (2018) directly over the falls for stunning views.</div>
                 <div class="hl-meta"><span>Free entry</span><span>Free parking</span><span>15-20 min</span></div>
             </div>
             <p>A scenic rest stop to stretch your legs after the longest drive segment. 5 min walk from car park to the falls.</p>
@@ -1092,33 +1233,33 @@
             <h3>Stop 3: Melk Abbey</h3>
             <div class="highlight-card">
                 <div class="hl-title">Stift Melk</div>
-                <div class="hl-detail">One of Europe's most magnificent Baroque monasteries, perched on a cliff above the Danube. Imperial corridor, marble hall, incredible library (250,000+ volumes).</div>
+                <div class="hl-detail">One of Europe&rsquo;s most magnificent Baroque monasteries, perched on a cliff above the Danube. Imperial corridor, marble hall, incredible library (250,000+ volumes). Gateway to the Wachau Valley.</div>
                 <div class="hl-meta"><span>~EUR 14.50</span><span>1.5-2 hours</span><span>Parking ~EUR 4</span></div>
             </div>
         </div>
         <div class="timeline-block drive">
             <div class="time-label">14:00 - 14:30</div>
-            <h3>Drive: Melk &rarr; Durnstein</h3>
+            <h3>Drive: Melk &rarr; D&uuml;rnstein</h3>
             <p>~30 min east along the Danube through the Wachau Valley. Vineyards, apricot orchards, the blue Danube below.</p>
-            <div class="tip-box"><strong>Apricot blossom season!</strong> Early April is peak bloom for Wachau's famous Marillen orchards. White/pink blossoms everywhere!</div>
+            <div class="tip-box"><strong>Apricot blossom season!</strong> Early April is peak bloom for Wachau&rsquo;s famous Marillen orchards. White/pink blossoms everywhere!</div>
         </div>
         <div class="timeline-block">
             <div class="time-label">14:40 - 16:10</div>
-            <h3>Stop 4: Durnstein</h3>
+            <h3>Stop 4: D&uuml;rnstein</h3>
             <p>Tiny, picture-perfect Wachau village.</p>
             <ul>
                 <li><strong>Blue church tower</strong> &mdash; Iconic Baroque Stiftskirche</li>
-                <li><strong>Ruine Durnstein</strong> &mdash; Castle where Richard the Lionheart was imprisoned (1192). ~20 min hike</li>
-                <li><strong>Wine tasting</strong> &mdash; Gruner Veltliner at a local Heuriger</li>
+                <li><strong>Ruine D&uuml;rnstein</strong> &mdash; Castle where Richard the Lionheart was imprisoned (1192). ~20 min hike, great valley views</li>
+                <li><strong>Wine tasting</strong> &mdash; Gr&uuml;ner Veltliner at a local Heuriger (wine tavern)</li>
             </ul>
             <div class="highlight-card">
                 <div class="hl-title">Loibnerhof (Lunch)</div>
-                <div class="hl-detail">Danube fish and local Wachau wines</div>
+                <div class="hl-detail">Danube fish and local Wachau wines. Budget option: Wachauer Laberl (local bread) with cheese at a bakery.</div>
             </div>
         </div>
         <div class="timeline-block drive">
             <div class="time-label">16:10 - 17:30</div>
-            <h3>Drive: Durnstein &rarr; Vienna</h3>
+            <h3>Drive: D&uuml;rnstein &rarr; Vienna</h3>
             <p>~1h 20min on A1/S33 to Vienna.</p>
         </div>
         <div class="timeline-block">
@@ -1127,17 +1268,29 @@
             <ul>
                 <li><strong>Stephansdom</strong> &mdash; Gothic masterpiece, South Tower climb (~EUR 6, 343 steps)</li>
                 <li><strong>Graben &amp; Kohlmarkt</strong> &mdash; Elegant shopping streets</li>
-                <li><strong>Naschmarkt</strong> &mdash; 120+ food stalls (closes ~18:00)</li>
             </ul>
             <div class="highlight-card">
-                <div class="hl-title">Figlmuller</div>
-                <div class="hl-detail">Vienna's most famous Schnitzel (since 1905). Hangs over the plate! Book ahead or queue.</div>
+                <div class="hl-title">Figlm&uuml;ller</div>
+                <div class="hl-detail">Vienna&rsquo;s most famous Schnitzel (since 1905). Hangs over the plate! Book ahead or queue. Or try Plachutta for definitive Tafelspitz (boiled beef).</div>
             </div>
             <ul>
-                <li><strong>Ringstrasse night walk</strong> &mdash; Illuminated Opera House, Parliament, Rathaus</li>
-                <li><strong>Loos American Bar</strong> &mdash; Legendary tiny cocktail bar (1908)</li>
+                <li><strong>Ringstra&szlig;e night walk</strong> &mdash; Illuminated Opera House, Parliament, Rathaus</li>
+                <li><strong>Loos American Bar</strong> &mdash; Legendary tiny cocktail bar designed by Adolf Loos (1908)</li>
             </ul>
             <div class="warning-box"><strong>Parking in Vienna:</strong> Expensive. Use a Park &amp; Ride (e.g., Erdberg P+R) and get a 24h Wiener Linien ticket (~EUR 8).</div>
+        </div>
+        <div class="timeline-block optional">
+            <div class="time-label">If You Have Time</div>
+            <h3>Optional Activities</h3>
+            <div class="optional-box">
+                <h4>&#x1F570; Extra Ideas for the Drive Day</h4>
+                <ul>
+                    <li><strong>Wolfgangsee quick stop</strong> &mdash; If you didn&rsquo;t do it on Day 6, detour to St. Wolfgang from Salzburg before the A1. Beautiful lake, Pilgrimage Church, lakeside cafes. Adds ~1.5-2 hours.</li>
+                    <li><strong>Steyr Old Town</strong> &mdash; One of Austria&rsquo;s best-preserved medieval town centers. Right off the A1 between Gmunden and Melk. Beautiful Stadtplatz, Gothic Bummerlhaus. Quick 1-hour stop.</li>
+                    <li><strong>Naschmarkt</strong> &mdash; Vienna&rsquo;s famous open-air market with 120+ stalls. May still be open when you arrive (closes ~18:00 weekdays).</li>
+                    <li><strong>Krems an der Donau</strong> &mdash; Another charming Wachau town near D&uuml;rnstein. Cobblestone streets, wine taverns. 30 min stop if time allows.</li>
+                </ul>
+            </div>
         </div>
         <div class="timeline-block sleep">
             <div class="time-label">Sleep</div>
@@ -1145,7 +1298,7 @@
             <div class="sleep-section">
                 <h4>&#x1F6CF; Where to Stay</h4>
                 <ul>
-                    <li><strong>Budget:</strong> Wombat's City Hostel, SafeStay Vienna</li>
+                    <li><strong>Budget:</strong> Wombat&rsquo;s City Hostel, SafeStay Vienna</li>
                     <li><strong>Mid-range:</strong> Motel One Wien-Staatsoper, Ruby Marie Hotel</li>
                     <li><strong>Area:</strong> 1st district or along the Ring (4th, 6th, 7th)</li>
                 </ul>
@@ -1190,6 +1343,19 @@
             </div>
             <p><strong>Alternative:</strong> Belvedere Palace &mdash; Klimt's "The Kiss" (~EUR 16).</p>
         </div>
+        <div class="timeline-block optional">
+            <div class="time-label">If You Have Time</div>
+            <h3>Optional Activities</h3>
+            <div class="optional-box">
+                <h4>&#x1F570; Extra Ideas for Vienna Morning</h4>
+                <ul>
+                    <li><strong>Naschmarkt + breakfast</strong> &mdash; Start at Vienna&rsquo;s famous market. Great for brunch and picking up souvenirs (spices, oils, sweets).</li>
+                    <li><strong>Prater + Giant Ferris Wheel (Riesenrad)</strong> &mdash; Vienna&rsquo;s famous amusement park. Great city views from the Riesenrad. ~EUR 13, 30 min.</li>
+                    <li><strong>Albertina Museum</strong> &mdash; World-class art collection (Monet, Renoir, Picasso). Beautiful building on the Ringstra&szlig;e. ~EUR 18.</li>
+                    <li><strong>Hundertwasserhaus</strong> &mdash; Quirky, colorful apartment building by artist Hundertwasser. Free to view from outside (5 min stop).</li>
+                </ul>
+            </div>
+        </div>
         <div class="timeline-block">
             <div class="time-label">Midday</div>
             <h3>Departure</h3>
@@ -1209,9 +1375,9 @@
         <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Kitzsteinhorn cable car April hours</span></div>
         <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Schmittenhohe cable car April status</span></div>
         <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Hohenwerfen Castle April hours</span></div>
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Eisriesenwelt Ice Cave (usually opens May 1!)</span></div>
+        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Ramsau am Dachstein / S&uuml;dwand cable car status</span></div>
         <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Melk Abbey hours (stiftmelk.at)</span></div>
-        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">St. Wolfgang Pilgrimage Church Easter hours</span></div>
-        <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Schafbergbahn cog railway (likely closed Apr)</span></div>
         <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Easter closures: restaurants Apr 3-6</span></div>
         <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">All accommodation booked</span></div>
         <div class="pack-item" onclick="this.classList.toggle('checked')"><div class="checkbox"></div><span class="pack-label">Rental car winter tires confirmed</span></div>
