@@ -353,6 +353,70 @@ body {
     margin-bottom: 0.6rem;
 }
 
+/* Custom price input */
+.custom-price-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.7rem;
+    padding: 0.45rem 0.6rem;
+    background: rgba(251,191,36,0.06);
+    border: 1px dashed rgba(251,191,36,0.25);
+    border-radius: 8px;
+    transition: border-color 0.2s;
+}
+.custom-price-row:focus-within {
+    border-color: var(--gold);
+}
+.custom-price-label {
+    font-size: 0.7rem;
+    color: var(--gold);
+    white-space: nowrap;
+    font-weight: 600;
+}
+.custom-price-input {
+    width: 90px;
+    padding: 0.25rem 0.4rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    background: var(--bg-card);
+    color: var(--gold);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-align: right;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.custom-price-input::placeholder { color: rgba(251,191,36,0.3); font-weight: 400; }
+.custom-price-input:focus { border-color: var(--gold); }
+.custom-price-input.has-value { background: rgba(251,191,36,0.1); }
+.custom-price-currency {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+.custom-price-active {
+    font-size: 0.65rem;
+    color: var(--green);
+    margin-left: auto;
+    white-space: nowrap;
+}
+
+/* Distances */
+.card-distances {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-bottom: 0.6rem;
+}
+.distance-tag {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.45rem;
+    border-radius: 5px;
+    background: rgba(251,191,36,0.1);
+    color: var(--gold);
+    white-space: nowrap;
+}
+
 /* Features */
 .features {
     display: flex;
@@ -782,313 +846,103 @@ const VOTERS = [
 // ========== HOTEL DATA ==========
 const LOCATIONS = [
     {
-        id: 'bratislava',
-        name: 'Bratislava',
-        nights: 2,
+        id: 'bratislava', name: 'Bratislava', nights: 2,
         dates: 'Apr 1–3 (2 nights)',
         image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=200&q=80',
         hotels: [
-            {
-                id: 'brat-1',
-                name: 'Park Inn by Radisson Danube',
-                location: 'Bratislava Old Town',
-                locType: 'in-village',
-                images: [],
-                pricePerCouple: 610,
-                priceRefund: 'refundable',
-                priceAlt: 'Non-refundable: ILS 550/couple',
-                features: ['Breakfast included', 'Hotel', '2 rooms available'],
-                url: 'https://www.booking.com/Share-PpVc1nt',
-            },
-            {
-                id: 'brat-2',
-                name: 'Palace Apartments',
-                location: 'Bratislava Center',
-                locType: 'in-village',
-                images: [],
-                pricePerCouple: 500,
-                priceRefund: 'refundable',
-                priceAlt: 'Full apartment: ILS 1,000',
-                features: ['Apartment', 'Self-catering', 'More space'],
-                url: 'https://www.booking.com/Share-JsVtOcw',
-            },
-            {
-                id: 'brat-3',
-                name: 'Old Town Luxury Apartment',
-                location: 'Heart of Bratislava',
-                locType: 'in-village',
-                images: [],
-                pricePerCouple: 492,
-                priceRefund: 'refundable',
-                priceAlt: 'Full apartment: ILS 985',
-                features: ['Apartment', 'Old Town location', 'Self-catering'],
-                url: 'https://www.booking.com/Share-J830x1',
-            },
-            {
-                id: 'brat-4',
-                name: 'Elisabeth Old Town',
-                location: 'Bratislava Old Town',
-                locType: 'in-village',
-                images: [],
-                pricePerCouple: 725,
-                priceRefund: 'refundable',
-                priceAlt: 'Non-refundable: ILS 656/couple',
-                features: ['Hotel', 'Old Town', 'Premium'],
-                url: 'https://www.booking.com/Share-6ki0ekz',
-            },
-            {
-                id: 'brat-5',
-                name: 'Radisson Blu Carlton Hotel',
-                location: 'Bratislava Center',
-                locType: 'in-village',
-                images: [],
-                pricePerCouple: 513,
-                priceRefund: 'refundable',
-                priceAlt: 'Non-refundable: ILS 486/couple',
-                features: ['Hotel', '5-star', 'Historic building'],
-                url: 'https://www.booking.com/Share-gaUIg9v',
-            },
+            { id: 'brat-1', name: 'Park Inn by Radisson Danube', location: 'Bratislava Old Town', locType: 'in-village', images: [], pricePerCouple: 610, priceRefund: 'refundable', priceAlt: 'Non-refundable: ILS 550/couple', features: ['Breakfast included', 'Hotel', '2 rooms available'], url: 'https://www.booking.com/Share-PpVc1nt' },
+            { id: 'brat-2', name: 'Palace Apartments', location: 'Bratislava Center', locType: 'in-village', images: [], pricePerCouple: 500, priceRefund: 'refundable', priceAlt: 'Full apartment: ILS 1,000', features: ['Apartment', 'Self-catering', 'More space'], url: 'https://www.booking.com/Share-JsVtOcw' },
+            { id: 'brat-3', name: 'Old Town Luxury Apartment', location: 'Heart of Bratislava', locType: 'in-village', images: [], pricePerCouple: 492, priceRefund: 'refundable', priceAlt: 'Full apartment: ILS 985', features: ['Apartment', 'Old Town location', 'Self-catering'], url: 'https://www.booking.com/Share-J830x1' },
+            { id: 'brat-4', name: 'Elisabeth Old Town', location: 'Bratislava Old Town', locType: 'in-village', images: [], pricePerCouple: 725, priceRefund: 'refundable', priceAlt: 'Non-refundable: ILS 656/couple', features: ['Hotel', 'Old Town', 'Premium'], url: 'https://www.booking.com/Share-6ki0ekz' },
+            { id: 'brat-5', name: 'Radisson Blu Carlton Hotel', location: 'Bratislava Center', locType: 'in-village', images: [], pricePerCouple: 513, priceRefund: 'refundable', priceAlt: 'Non-refundable: ILS 486/couple', features: ['Hotel', '5-star', 'Historic building'], url: 'https://www.booking.com/Share-gaUIg9v' },
         ]
     },
     {
-        id: 'hallstatt',
-        name: 'Hallstatt Area',
-        nights: 2,
+        id: 'hallstatt', name: 'Hallstatt Area', nights: 2,
         dates: 'Apr 3–5 (2 nights)',
         image: 'https://images.unsplash.com/photo-1609942167021-f59442d56d8f?w=200&q=80',
         hotels: [
-            {
-                id: 'hall-1',
-                name: 'Seewirt Zauner',
-                location: 'Hallstatt village',
-                locType: 'in-village',
-                images: [
-                    'https://www.hallstatt.net/assets/Hallstatt/Unterkunft/unterkunftsverzeichnis/gasthoefe-und-hotels/gasthof-zauner/gasthof-zauner-hallstatt/_resampled/WebsitePictureW10/hallstatt-hotels-gasthof-zauner-025.jpg',
-                    'https://www.seewirt-zauner.at/assets/images/3/hallstatt-see-aussicht-69c3232e-d3a0334c.jpg',
-                    'https://www.seewirt-zauner.at/assets/images/0/restaurant-balkon-seewirt-bbc897d9-d4bafbcd.jpg',
-                    'https://www.seewirt-zauner.at/assets/images/7/stuhl-restaurant-zauner-64a527e2-0bbd84b6.jpg',
-                ],
-                pricePerCouple: 1815,
-                priceRefund: 'refundable',
-                priceAlt: null,
-                features: ['Hotel', 'In Hallstatt', 'Contactless check-in', 'Lakeside'],
-                url: 'https://www.booking.com/Share-NCaqc3t',
-            },
-            {
-                id: 'hall-2',
-                name: 'Pension Leopoldine',
-                location: 'Hallstatt village',
-                locType: 'in-village',
-                images: [],
-                pricePerCouple: 1939,
-                priceRefund: 'refundable',
-                priceAlt: null,
-                features: ['Pension', 'In Hallstatt', 'Charming'],
-                url: 'https://www.booking.com/Share-rI2tTCf',
-            },
-            {
-                id: 'hall-3',
-                name: 'Fenix Hall Boutique Hotel',
-                location: 'Hallstatt village',
-                locType: 'in-village',
-                images: [],
-                pricePerCouple: 1820,
-                priceRefund: 'refundable',
-                priceAlt: null,
-                features: ['Boutique Hotel', 'In Hallstatt', 'Modern'],
-                url: 'https://www.booking.com/Share-2lMuA6',
-            },
-            {
-                id: 'hall-4',
-                name: 'Dormio Hotel Obertraun',
-                location: 'Obertraun (near Hallstatt)',
-                locType: 'nearby',
-                images: [],
-                pricePerCouple: 1627,
-                priceRefund: 'refundable',
-                priceAlt: 'Non-refundable: ILS 1,363/couple',
-                features: ['Hotel', 'Near Hallstatt', 'Obertraun'],
-                url: 'https://www.booking.com/Share-sGsET7',
-            },
-            {
-                id: 'hall-5',
-                name: 'Seehotel am Hallstattersee',
-                location: 'Obertraun (lakeside)',
-                locType: 'nearby',
-                images: [],
-                pricePerCouple: 1016,
-                priceRefund: 'refundable',
-                priceAlt: null,
-                features: ['Hotel', 'Lakeside', 'Obertraun', 'Budget-friendly'],
-                url: 'https://www.booking.com/Share-3vaBpc',
-            },
-            {
-                id: 'hall-6',
-                name: 'COOEE alpin Hotel Dachstein',
-                location: 'Hallstatt area',
-                locType: 'nearby',
-                images: [
-                    'https://cooee-alpin.com/wp-content/uploads/Aussenaufnahme_DAC_Sommer-2024-3-e1770817620243.webp',
-                    'https://cooee-alpin.com/wp-content/uploads/401_Apartment_COOEE_alpin_Dachstein-9.webp',
-                    'https://cooee-alpin.com/wp-content/uploads/402_Apartment_COOEE_alpin_Dachstein-5.webp',
-                    'https://cooee-alpin.com/wp-content/uploads/404_Apartment_COOEE_alpin_Dachstein-_1.webp',
-                ],
-                pricePerCouple: 1494,
-                priceRefund: 'refundable',
-                priceAlt: 'Full apartment: ILS 2,989',
-                features: ['Apartment', 'Alpine style', 'More space'],
-                url: 'https://www.booking.com/Share-kKfqboV',
-            },
-            {
-                id: 'hall-7',
-                name: 'Villa Salzweg',
-                location: 'Hallstatt area',
-                locType: 'nearby',
-                images: [],
-                pricePerCouple: 950,
-                priceRefund: 'refundable',
-                priceAlt: 'Full apartment: ILS 1,900',
-                features: ['Apartment', 'Villa', 'Self-catering'],
-                url: 'https://www.booking.com/Share-Iqyofa',
-            },
-            {
-                id: 'hall-8',
-                name: 'Obertrauner Hof',
-                location: 'Obertraun',
-                locType: 'nearby',
-                images: [],
-                pricePerCouple: 1300,
-                priceRefund: 'refundable',
-                priceAlt: null,
-                features: ['Hotel', 'Obertraun', 'Traditional'],
-                url: 'https://www.booking.com/Share-SH14Nj',
-            },
+            { id: 'hall-1', name: 'Seewirt Zauner', location: 'Hallstatt village', locType: 'in-village', distances: ['In Hallstatt', '7 min → Dachstein Cable Car', '50 min → Ramsau'], images: ['https://www.hallstatt.net/assets/Hallstatt/Unterkunft/unterkunftsverzeichnis/gasthoefe-und-hotels/gasthof-zauner/_resampled/WebsitePictureW10/hallstatt-hotels-gasthof-zauner-025.jpg','https://www.seewirt-zauner.at/assets/images/3/hallstatt-see-aussicht-69c3232e-d3a0334c.jpg','https://www.seewirt-zauner.at/assets/images/0/restaurant-balkon-seewirt-bbc897d9-d4bafbcd.jpg','https://www.seewirt-zauner.at/assets/images/7/stuhl-restaurant-zauner-64a527e2-0bbd84b6.jpg'], pricePerCouple: 1815, priceRefund: 'refundable', priceAlt: null, features: ['Hotel', 'In Hallstatt', 'Contactless check-in', 'Lakeside'], url: 'https://www.booking.com/Share-NCaqc3t' },
+            { id: 'hall-2', name: 'Pension Leopoldine', location: 'Hallstatt village', locType: 'in-village', distances: ['In Hallstatt', '7 min → Dachstein Cable Car', '50 min → Ramsau'], images: [], pricePerCouple: 1939, priceRefund: 'refundable', priceAlt: null, features: ['Pension', 'In Hallstatt', 'Charming'], url: 'https://www.booking.com/Share-rI2tTCf' },
+            { id: 'hall-3', name: 'Fenix Hall Boutique Hotel', location: 'Hallstatt village', locType: 'in-village', distances: ['In Hallstatt', '7 min → Dachstein Cable Car', '50 min → Ramsau'], images: [], pricePerCouple: 1820, priceRefund: 'refundable', priceAlt: null, features: ['Boutique Hotel', 'In Hallstatt', 'Modern'], url: 'https://www.booking.com/Share-2lMuA6' },
+            { id: 'hall-4', name: 'Dormio Hotel Obertraun', location: 'Obertraun', locType: 'nearby', distances: ['7 min → Hallstatt', '3 min → Dachstein Cable Car', '45 min → Ramsau'], images: [], pricePerCouple: 1627, priceRefund: 'refundable', priceAlt: 'Non-refundable: ILS 1,363/couple', features: ['Hotel', 'Near Hallstatt', 'Obertraun'], url: 'https://www.booking.com/Share-sGsET7' },
+            { id: 'hall-5', name: 'Seehotel am Hallstättersee', location: 'Obertraun (lakeside)', locType: 'nearby', distances: ['7 min → Hallstatt', '3 min → Dachstein Cable Car', '45 min → Ramsau'], images: [], pricePerCouple: 1016, priceRefund: 'refundable', priceAlt: null, features: ['Hotel', 'Lakeside', 'Obertraun', 'Budget-friendly'], url: 'https://www.booking.com/Share-3vaBpc' },
+            { id: 'hall-6', name: 'COOEE alpin Hotel Dachstein', location: 'Gosau', locType: 'nearby', distances: ['25 min → Hallstatt', '30 min → Dachstein Cable Car', '40 min → Ramsau'], images: ['https://cooee-alpin.com/wp-content/uploads/Aussenaufnahme_DAC_Sommer-2024-3-e1770817620243.webp','https://cooee-alpin.com/wp-content/uploads/401_Apartment_COOEE_alpin_Dachstein-9.webp','https://cooee-alpin.com/wp-content/uploads/402_Apartment_COOEE_alpin_Dachstein-5.webp','https://cooee-alpin.com/wp-content/uploads/404_Apartment_COOEE_alpin_Dachstein-_1.webp'], pricePerCouple: 1494, priceRefund: 'refundable', priceAlt: 'Full apartment: ILS 2,989', features: ['Apartment', 'Alpine style', 'More space'], url: 'https://www.booking.com/Share-kKfqboV' },
+            { id: 'hall-7', name: 'Villa Salzweg', location: 'Gosau', locType: 'nearby', distances: ['25 min → Hallstatt', '30 min → Dachstein Cable Car', '40 min → Ramsau'], images: [], pricePerCouple: 950, priceRefund: 'refundable', priceAlt: 'Full apartment: ILS 1,900', features: ['Apartment', 'Villa', 'Self-catering'], url: 'https://www.booking.com/Share-Iqyofa' },
+            { id: 'hall-8', name: 'Obertrauner Hof', location: 'Obertraun', locType: 'nearby', distances: ['7 min → Hallstatt', '3 min → Dachstein Cable Car', '45 min → Ramsau'], images: [], pricePerCouple: 1300, priceRefund: 'refundable', priceAlt: null, features: ['Hotel', 'Obertraun', 'Traditional'], url: 'https://www.booking.com/Share-SH14Nj' },
+            { id: 'hall-9', name: 'Dorfhotel Mayer', location: 'Bad Aussee area', locType: 'nearby', distances: ['20 min → Hallstatt', '25 min → Dachstein Cable Car', '40 min → Ramsau'], images: [], pricePerCouple: 1247, priceRefund: 'refundable', priceAlt: null, features: ['Hotel', 'Free cancellation'], url: 'https://www.booking.com/hotel/at/dorfhotel-mayer.en-gb.html' },
+            { id: 'hall-10', name: 'Alpenhof', location: 'Hallstatt area', locType: 'nearby', distances: ['10 min → Hallstatt', '10 min → Dachstein Cable Car', '45 min → Ramsau'], images: [], pricePerCouple: 1218, priceRefund: 'refundable', priceAlt: null, features: ['Hotel', 'Breakfast included', 'Free cancellation'], url: 'https://www.booking.com/hotel/at/alpenhof.en-gb.html' },
+            { id: 'hall-11', name: 'Ferienwohnung Unterdurmoos', location: 'Near Obertraun', locType: 'nearby', distances: ['10 min → Hallstatt', '5 min → Dachstein Cable Car', '45 min → Ramsau'], images: [], pricePerCouple: 1626, priceRefund: 'refundable', priceAlt: null, features: ['Apartment', 'Free cancellation'], url: 'https://www.booking.com/hotel/at/ferienwohnung-unterdurmoos.en-gb.html' },
+            { id: 'hall-12', name: 'Stegerbräu', location: 'Bad Aussee', locType: 'nearby', distances: ['20 min → Hallstatt', '25 min → Dachstein Cable Car', '35 min → Ramsau'], images: [], pricePerCouple: 1274, priceRefund: 'refundable', priceAlt: null, features: ['Hotel', 'Breakfast included', 'Free cancellation'], url: 'https://www.booking.com/hotel/at/stegerbrau.en-gb.html' },
+            { id: 'hall-13', name: 'Der Seebacherhof', location: 'Near Hallstatt', locType: 'nearby', distances: ['10 min → Hallstatt', '15 min → Dachstein Cable Car', '45 min → Ramsau'], images: [], pricePerCouple: 1487, priceRefund: 'refundable', priceAlt: null, features: ['Hotel', 'Breakfast included', 'Free cancellation'], url: 'https://www.booking.com/hotel/at/der-seebacherhof.en-gb.html' },
+            { id: 'hall-14', name: 'Hotel Obertraun 2', location: 'Obertraun', locType: 'nearby', distances: ['7 min → Hallstatt', '3 min → Dachstein Cable Car', '45 min → Ramsau'], images: [], pricePerCouple: 1709, priceRefund: 'refundable', priceAlt: null, features: ['Hotel', 'Breakfast included', 'Free cancellation'], url: 'https://www.booking.com/hotel/at/obertraun-obertraun2.en-gb.html' },
+            { id: 'hall-15', name: 'Wanderhotel Das Waldheim', location: 'Bad Aussee area', locType: 'nearby', distances: ['20 min → Hallstatt', '25 min → Dachstein Cable Car', '35 min → Ramsau'], images: [], pricePerCouple: 1335, priceRefund: 'refundable', priceAlt: null, features: ['Hotel', 'Free cancellation'], url: 'https://www.booking.com/hotel/at/wanderhotel-das-waldheim.en-gb.html' },
+            { id: 'hall-16', name: 'Seehotel Hostel', location: 'Hallstatt area', locType: 'nearby', distances: ['10 min → Hallstatt', '10 min → Dachstein Cable Car', '45 min → Ramsau'], images: [], pricePerCouple: 1365, priceRefund: 'refundable', priceAlt: null, features: ['Hostel', 'Budget'], url: 'https://www.booking.com/hotel/at/seehotel-hostel.en-gb.html' },
+            { id: 'hall-17', name: 'Vitalhotel Gosau', location: 'Gosau', locType: 'nearby', distances: ['25 min → Hallstatt', '30 min → Dachstein Cable Car', '40 min → Ramsau'], images: [], pricePerCouple: 2076, priceRefund: 'refundable', priceAlt: null, features: ['Hotel', 'Wellness'], url: 'https://www.booking.com/hotel/at/vitalhotel-gosau.en-gb.html' },
+            { id: 'hall-18', name: 'Hotel Ausseerland', location: 'Bad Aussee / Altaussee', locType: 'nearby', distances: ['20 min → Hallstatt', '25 min → Dachstein Cable Car', '35 min → Ramsau'], images: [], pricePerCouple: 1005, priceRefund: 'refundable', priceAlt: null, features: ['Hotel', 'Breakfast included', 'Free cancellation'], url: 'https://www.booking.com/hotel/at/ausseerland.en-gb.html' },
+            { id: 'hall-19', name: 'Appartements Ennsegg', location: 'Near Bad Aussee', locType: 'nearby', distances: ['20 min → Hallstatt', '25 min → Dachstein Cable Car', '35 min → Ramsau'], images: [], pricePerCouple: 900, priceRefund: 'refundable', priceAlt: null, features: ['Apartment', 'Free cancellation'], url: 'https://www.booking.com/hotel/at/appartements-ennsegg.en-gb.html' },
+            { id: 'hall-20', name: 'Hubertus Alpine Living', location: 'Hallstatt area', locType: 'nearby', distances: ['15 min → Hallstatt', '15 min → Dachstein Cable Car', '40 min → Ramsau'], images: [], pricePerCouple: 1548, priceRefund: null, priceAlt: '~$212/night est.', features: ['Alpine'], url: 'https://www.booking.com/Share-FRtbtKQ' },
+            { id: 'hall-21', name: 'OFENTÜRL Alpine Living', location: 'Hallstatt area', locType: 'nearby', distances: ['15 min → Hallstatt', '15 min → Dachstein Cable Car', '40 min → Ramsau'], images: [], pricePerCouple: 1460, priceRefund: null, priceAlt: '~$200/night est.', features: ['Alpine'], url: 'https://www.booking.com/Share-OuxGkmD' },
+            { id: 'hall-22', name: 'Hotel Taxerhof', location: 'Hallstatt area', locType: 'nearby', distances: ['15 min → Hallstatt', '15 min → Dachstein Cable Car', '40 min → Ramsau'], images: [], pricePerCouple: 1095, priceRefund: null, priceAlt: '~$150/night est.', features: ['Hotel'], url: 'https://www.booking.com/Share-y56buSU' },
         ]
     },
     {
-        id: 'zellamsee',
-        name: 'Zell am See',
-        nights: 2,
+        id: 'zellamsee', name: 'Zell am See / Kaprun', nights: 2,
         dates: 'Apr 5–7 (2 nights)',
         image: 'https://images.unsplash.com/photo-1589308078059-be1415eab4c3?w=200&q=80',
         hotels: [
-            {
-                id: 'zell-1',
-                name: 'The House Zell am See',
-                location: 'Zell am See',
-                locType: 'in-village',
-                images: [],
-                pricePerCouple: null,
-                priceRefund: null,
-                priceAlt: 'Price not listed — check Booking.com',
-                features: ['Check price on Booking'],
-                url: 'https://www.booking.com/Share-koo4IQ',
-            },
-            {
-                id: 'zell-2',
-                name: 'Residence Bellevue',
-                location: 'Zell am See',
-                locType: 'in-village',
-                images: [],
-                pricePerCouple: 1316,
-                priceRefund: 'refundable',
-                priceAlt: 'Full apartment: ILS 2,633',
-                features: ['Apartment', '2 rooms', 'Parking included'],
-                url: 'https://www.booking.com/Share-ejOSnF',
-            },
-            {
-                id: 'zell-3',
-                name: 'Der Erlhof Restaurant & Landhotel',
-                location: 'Zell am See area',
-                locType: 'nearby',
-                images: [
-                    'https://erlhof-at.b-cdn.net/wp-content/uploads/2019/07/slide-erlhof-9-1.jpg',
-                    'https://erlhof-at.b-cdn.net/wp-content/uploads/2019/07/der-erlhof-hotel-zell-am-see-14.jpg',
-                    'https://erlhof-at.b-cdn.net/wp-content/uploads/2019/06/hotel-direkt-am-see-zell-am-see.jpg',
-                    'https://erlhof-at.b-cdn.net/wp-content/uploads/2019/07/der-erlhof-hotel-restaurant-zell-am-see-1.jpg',
-                ],
-                pricePerCouple: 1282,
-                priceRefund: 'refundable',
-                priceAlt: null,
-                features: ['Hotel', 'Restaurant', 'Breakfast included', 'Traditional'],
-                url: 'https://www.booking.com/Share-CYaNFBZ',
-            },
-            {
-                id: 'zell-4',
-                name: 'Hotel Steinerwirt1493',
-                location: 'Zell am See',
-                locType: 'in-village',
-                images: [
-                    'https://cdn-steinerwirt.b-cdn.net/wp-content/uploads/2022/12/028_5892-2-scaled.jpg',
-                    'https://cdn-steinerwirt.b-cdn.net/wp-content/uploads/2022/12/Zimmer03-scaled.jpg',
-                    'https://cdn-steinerwirt.b-cdn.net/wp-content/uploads/2022/12/Stueberl03-scaled.jpg',
-                    'https://cdn-steinerwirt.b-cdn.net/wp-content/uploads/2022/12/Essen07-1-scaled.jpg',
-                ],
-                pricePerCouple: 1436,
-                priceRefund: 'refundable',
-                priceAlt: 'Non-refundable: ILS 1,364/couple',
-                features: ['Hotel', 'Historic (since 1493!)', 'Central'],
-                url: 'https://www.booking.com/Share-d1aWQ5',
-            },
+            { id: 'zell-1', name: 'The House Zell am See', location: 'Zell am See center', locType: 'in-village', distances: ['In Zell am See', '12 min → Kitzsteinhorn'], images: [], pricePerCouple: 2555, priceRefund: null, priceAlt: '~$350/night est. (4-star aparthotel)', features: ['Aparthotel', '4-star', 'Central'], url: 'https://www.booking.com/Share-koo4IQ' },
+            { id: 'zell-2', name: 'Residence Bellevue', location: 'Zell am See', locType: 'in-village', distances: ['In Zell am See', '12 min → Kitzsteinhorn'], images: [], pricePerCouple: 1316, priceRefund: 'refundable', priceAlt: 'Full apartment: ILS 2,633', features: ['Apartment', '2 rooms', 'Parking included'], url: 'https://www.booking.com/Share-ejOSnF' },
+            { id: 'zell-3', name: 'Der Erlhof Restaurant & Landhotel', location: 'Zell am See area', locType: 'nearby', distances: ['5 min → Zell am See', '15 min → Kitzsteinhorn'], images: ['https://erlhof-at.b-cdn.net/wp-content/uploads/2019/07/slide-erlhof-9-1.jpg','https://erlhof-at.b-cdn.net/wp-content/uploads/2019/07/der-erlhof-hotel-zell-am-see-14.jpg','https://erlhof-at.b-cdn.net/wp-content/uploads/2019/06/hotel-direkt-am-see-zell-am-see.jpg','https://erlhof-at.b-cdn.net/wp-content/uploads/2019/07/der-erlhof-hotel-restaurant-zell-am-see-1.jpg'], pricePerCouple: 1282, priceRefund: 'refundable', priceAlt: null, features: ['Hotel', 'Restaurant', 'Breakfast included', 'Traditional'], url: 'https://www.booking.com/Share-CYaNFBZ' },
+            { id: 'zell-4', name: 'Hotel Steinerwirt1493', location: 'Zell am See center', locType: 'in-village', distances: ['In Zell am See', '12 min → Kitzsteinhorn'], images: ['https://cdn-steinerwirt.b-cdn.net/wp-content/uploads/2022/12/028_5892-2-scaled.jpg','https://cdn-steinerwirt.b-cdn.net/wp-content/uploads/2022/12/Zimmer03-scaled.jpg','https://cdn-steinerwirt.b-cdn.net/wp-content/uploads/2022/12/Stueberl03-scaled.jpg','https://cdn-steinerwirt.b-cdn.net/wp-content/uploads/2022/12/Essen07-1-scaled.jpg'], pricePerCouple: 1436, priceRefund: 'refundable', priceAlt: 'Non-refundable: ILS 1,364/couple', features: ['Hotel', 'Historic (since 1493!)', 'Central'], url: 'https://www.booking.com/Share-d1aWQ5' },
+            { id: 'zell-5', name: 'Elements Resort Zell am See', location: 'Zell am See', locType: 'in-village', distances: ['In Zell am See', '12 min → Kitzsteinhorn'], images: [], pricePerCouple: 2081, priceRefund: null, priceAlt: '~$285/night est.', features: ['Resort', '4-star'], url: 'https://www.booking.com/Share-YF46m8' },
+            { id: 'zell-6', name: 'The Gast House Zell am See', location: 'Zell am See', locType: 'in-village', distances: ['In Zell am See', '12 min → Kitzsteinhorn'], images: [], pricePerCouple: 1825, priceRefund: null, priceAlt: '~$250/night est.', features: ['Guesthouse', '4-star'], url: 'https://www.booking.com/Share-04ZtSBo' },
+            { id: 'zell-7', name: 'Berggasthof Zaismann', location: 'Near Zell am See', locType: 'nearby', distances: ['10 min → Zell am See', '15 min → Kitzsteinhorn'], images: [], pricePerCouple: 662, priceRefund: 'refundable', priceAlt: null, features: ['Guesthouse', 'Free cancellation'], url: 'https://www.booking.com/hotel/at/berggasthof-zaismann.en-gb.html' },
+            { id: 'zell-8', name: 'Sonja Alpine Resort', location: 'Zell am See area', locType: 'nearby', distances: ['10 min → Zell am See', '15 min → Kitzsteinhorn'], images: [], pricePerCouple: 200, priceRefund: 'refundable', priceAlt: null, features: ['Resort', 'Budget'], url: 'https://www.booking.com/hotel/at/sonja-alpine-resort.en-gb.html' },
+            { id: 'zell-9', name: 'Gasthof Mitteregger', location: 'Near Zell am See', locType: 'nearby', distances: ['10 min → Zell am See', '15 min → Kitzsteinhorn'], images: [], pricePerCouple: 1791, priceRefund: 'refundable', priceAlt: null, features: ['Guesthouse', 'Breakfast included', 'Free cancellation'], url: 'https://www.booking.com/hotel/at/gasthof-mitteregger.en-gb.html' },
+            { id: 'zell-10', name: 'Hotel Seeblick', location: 'Zell am See', locType: 'in-village', distances: ['In Zell am See', '12 min → Kitzsteinhorn'], images: [], pricePerCouple: 1492, priceRefund: 'refundable', priceAlt: 'With breakfast: ILS 1,875/couple', features: ['Hotel', 'Breakfast available', 'Free cancellation'], url: 'https://www.booking.com/hotel/at/seeblick.en-gb.html' },
+            { id: 'zell-11', name: 'Alpendorf Schi & Sonnenresort', location: 'St. Johann/Alpendorf (between Hallstatt & Zell)', locType: 'nearby', distances: ['40 min → Zell am See', '45 min → Kitzsteinhorn'], images: [], pricePerCouple: 1445, priceRefund: 'refundable', priceAlt: null, features: ['Resort', 'Breakfast included', 'Free cancellation'], url: 'https://www.booking.com/hotel/at/alpendorf-schi-und-sonnenresort.en-gb.html' },
         ]
     },
     {
-        id: 'werfen',
-        name: 'Salzburg / Werfen',
-        nights: 2,
+        id: 'salzburg', name: 'Salzburg / Wolfgangsee', nights: 2,
         dates: 'Apr 7–9 (2 nights)',
-        image: 'https://images.unsplash.com/photo-1632892271596-9afebd2de0c1?w=200&q=80',
+        image: 'https://images.unsplash.com/photo-1660046911251-e29fa793f429?w=200&q=80',
         hotels: [
-            {
-                id: 'werf-1',
-                name: 'Der Burgblick — Adults Only',
-                location: 'Werfen (near Salzburg)',
-                locType: 'nearby',
-                images: [
-                    'https://www.der-burgblick.at/wp-content/uploads/hotel-zimmer-werfen-salzburg-4-990x582.jpg',
-                    'https://www.der-burgblick.at/wp-content/uploads/hotel-zimmer-werfen-salzburg-1-990x660.jpg',
-                    'https://www.der-burgblick.at/wp-content/uploads/hotel-zimmer-werfen-salzburg-2-990x660.jpg',
-                ],
-                pricePerCouple: 742,
-                priceRefund: 'refundable',
-                priceAlt: null,
-                features: ['Hotel', 'Adults Only', 'Castle views', 'Near Hohenwerfen'],
-                url: 'https://www.booking.com/Share-y0qO2iA',
-            },
-            {
-                id: 'werf-2',
-                name: 'Numa Salzburg Vogelweider',
-                location: 'Salzburg city',
-                locType: 'in-village',
-                images: [],
-                pricePerCouple: null,
-                priceRefund: null,
-                priceAlt: 'Price not listed — check Booking.com',
-                features: ['Apartment', 'In Salzburg', 'Modern'],
-                url: 'https://www.booking.com/Share-RH86Gg',
-            },
+            { id: 'salz-1', name: 'Numa Salzburg Vogelweider', location: 'Salzburg city', locType: 'in-village', distances: ['In Salzburg', '45 min → Werfen/Hohenwerfen'], images: [], pricePerCouple: 1095, priceRefund: null, priceAlt: '~$150/night est.', features: ['Apartment', 'In Salzburg', 'Modern'], url: 'https://www.booking.com/Share-RH86Gg' },
+            { id: 'salz-2', name: 'Der Burgblick – Adults Only', location: 'Werfen (near Salzburg)', locType: 'nearby', distances: ['45 min → Salzburg Old Town', 'In Werfen – next to Hohenwerfen Castle'], images: [], pricePerCouple: 742, priceRefund: 'refundable', priceAlt: 'Non-refundable: ILS 784/couple', features: ['Hotel', 'Adults Only', 'Near Castle'], url: 'https://www.booking.com/Share-y0qO2iA' },
+            { id: 'salz-3', name: 'Hotel Elefant Family Business', location: 'Salzburg Old Town', locType: 'in-village', distances: ['In Salzburg Old Town', '45 min → Werfen/Hohenwerfen'], images: [], pricePerCouple: 1168, priceRefund: null, priceAlt: '~$160/night est.', features: ['Hotel', 'Old Town', 'Family'], url: 'https://www.booking.com/Share-jRoo8W' },
+            { id: 'salz-4', name: 'Radisson Blu Hotel Altstadt', location: 'Salzburg Old Town', locType: 'in-village', distances: ['In Salzburg Old Town', '45 min → Werfen/Hohenwerfen'], images: [], pricePerCouple: 1606, priceRefund: null, priceAlt: '~$220/night est.', features: ['Hotel', '5-star', 'Old Town'], url: 'https://www.booking.com/Share-ihAsPtH' },
+            { id: 'salz-5', name: 'artHotel Blaue Gans', location: 'Salzburg Old Town', locType: 'in-village', distances: ['In Salzburg Old Town', '45 min → Werfen/Hohenwerfen'], images: [], pricePerCouple: 1460, priceRefund: null, priceAlt: '~$200/night est. (from €177)', features: ['Boutique Hotel', 'Old Town', 'Art'], url: 'https://www.booking.com/Share-A8yBpAA' },
+            { id: 'salz-6', name: 'Max 70', location: 'Salzburg', locType: 'in-village', distances: ['In Salzburg', '45 min → Werfen/Hohenwerfen'], images: [], pricePerCouple: 884, priceRefund: 'refundable', priceAlt: null, features: ['Hotel', 'Free cancellation'], url: 'https://www.booking.com/hotel/at/max-70.en-gb.html' },
+            { id: 'salz-7', name: 'Motel One Salzburg', location: 'Salzburg', locType: 'in-village', distances: ['In Salzburg', '45 min → Werfen/Hohenwerfen'], images: [], pricePerCouple: 778, priceRefund: 'refundable', priceAlt: null, features: ['Hotel', 'Modern', 'Free cancellation'], url: 'https://www.booking.com/hotel/at/motel-one-salzburg.en-gb.html' },
+            { id: 'salz-8', name: 'Landhotel Santner', location: 'Near Salzburg', locType: 'nearby', distances: ['15 min → Salzburg Old Town', '50 min → Werfen/Hohenwerfen'], images: [], pricePerCouple: 910, priceRefund: 'refundable', priceAlt: null, features: ['Hotel', 'Free cancellation'], url: 'https://www.booking.com/hotel/at/landhotel-santner.en-gb.html' },
+            { id: 'salz-9', name: 'Sheraton Arabella Jagdhof', location: 'Fuschl am See (near Salzburg)', locType: 'nearby', distances: ['30 min → Salzburg Old Town', '55 min → Werfen/Hohenwerfen'], images: [], pricePerCouple: 1000, priceRefund: 'refundable', priceAlt: null, features: ['Resort', 'Lakeside', 'Free cancellation'], url: 'https://www.booking.com/hotel/at/arabsheratonjagdhof.en-gb.html' },
+            { id: 'salz-10', name: 'Residenz Bavaria', location: 'Near Salzburg', locType: 'nearby', distances: ['15 min → Salzburg Old Town', '50 min → Werfen/Hohenwerfen'], images: [], pricePerCouple: 963, priceRefund: 'refundable', priceAlt: null, features: ['Hotel', 'Breakfast included', 'Free cancellation'], url: 'https://www.booking.com/hotel/de/residenz-bavaria.en-gb.html' },
         ]
     },
     {
-        id: 'vienna',
-        name: 'Vienna',
-        nights: 1,
+        id: 'vienna', name: 'Vienna', nights: 1,
         dates: 'Apr 9–10 (1 night)',
         image: 'https://images.unsplash.com/photo-1516550893923-42d28e5677af?w=200&q=80',
         hotels: [
-            {
-                id: 'wien-placeholder',
-                name: 'Add Vienna hotels',
-                location: 'Vienna — no hotels added yet',
-                locType: 'in-village',
-                images: [],
-                pricePerCouple: null,
-                priceRefund: null,
-                priceAlt: 'Add your Vienna hotel options to compare',
-                features: ['Coming soon'],
-                url: null,
-                placeholder: true,
-            },
+            { id: 'wien-1', name: 'City Pension Stephansplatz I Self Check In', location: 'Vienna – Stephansplatz', locType: 'in-village', images: [], pricePerCouple: 402, priceRefund: null, priceAlt: '~$110/night est. (1 night)', features: ['Pension', 'Self check-in', 'Central'], url: 'https://www.booking.com/Share-ggZKp1' },
+        ]
+    },
+    {
+        id: 'multi-hallzell', name: 'Shared: Hallstatt + Zell am See', nights: 4,
+        dates: 'Apr 3–7 (4 nights – covers both bases)',
+        image: 'https://images.unsplash.com/photo-1589308078059-be1415eab4c3?w=200&q=80',
+        hotels: [
+            { id: 'multi-hz-1', name: 'Alpendorf Schi & Sonnenresort', location: 'St. Johann/Alpendorf (between Hallstatt & Zell am See)', locType: 'nearby', distances: ['60 min → Hallstatt', '40 min → Zell am See', '45 min → Ramsau', '45 min → Kitzsteinhorn'], images: [], pricePerCouple: 3316, priceRefund: 'refundable', priceAlt: null, features: ['Resort', 'Covers 2 bases!', 'Breakfast included', 'Free cancellation'], url: 'https://www.booking.com/hotel/at/alpendorf-schi-und-sonnenresort.en-gb.html' },
+        ]
+    },
+    {
+        id: 'multi-all', name: 'Shared: All Austria Days', nights: 6,
+        dates: 'Apr 3–9 (6 nights – covers Hallstatt + Zell + Salzburg)',
+        image: 'https://images.unsplash.com/photo-1609942167021-f59442d56d8f?w=200&q=80',
+        hotels: [
+            { id: 'multi-all-1', name: 'Berggasthof Zaismann', location: 'Near Zell am See (central to all bases)', locType: 'nearby', distances: ['60 min → Hallstatt', '10 min → Zell am See', '45 min → Ramsau', '45 min → Salzburg Old Town'], images: [], pricePerCouple: 1961, priceRefund: 'refundable', priceAlt: null, features: ['Guesthouse', 'Covers 3 bases!', 'Free cancellation', '6 nights'], url: 'https://www.booking.com/hotel/at/berggasthof-zaismann.en-gb.html' },
         ]
     },
 ];
@@ -1106,8 +960,8 @@ let lastSync = 0;
 function loadLocal() {
     try {
         const s = localStorage.getItem(STORAGE_KEY);
-        return s ? JSON.parse(s) : { votes: {}, selections: {} };
-    } catch { return { votes: {}, selections: {} }; }
+        return s ? JSON.parse(s) : { votes: {}, selections: {}, customPrices: {} };
+    } catch { return { votes: {}, selections: {}, customPrices: {} }; }
 }
 function saveLocal(s) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
@@ -1115,7 +969,7 @@ function saveLocal(s) {
 
 // Merge remote state with local state (union of votes, keep latest selections)
 function mergeStates(local, remote) {
-    const merged = { votes: {}, selections: {} };
+    const merged = { votes: {}, selections: {}, customPrices: {} };
     // Merge votes: union of all votes from both
     const allHotelIds = new Set([...Object.keys(local.votes || {}), ...Object.keys(remote.votes || {})]);
     for (const hid of allHotelIds) {
@@ -1123,6 +977,11 @@ function mergeStates(local, remote) {
     }
     // Merge selections: remote wins (since it has everyone's choices)
     merged.selections = { ...(local.selections || {}), ...(remote.selections || {}) };
+    // Merge custom prices: prefer non-null values, remote wins on conflict
+    const allPriceIds = new Set([...Object.keys(local.customPrices || {}), ...Object.keys(remote.customPrices || {})]);
+    for (const hid of allPriceIds) {
+        merged.customPrices[hid] = (remote.customPrices || {})[hid] || (local.customPrices || {})[hid];
+    }
     return merged;
 }
 
@@ -1266,6 +1125,7 @@ setInterval(() => {
 }, 15000);
 
 let state = loadLocal();
+if (!state.customPrices) state.customPrices = {};
 
 // ========== RENDER ==========
 function renderNav() {
@@ -1303,13 +1163,16 @@ function renderHotelCard(hotel, locationId) {
     const isSelected = state.selections[locationId] === hotel.id;
     const votes = state.votes[hotel.id] || {};
     const voteCount = getVoteCount(hotel.id);
+    const customPrice = (state.customPrices || {})[hotel.id] || null;
 
     // Find max votes in this location to mark popular
     const loc = LOCATIONS.find(l => l.id === locationId);
     const maxVotes = Math.max(...loc.hotels.filter(h => !h.placeholder).map(h => getVoteCount(h.id)), 0);
     const isPopular = voteCount > 0 && voteCount === maxVotes && maxVotes > 1;
 
-    const priceDisplay = hotel.pricePerCouple
+    const priceDisplay = customPrice
+        ? `<span class="price-main" style="color:var(--gold);">ILS ${customPrice.toLocaleString()}</span><span class="price-sub">/ couple</span>${hotel.pricePerCouple ? `<span style="font-size:0.75rem;color:var(--text-muted);text-decoration:line-through;margin-left:0.5rem;">ILS ${hotel.pricePerCouple.toLocaleString()}</span>` : ''}`
+        : hotel.pricePerCouple
         ? `<span class="price-main">ILS ${hotel.pricePerCouple.toLocaleString()}</span><span class="price-sub">/ couple</span>`
         : `<span class="price-main" style="color:var(--text-muted);font-size:1rem;">Price TBD</span>`;
 
@@ -1351,11 +1214,18 @@ function renderHotelCard(hotel, locationId) {
                 <span class="loc-badge ${hotel.locType}">${hotel.locType === 'in-village' ? 'In town' : 'Nearby'}</span>
                 ${hotel.location}
             </div>
+            ${hotel.distances ? `<div class="card-distances">${hotel.distances.map(d => `<span class="distance-tag">${d}</span>`).join('')}</div>` : ''}
             <div class="price-row">
                 ${priceDisplay}
                 ${refundBadge}
             </div>
             ${hotel.priceAlt ? `<div class="price-alt">${hotel.priceAlt}</div>` : ''}
+            <div class="custom-price-row">
+                <span class="custom-price-label">Your price</span>
+                <span class="custom-price-currency">ILS</span>
+                <input type="number" class="custom-price-input ${customPrice ? 'has-value' : ''}" data-hotel="${hotel.id}" placeholder="0" value="${customPrice || ''}" min="0" step="1">
+                ${customPrice ? `<span class="custom-price-active">&#10003; Using this</span>` : ''}
+            </div>
             <div class="features">
                 ${hotel.features.map(f => `<span class="feature-tag ${f.includes('Breakfast') || f.includes('Parking') ? 'highlight' : ''}">${f}</span>`).join('')}
             </div>
@@ -1397,6 +1267,13 @@ function renderSection(loc) {
     </section>`;
 }
 
+function getEffectivePrice(hotel) {
+    const custom = (state.customPrices || {})[hotel.id];
+    if (custom && custom > 0) return { price: custom, isCustom: true };
+    if (hotel.pricePerCouple) return { price: hotel.pricePerCouple, isCustom: false };
+    return { price: null, isCustom: false };
+}
+
 function renderTotal() {
     let total = 0;
     let chosen = 0;
@@ -1408,15 +1285,18 @@ function renderTotal() {
         const chip = document.createElement('span');
         if (selId) {
             const hotel = loc.hotels.find(h => h.id === selId);
-            if (hotel && hotel.pricePerCouple) {
-                total += hotel.pricePerCouple;
-                chosen++;
-                chip.className = 'total-loc-chip';
-                chip.textContent = `${loc.name}: ILS ${hotel.pricePerCouple.toLocaleString()}`;
-            } else {
-                chosen++;
-                chip.className = 'total-loc-chip';
-                chip.textContent = `${loc.name}: TBD`;
+            if (hotel) {
+                const { price, isCustom } = getEffectivePrice(hotel);
+                if (price) {
+                    total += price;
+                    chosen++;
+                    chip.className = 'total-loc-chip';
+                    chip.textContent = `${loc.name}: ILS ${price.toLocaleString()}${isCustom ? ' *' : ''}`;
+                } else {
+                    chosen++;
+                    chip.className = 'total-loc-chip';
+                    chip.textContent = `${loc.name}: TBD`;
+                }
             }
         } else {
             chip.className = 'total-loc-chip empty';
@@ -1480,6 +1360,26 @@ function bindEvents() {
         });
     });
 
+    // Custom price inputs
+    document.querySelectorAll('.custom-price-input').forEach(input => {
+        input.addEventListener('change', () => {
+            const hotelId = input.dataset.hotel;
+            const val = parseInt(input.value, 10);
+            if (!state.customPrices) state.customPrices = {};
+            if (val && val > 0) {
+                state.customPrices[hotelId] = val;
+            } else {
+                delete state.customPrices[hotelId];
+            }
+            saveState(state);
+            render();
+        });
+        // Prevent re-render on every keystroke, but update visual state
+        input.addEventListener('input', () => {
+            input.classList.toggle('has-value', input.value && parseInt(input.value) > 0);
+        });
+    });
+
     // Choose buttons
     document.querySelectorAll('.btn-choose').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -1507,16 +1407,17 @@ function showSummary() {
         if (selId) {
             const hotel = loc.hotels.find(h => h.id === selId);
             if (hotel) {
-                const price = hotel.pricePerCouple;
+                const { price, isCustom } = getEffectivePrice(hotel);
                 if (price) total += price;
-                text += `${loc.name} (${loc.dates})\n  ${hotel.name} — ${hotel.location}${price ? ` — ILS ${price.toLocaleString()}/couple` : ''}\n\n`;
+                const priceLabel = price ? `ILS ${price.toLocaleString()}${isCustom ? ' (your price)' : ''}/couple` : '';
+                text += `${loc.name} (${loc.dates})\n  ${hotel.name} — ${hotel.location}${priceLabel ? ` — ${priceLabel}` : ''}\n\n`;
                 return `<div class="modal-row">
                     <div>
                         <div class="modal-loc">${loc.name} · ${loc.dates}</div>
                         <div class="modal-hotel">${hotel.name}</div>
                         <div class="modal-area">${hotel.location}</div>
                     </div>
-                    <div class="modal-price">${price ? `ILS ${price.toLocaleString()}` : 'TBD'}</div>
+                    <div class="modal-price">${price ? `ILS ${price.toLocaleString()}${isCustom ? ' *' : ''}` : 'TBD'}</div>
                 </div>`;
             }
         }
