@@ -600,8 +600,11 @@ body {
     }
 }
 @media (max-width: 500px) {
-    .total-bar { padding: 0.6rem 1rem; }
-    .total-bar .total-amount { font-size: 1.3rem; }
+    body { padding-bottom: 140px; }
+    .total-bar { padding: 0.5rem 0.8rem; flex-wrap: wrap; gap: 0.3rem; }
+    .total-bar .total-amount { font-size: 1.2rem; }
+    .total-locations { display: none; }
+    .total-left { min-width: 0; }
     .card-image { height: 150px; }
     .nav-btn { padding: 0.7rem 0.8rem; font-size: 0.72rem; }
 }
@@ -854,7 +857,7 @@ const LOCATIONS = [
             { id: 'brat-2', name: 'Palace Apartments', location: 'Bratislava Center', locType: 'in-village', images: [], pricePerCouple: 500, priceRefund: 'refundable', priceAlt: 'Full apartment: ILS 1,000', features: ['Apartment', 'Self-catering', 'More space'], url: 'https://www.booking.com/Share-JsVtOcw' },
             { id: 'brat-3', name: 'Old Town Luxury Apartment', location: 'Heart of Bratislava', locType: 'in-village', images: [], pricePerCouple: 492, priceRefund: 'refundable', priceAlt: 'Full apartment: ILS 985', features: ['Apartment', 'Old Town location', 'Self-catering'], url: 'https://www.booking.com/Share-J830x1' },
             { id: 'brat-4', name: 'Elisabeth Old Town', location: 'Bratislava Old Town', locType: 'in-village', images: [], pricePerCouple: 725, priceRefund: 'refundable', priceAlt: 'Non-refundable: ILS 656/couple', features: ['Hotel', 'Old Town', 'Premium'], url: 'https://www.booking.com/Share-6ki0ekz' },
-            { id: 'brat-5', name: 'Radisson Blu Carlton Hotel', location: 'Bratislava Center', locType: 'in-village', images: [], pricePerCouple: 513, priceRefund: 'refundable', priceAlt: 'Non-refundable: ILS 486/couple', features: ['Hotel', '5-star', 'Historic building'], url: 'https://www.booking.com/Share-gaUIg9v' },
+            { id: 'brat-5', name: 'Radisson Blu Carlton Hotel', location: 'Bratislava Center', locType: 'in-village', images: [], pricePerCouple: 1028, priceRefund: 'refundable', priceAlt: null, features: ['Hotel', '5-star', 'Historic building'], url: 'https://www.booking.com/Share-gaUIg9v' },
         ]
     },
     {
